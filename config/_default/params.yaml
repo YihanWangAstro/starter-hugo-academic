@@ -9,17 +9,17 @@ appearance:
   theme_day: minimal
   theme_night: minimal
   font: minimal
-  font_size: L
+  font_size: M
 
 # SEO
 
 marketing:
   seo:
     site_type: Person
-    local_business_type: ''
-    org_name: ''
-    description: 'A highly-customizable Hugo academic resume theme powered by Wowchemy website builder.'
-    twitter: 'wowchemy'
+    local_business_type: 'Academic Website'
+    org_name: 'Stony Brook University'
+    description: 'Yihan Wang, Stony Brook, Astronomy, 王艺涵, SpaceHub'
+    twitter: ''
   analytics:
     google_analytics: ''
     baidu_tongji: ''
@@ -66,11 +66,11 @@ features:
       - r
       - latex
   math:
-    enable: false
+    enable: true
   privacy_pack:
     enable: false
   repository:
-    url: 'https://github.com/<username>/<repository>'
+    url: 'https://github.com/YihanWangAstro/YihanWang.github.io'
     content_dir: content
     branch: master
   avatar:
