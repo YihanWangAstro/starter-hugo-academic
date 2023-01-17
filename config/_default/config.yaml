@@ -4,7 +4,7 @@
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 title: Yihan Wang (王艺涵) # Website name
-baseURL: 'https://yihanwangastro.github.io/YihanWang.github.io/' # Website URL
+baseURL: 'https://yihanwangastro.github.io' # Website URL
 
 ############################
 ## LANGUAGE

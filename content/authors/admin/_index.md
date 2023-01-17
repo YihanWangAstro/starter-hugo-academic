@@ -70,6 +70,6 @@ email: 'yihan.wang.1@stonybrook.edu'
 highlight_name: true
 ---
 
-Yihan Wang is a graduate student of astrophysics at Stony Brook University working with Rosalba Perna. His research interests include tidal disruption events by solar mass black holes, gamma-ray bursts in dense environment, few-body scattering with applications ranging from supermassive black hole dynamics in galactic centers, to production of hypervelocity stars, to binary compact mergers in AGN disks, to exoplanetary architectures and hot Jupiter formation in dense star clusters. He is also a real astrophysical software developer who is devoted to contributing high performance tools to the community.
+Yihan Wang is postdoc fellow at NCfA(Nevada Center for Astrophysics). His research interests include tidal disruption events by solar mass black holes, gamma-ray bursts in dense environment, few-body scattering with applications ranging from supermassive black hole dynamics in galactic centers, to production of hypervelocity stars, to binary compact object mergers in AGN disks, to exoplanetary architectures and hot Jupiter formation in dense star clusters. He is also a real astrophysical software developer who is devoted to contributing high performance tools to the community.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/Yihan's CV.pdf" "newtab" >}}CV{{< /staticref >}}.
