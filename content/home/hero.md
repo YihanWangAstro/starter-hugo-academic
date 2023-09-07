@@ -38,7 +38,7 @@ cta_note:
   label: 
 ---
 
-#### SpaceHub uses unique algorithms for fast precise and accurate computations for few-body problems ranging from interacting black holes to planetary dynamics. This few-body gravity integration toolkit can treat black hole dynamics with extreme mass ratios, extreme eccentricities and very close encounters. SpaceHub offers a bunch of integrators with round off error controls and can handle extremely eccentric orbits and close approaches in long-term integrations.
+#### Recognized as one of the best codes available for black hole dynamics, SpaceHub utilizes unique algorithms for fast, precise, and accurate computations for few-body problems, ranging from interacting black holes to planetary dynamics. This few-body gravity integration toolkit can treat black hole dynamics with extreme mass ratios, extreme eccentricities, and very close encounters. SpaceHub offers a variety of integrators with round-off error controls and can handle extremely eccentric orbits and close approaches in long-term integrations.
 
 [![DOI:10.1093/mnras/stab1189](https://zenodo.org/badge/DOI/10.1093/mnras/stab1189.svg)](https://doi.org/10.1093/mnras/stab1189)
 
