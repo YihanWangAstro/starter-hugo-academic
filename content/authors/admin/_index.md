@@ -70,6 +70,6 @@ email: 'yihan.wang@unlv.edu'
 highlight_name: true
 ---
 
-I am a postdoc fellow of NCfA (Nevada Center for Astrophysics) at UNLV (Independent, but work mostly with [Bing Zhang](https://www.physics.unlv.edu/~bzhang/) and [Zhaohuan Zhu](https://www.physics.unlv.edu/~zhzhu/Home.html)). Before I came to UNLV, I was a PhD student of Stony Brook University working with [Rosalba Perna](http://www.astro.sunysb.edu/rosalba/). My research interests include tidal disruption events by solar mass black holes, gamma-ray bursts in dense environment, few-body dynamics with applications from supermassive black hole dynamics in galactic centers, to binary compact object mergers in AGN disks, to exoplanetary dynamics in dense star clusters. I am also a hardcore astrophysics software developer.
+I am currently a postdoc fellow at the Nevada Center for Astrophysics (NCfA) based at UNLV. I primarily collaborate with [Bing Zhang](https://www.physics.unlv.edu/~bzhang/) and [Zhaohuan Zhu](https://www.physics.unlv.edu/~zhzhu/Home.html). Prior to my role at UNLV, I pursued my PhD at Stony Brook University under the guidance of [Rosalba Perna](http://www.astro.sunysb.edu/rosalba/). My research interests span a diverse range of phenomena including tidal disruption events, gamma-ray bursts, and few-body dynamics, with applications that extend from exoplanets to stellar mass black holes, and further to supermassive black holes. In addition to my research pursuits, I am also a dedicated astrophysics software developer.
 
-{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/Yihan's CV.pdf" "newtab" >}}CV{{< /staticref >}}.
+{{< icon name="download" pack="fas" >}} my {{< staticref "uploads/Yihan's CV.pdf" "newtab" >}}CV{{< /staticref >}}.
