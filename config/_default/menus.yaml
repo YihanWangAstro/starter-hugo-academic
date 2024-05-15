@@ -22,6 +22,9 @@ main:
   - name: About me
     url: '#posts'
     weight: 45
+  - name: Posts
+    url: '#posts2'
+    weight: 46
   - name: Contact
     url: '#contact'
     weight: 50
