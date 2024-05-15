@@ -40,5 +40,6 @@ design:
 ---
 
 {{% callout note %}}
-Quickly discover relevant content by [filtering publications](./publication/).
+Quickly discover relevant content by [filtering publications](./publication/). 
+A complete list of publications can also be found at the [NASA ADS](https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-8614-8721&sort=date+desc).
 {{% /callout %}}
