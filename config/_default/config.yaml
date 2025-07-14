@@ -4,8 +4,9 @@
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 title: Yihan Wang (王艺涵) # Website name
-baseURL: 'https://yihanwangastro.github.io' # Website URL
-
+baseURL: './' # Local relative URL
+relativeURLs: true
+googleAnalytics: ""
 ############################
 ## LANGUAGE
 ############################
@@ -21,16 +22,19 @@ removePathAccents: true
 
 module:
   imports:
-    - path: github.com/wowchemy/wowchemy-hugo-modules/wowchemy-cms/v5
-    - path: github.com/wowchemy/wowchemy-hugo-modules/wowchemy/v5
+    - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-plugin-netlify
+    - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5
 
 ############################
 ## ADVANCED
+
 ############################
 
 enableGitInfo: false
 summaryLength: 30
-paginate: 10
+
+pagerSize: 10
+#paginate: 10
 enableEmoji: true
 enableRobotsTXT: true
 footnotereturnlinkcontents: <sup>^</sup>

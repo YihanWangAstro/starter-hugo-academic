@@ -35,10 +35,10 @@ image:
 #   E.g. `projects = ["internal-project"]` references `content/project/deep-learning/index.md`.
 #   Otherwise, set `projects = []`.
 projects: []
-publishDate: '2023-10-08T23:06:46.072840Z'
+publishDate: '2024-05-15T02:11:19.907481Z'
 publication_types:
 - '2'
-abstract: 'The discs of active galactic nuclei (AGNs) have emerged as rich environments for the production and capture of stars and the compact objects that they leave behind. These stars produce long gamma-ray bursts (GRBs) at their deaths, while frequent interactions among compact objects form binary neutron stars and neutron star-black hole binaries, leading to short GRBs upon their merger. Predicting the properties of these transients as they emerge from the dense environments of AGN discs is key to their proper identification and to better constrain the star and compact object population in AGN discs. Some of these transients would appear unusual because they take place in much higher densities than the interstellar medium. Others, which are the subject of this paper, would additionally be modified by radiation diffusion, since they are generated within optically thick regions of the accretion discs. Here, we compute the GRB afterglow light curves for diffused GRB sources for a representative variety of central black hole masses and disc locations. We find that the radiation from radio to ultraviolet and soft X-rays can be strongly suppressed by synchrotron self-absorption in the dense medium of the AGN disc. In addition, photon diffusion can significantly delay the emergence of the emission peak, turning a beamed, fast transient into a slow, isotropic, and dimmer one. These would appear as broad-band correlated AGN variability with a dominance at the higher frequencies. Their properties can constrain both the stellar populations within AGN discs and the disc structure.'
+abstract: ''
 publication: '*mnras*'
 doi: 10.1093/mnras/stac1968
 links:

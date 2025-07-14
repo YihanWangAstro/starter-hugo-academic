@@ -9,6 +9,10 @@ authors:
 - Rosalba Perna
 - Nathan W.~C. Leigh
 tags:
+- Exoplanet astronomy
+- Exoplanet dynamics
+- Stellar dynamics
+- N-body simulations
 - '486'
 - '490'
 - '1596'
@@ -36,7 +40,7 @@ image:
 #   E.g. `projects = ["internal-project"]` references `content/project/deep-learning/index.md`.
 #   Otherwise, set `projects = []`.
 projects: []
-publishDate: '2022-06-02T07:19:39.550502Z'
+publishDate: '2024-05-15T02:11:20.582244Z'
 publication_types:
 - '2'
 abstract: ''

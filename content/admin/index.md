@@ -1,8 +1,7 @@
 ---
-# Generate Wowchemy CMS
-type: wowchemycms
+# Generate Hugo Blox CMS
+type: hugoblockcms
 private: true
 outputs:
-  - wowchemycms_config
   - HTML
 ---
