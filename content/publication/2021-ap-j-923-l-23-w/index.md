@@ -41,10 +41,10 @@ image:
 #   E.g. `projects = ["internal-project"]` references `content/project/deep-learning/index.md`.
 #   Otherwise, set `projects = []`.
 projects: []
-publishDate: '2022-06-02T07:19:39.033065Z'
+publishDate: '2024-05-15T02:11:20.205413Z'
 publication_types:
 - '2'
-abstract: 'The disks of active galactic nuclei (AGNs) may be important sites of binary black hole (BBH) mergers. Here we show via numerical experiments with the high-accuracy, high-precision code SpaceHub that broken symmetry in dynamical encounters in AGN disks can lead to asymmetry between prograde and retrograde BBH mergers. The direction of the hardening asymmetry depends on the initial binary semi-major axis. Under the assumption that the spin of the BHs becomes aligned with the angular momentum of the disk on a short timescale compared with the encounter timescale, an asymmetric distribution of mass-weighted projected spin $\chi_{\rm eff}$ is predicted in LIGO-Virgo detections of BBH mergers from AGN disks. In particular, this model predicts that positive $\chi_{\rm eff}$ BBH mergers are most likely for encounters with massive tertiaries in migration traps at radial distances ≳500-600 gravitational radii. '
+abstract: ''
 publication: '*apjl*'
 doi: 10.3847/2041-8213/ac400a
 links:

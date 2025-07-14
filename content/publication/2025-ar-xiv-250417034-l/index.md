@@ -1,0 +1,121 @@
+---
+title: An extremely soft and weak fast X-ray transient associated with a luminous
+  supernova
+authors:
+- W. -X. Li
+- Z. -P. Zhu
+- X. -Z. Zou
+- J. -J. Geng
+- L. -D. Liu
+- Y. -H. Wang
+- R. -Z. Li
+- D. Xu
+- H. Sun
+- X. -F. Wang
+- Y. -W. Yu
+- B. Zhang
+- X. -F. Wu
+- Y. Yang
+- A.~V. Filippenko
+- X. -W. Liu
+- W. -M. Yuan
+- D. Aguado
+- J. An
+- T. An
+- D.~A.~H. Buckley
+- A.~J. Castro-Tirado
+- S. -Y. Fu
+- J.~P.~U. Fynbo
+- D.~A. Howell
+- J. -W. Hu
+- S. -Q. Jiang
+- A. Kumar
+- J. -R. Mao
+- J.~R. Maund
+- X. Liu
+- B. Mockler
+- A. Moskvitin
+- M. Andrews
+- C.~R. Bom
+- T.~G. Brink
+- K. Chatterjee
+- Y. Chen
+- H. -Q. Cheng
+- J. Cooke
+- J.~L. Dai
+- G. -W. Du
+- N. Erasmus
+- Y. Fang
+- J. Farah
+- V. Goranskij
+- M. Gritsevich
+- M. Gu
+- Z. Guo
+- E. Hsiao
+- Y. -D. Hu
+- Y. -L. Hua
+- W. Jacobson-Galán
+- S. -M. Jia
+- C. -C. Jin
+- M.~M. Kasliwal
+- C.~D. Kilpatrick
+- B. Kumar
+- W. -H. Lei
+- C. -K. Li
+- D. -Y. Li
+- L. -P. Li
+- Z. -X. Ling
+- Q. -C. Liu
+- Y. Liu
+- Y. -Q. Liu
+- A. López-Oramas
+- O. Maslennikova
+- C. McCully
+- I. Monageng
+- M. Newsone
+- E. Padilla Gonzalez
+- H. -W. Pan
+- H. -W. Peng
+- G. Pignata
+- F. Poidevin
+- S.~B. Potter
+- I. Pérez-Fournon
+- L. Santana-Silva
+- A. Santos
+- C. -Y. Song
+- F. -F. Song
+- O. Spiridonova
+- N. -C. Sun
+- X. -J. Sun
+- G. Terreran
+- L. -Z. Wang
+- L. -F. Wang
+- B. -T. Wang
+- Z. -Y. Wang
+- G. -L. Wu
+- D. -F. Xiang
+- H. -F. Xiao
+- Y. -F. Xu
+- S. -J. Xue
+- S. -Y. Yan
+- Y. -P. Yang
+- L. -X. Yu
+- Y. -H. Zhang
+- Y. -H. Zhang
+- C. Zhang
+- J. -H. Zhang
+- J. -J. Zhang
+- W. Zheng
+- H. Zou
+date: '2025-04-01'
+publishDate: '2025-07-14T20:32:54.139944Z'
+publication_types:
+- article-journal
+publication: '*arXiv e-prints*'
+doi: 10.48550/arXiv.2504.17034
+tags:
+- High Energy Astrophysical Phenomena
+links:
+- name: arXiv
+  url: https://arxiv.org/abs/2504.17034
+---

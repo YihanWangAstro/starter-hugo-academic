@@ -18,11 +18,11 @@ bio: .
 
 # Interests to show in About widget
 interests:
-  - Black hole merger dynamics
-  - Hot Jupiter formation dynamics
-  - Tidal disruption events
-  - GRB simulations
-  - N-body code algorithm
+  - Stellar dynamics in AGN
+  - Formation of free-floating planets and planet binaries
+  - Tidal disruption events associated with AGNs
+  - Planetary systems in star clusters
+  - N-body code algorithm development
 
 # Education to show in About widget
 education:
@@ -70,6 +70,8 @@ email: 'yihan.wang@unlv.edu'
 highlight_name: true
 ---
 
-I am currently a fellow of the Nevada Center for Astrophysics (NCfA) based at UNLV. I primarily collaborate with [Bing Zhang](https://www.physics.unlv.edu/~bzhang/) and [Zhaohuan Zhu](https://www.physics.unlv.edu/~zhzhu/Home.html). Prior to my role at UNLV, I pursued my PhD at Stony Brook University under [Rosalba Perna](https://www.astro.sunysb.edu/rosalba/). I am a dynamicist interested in a diverse range of topics, including exoplanets, black hole mergers, tidal disruption events, and gamma-ray bursts. In addition to my research pursuits, I have a keen interest in astrophysics software development.
+I am currently a Fellow of the Nevada Center for Astrophysics (NCfA) at UNLV. I primarily collaborate with [Bing Zhang](https://www.physics.unlv.edu/~bzhang/) and [Zhaohuan Zhu](https://www.physics.unlv.edu/~zhzhu/Home.html). Prior to my role at UNLV, I pursued my PhD at Stony Brook University under [Rosalba Perna](https://www.astro.sunysb.edu/rosalba/).
 
-{{< icon name="download" pack="fas" >}} my {{< staticref "uploads/Yihan's CV.pdf" "newtab" >}}CV{{< /staticref >}}.
+I am a dynamicist interested in stellar dynamics in AGN, formation of free-floating planets and planet binaries, tidal disruption events associated with AGNs, and planetary systems in star clusters. In addition to my research pursuits, I have a keen interest in astrophysics software development, including the development of [VegasAfterglow](https://github.com/YihanWangAstro/VegasAfterglow), a high-performance C++ framework for gamma-ray burst afterglow modeling, and [SpaceHub](https://yihanwangastro.github.io/SpaceHubWeb/), a high-precision few-body integration toolkit.
+
+{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/Yihan's CV.pdf" "newtab" >}}CV{{< /staticref >}}.

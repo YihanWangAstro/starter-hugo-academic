@@ -1,0 +1,18 @@
+{{/* Hugo Blox Builder Google Analytics override for Hugo v0.148+ */}}
+{{- $ga_id := "" -}}
+{{- with site.Params.marketing.analytics.google_analytics -}}
+  {{- if ne . "" -}}
+    {{- $ga_id = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $ga_id -}}
+  {{/* Google Analytics gtag.js */}}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ $ga_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ $ga_id }}');
+  </script>
+{{- end -}}
