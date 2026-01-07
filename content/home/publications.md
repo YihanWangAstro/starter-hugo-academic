@@ -7,9 +7,9 @@ widget: pages
 headless: true
 
 # Order that this section appears on the page.
-weight: 90
+weight: 40
 
-title: Recent Publications
+title: Selected First/Lead Author Publications
 subtitle: ''
 
 
@@ -21,14 +21,14 @@ content:
     folders:
       - publication
     tag: ''
-    category: ''
+    category: 'selected'
     publication_type: ''
     author: ''
     exclude_featured: false
     exclude_future: false
     exclude_past: false
   # Choose how many pages you would like to display (0 = all pages)
-  count: 10
+  count: 0
   # Choose how many pages you would like to offset by
   offset: 0
   # Page order: descending (desc) or ascending (asc) date.
@@ -40,6 +40,5 @@ design:
 ---
 
 {{% callout note %}}
-Quickly discover relevant content by [filtering publications](./publication/). 
-A complete list of publications can also be found at the [NASA ADS](https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-8614-8721&sort=date+desc).
+A complete list of publications can be found at the [NASA ADS](https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-8614-8721&sort=date+desc).
 {{% /callout %}}

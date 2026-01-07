@@ -12,6 +12,8 @@ publication_types:
 - article-journal
 publication: '*apj*'
 doi: 10.3847/1538-4357/adb8e9
+categories:
+- selected
 tags:
 - N-body simulations
 - Dynamical evolution
@@ -22,6 +24,8 @@ tags:
 - Astrophysics - Earth and Planetary Astrophysics
 - Astrophysics - Astrophysics of Galaxies
 - Astrophysics - Solar and Stellar Astrophysics
+categories:
+- selected
 links:
 - name: arXiv
   url: https://arxiv.org/abs/2407.20416

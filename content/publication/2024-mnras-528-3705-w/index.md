@@ -12,6 +12,8 @@ publication_types:
 abstract: ''
 featured: false
 publication: '*mnras*'
+categories:
+- selected
 tags:
 - MHD
 - 'methods: numerical'
@@ -20,6 +22,8 @@ tags:
 - 'stars: winds'
 - outflows
 - Astrophysics - High Energy Astrophysical Phenomena
+categories:
+- selected
 doi: 10.1093/mnras/stae136
 links:
 - name: arXiv

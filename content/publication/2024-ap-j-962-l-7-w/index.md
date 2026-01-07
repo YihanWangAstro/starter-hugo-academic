@@ -14,6 +14,8 @@ publication_types:
 abstract: ''
 featured: true
 publication: '*apjl*'
+categories:
+- selected
 tags:
 - AGN host galaxies
 - Active galactic nuclei
@@ -30,6 +32,8 @@ tags:
 - Astrophysics - High Energy Astrophysical Phenomena
 - Astrophysics - Astrophysics of Galaxies
 - Astrophysics - Solar and Stellar Astrophysics
+categories:
+- selected
 doi: 10.3847/2041-8213/ad20e5
 links:
 - name: arXiv

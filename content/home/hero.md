@@ -38,7 +38,7 @@ cta_note:
   label: 
 ---
 
-#### SpaceHub utilizes unique algorithms for fast, precise, and accurate computations for few-body problems, ranging from interacting black holes to planetary dynamics. This few-body gravity integration toolkit can treat black hole dynamics with extreme mass ratios, extreme eccentricities, and very close encounters. SpaceHub offers a variety of integrators with round-off error controls and can handle extremely eccentric orbits and close approaches in long-term integrations.
+#### SpaceHub is a state-of-the-art gravitational dynamics framework designed to solve challenging few-body problems with exceptional precision and efficiency. From supermassive black hole binaries to planetary system evolution, SpaceHub handles extreme scenarios — including large mass ratios, highly eccentric orbits, and close gravitational encounters — that often challenge conventional numerical integrators. Built with advanced algorithmic regularization and rigorous round-off error control, it enables reliable long-term integrations where standard codes like REBOUND may struggle with numerical accuracy.
 
 [![DOI:10.1093/mnras/stab1189](https://zenodo.org/badge/DOI/10.1093/mnras/stab1189.svg)](https://doi.org/10.1093/mnras/stab1189)
 

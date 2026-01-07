@@ -13,10 +13,14 @@ publication_types:
 - article-journal
 publication: '*mnras*'
 doi: 10.1093/mnras/stae1263
+categories:
+- selected
 tags:
 - Astrophysics - High Energy Astrophysical Phenomena
 - Astrophysics - Astrophysics of Galaxies
 - Astrophysics - Solar and Stellar Astrophysics
+categories:
+- selected
 links:
 - name: arXiv
   url: https://arxiv.org/abs/2310.00020

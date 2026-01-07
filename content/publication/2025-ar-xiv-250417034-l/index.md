@@ -7,7 +7,7 @@ authors:
 - X. -Z. Zou
 - J. -J. Geng
 - L. -D. Liu
-- Y. -H. Wang
+- Y.-H. Wang
 - R. -Z. Li
 - D. Xu
 - H. Sun
@@ -114,6 +114,7 @@ publication_types:
 publication: '*arXiv e-prints*'
 doi: 10.48550/arXiv.2504.17034
 tags:
+- collaboration
 - High Energy Astrophysical Phenomena
 links:
 - name: arXiv

@@ -14,9 +14,13 @@ publication_types:
 - article-journal
 publication: '*arXiv e-prints*'
 doi: 10.48550/arXiv.2406.12096
+categories:
+- selected
 tags:
 - Astrophysics - High Energy Astrophysical Phenomena
 - Astrophysics - Astrophysics of Galaxies
+categories:
+- selected
 links:
 - name: arXiv
   url: https://arxiv.org/abs/2406.12096

@@ -10,8 +10,12 @@ publication_types:
 - article-journal
 publication: '*arXiv e-prints*'
 doi: 10.48550/arXiv.2505.01606
+categories:
+- selected
 tags:
 - High Energy Astrophysical Phenomena
+categories:
+- selected
 links:
 - name: arXiv
   url: https://arxiv.org/abs/2505.01606
