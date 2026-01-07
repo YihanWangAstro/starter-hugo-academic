@@ -10,6 +10,8 @@ publication_types:
 featured: true
 publication: '*Nature Astronomy*'
 doi: 10.1038/s41550-024-02358-w
+categories:
+- selected
 tags:
 - Astrophysics - Astrophysics of Galaxies
 - Astrophysics - Cosmology and Nongalactic Astrophysics

@@ -15,10 +15,14 @@ publication_types:
 abstract: ''
 featured: false
 publication: '*arXiv e-prints*'
+categories:
+- selected
 tags:
 - Astrophysics - High Energy Astrophysical Phenomena
 - Astrophysics - Astrophysics of Galaxies
 - Astrophysics - Solar and Stellar Astrophysics
+categories:
+- selected
 doi: 10.48550/arXiv.2310.00020
 links:
 - name: arXiv

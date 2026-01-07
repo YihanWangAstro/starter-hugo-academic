@@ -13,6 +13,8 @@ publication_types:
 abstract: ''
 featured: true
 publication: '*mnras*'
+categories:
+- selected
 tags:
 - accretion
 - accretion discs
@@ -22,6 +24,8 @@ tags:
 - 'galaxies: nuclei'
 - Astrophysics - Astrophysics of Galaxies
 - Astrophysics - Solar and Stellar Astrophysics
+categories:
+- selected
 doi: 10.1093/mnras/stae321
 links:
 - name: arXiv

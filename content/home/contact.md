@@ -25,15 +25,15 @@ content:
   #    captcha: false
 
   # Contact details (edit or remove options as required)
-  email: yihan.wang@unlv.edu
+  email: wang3697@wisc.edu
   #phone: 888 888 88 88
-  #address:
-  #  street: 450 Serra Mall
-  #  city: Stanford
-  #  region: CA
-  #  postcode: '94305'
-  #  country: United States
-  #  country_code: US
+  address:
+    street: 500 Lincoln Dr
+    city: Madison
+    region: WI
+    postcode: '53706'
+    country: United States
+    country_code: US
   #coordinates:
   #  latitude: '37.4275'
   #  longitude: '-122.1697'

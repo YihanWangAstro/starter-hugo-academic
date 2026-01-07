@@ -15,6 +15,8 @@ publication_types:
 abstract: ''
 featured: false
 publication: '*apj*'
+categories:
+- selected
 tags:
 - High energy astrophysics
 - Active galactic nuclei
@@ -25,6 +27,8 @@ tags:
 - Astrophysics - High Energy Astrophysical Phenomena
 - Astrophysics - Astrophysics of Galaxies
 - High Energy Physics - Theory
+categories:
+- selected
 doi: 10.3847/1538-4357/ad11d3
 links:
 - name: arXiv

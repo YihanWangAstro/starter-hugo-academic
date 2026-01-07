@@ -6,23 +6,23 @@ title: Yihan Wang
 superuser: true
 
 # Role/position/tagline
-role: Post-doc Fellow
+role: Postdoctoral Research Associate
 
 # Organizations/Affiliations to show in About widget
 organizations:
-  - name: Nevada Center for Astrophysics, University of Nevada Las Vegas
-    url: https://ncfa.physics.unlv.edu/
+  - name: Department of Astronomy, University of Wisconsin-Madison
+    url: https://www.astro.wisc.edu/
 
 # Short bio (displayed in user profile at end of posts)
-bio: .
+bio: Studying stellar dynamics and transients in Active Galactic Nuclei through theory and high-performance simulations.
 
 # Interests to show in About widget
 interests:
-  - Stellar dynamics in AGN
-  - Formation of free-floating planets and planet binaries
-  - Tidal disruption events associated with AGNs
-  - Planetary systems in star clusters
-  - N-body code algorithm development
+  - Stellar dynamics in AGN disks
+  - Tidal disruption events and changing-look AGN
+  - Gravitational wave sources (EMRIs, binary BH mergers)
+  - Quasi-periodic eruptions
+  - Free-floating planets and binary planets
 
 # Education to show in About widget
 education:
@@ -30,48 +30,43 @@ education:
     - course: PhD in Physics
       institution: Stony Brook University
       year: 2022
-   
-    - course: BS in Physics
-      institution: University of Science & Technology of China
+    - course: MA in Physics
+      institution: Stony Brook University
+      year: 2017
+    - course: BS in Physics (Theoretical Physics)
+      institution: University of Science and Technology of China
       year: 2015
 
 # Social/Academic Networking
-# For available icons, see: https://wowchemy.com/docs/getting-started/page-builder/#icons
-#   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
-#   form "mailto:your-email@example.com" or "/#contact" for contact widget.
 social:
   - icon: envelope
     icon_pack: fas
     link: '/#contact'
-  #- icon: twitter
-  #  icon_pack: fab
-  #  link: https://twitter.com/GeorgeCushen
-  - icon: graduation-cap # Alternatively, use `google-scholar` icon from `ai` icon pack
-    icon_pack: fas
+  - icon: google-scholar
+    icon_pack: ai
     link: https://scholar.google.com/citations?user=SOMMc6gAAAAJ&hl=en
+  - icon: orcid
+    icon_pack: ai
+    link: https://orcid.org/0000-0002-8614-8721
   - icon: github
     icon_pack: fab
     link: https://github.com/YihanWangAstro
   - icon: linkedin
     icon_pack: fab
     link: https://www.linkedin.com/in/yihan-wang-b724a7132/
-
-# Link to a PDF of your resume/CV.
-# To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.toml`,
-# and uncomment the lines below.
   - icon: cv
     icon_pack: ai
     link: uploads/Yihan's CV.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
-email: 'yihan.wang@unlv.edu'
+email: 'wang3697@wisc.edu'
 
 # Highlight the author in author lists? (true/false)
 highlight_name: true
 ---
 
-I am currently a Fellow of the Nevada Center for Astrophysics (NCfA) at UNLV. I primarily collaborate with [Bing Zhang](https://www.physics.unlv.edu/~bzhang/) and [Zhaohuan Zhu](https://www.physics.unlv.edu/~zhzhu/Home.html). Prior to my role at UNLV, I pursued my PhD at Stony Brook University under [Rosalba Perna](https://www.astro.sunysb.edu/rosalba/).
+I am a Postdoctoral Research Associate in the Department of Astronomy at the University of Wisconsin-Madison, working with [Nick Stone](https://www.ncstone.space). Previously, I was a Fellow at the Nevada Center for Astrophysics at UNLV, collaborating with [Bing Zhang](https://www.physics.unlv.edu/~bzhang/) and [Zhaohuan Zhu](https://www.physics.unlv.edu/~zhzhu/Home.html). I completed my PhD at Stony Brook University under [Rosalba Perna](https://www.astro.sunysb.edu/rosalba/).
 
-I am a dynamicist interested in stellar dynamics in AGN, formation of free-floating planets and planet binaries, tidal disruption events associated with AGNs, and planetary systems in star clusters. In addition to my research pursuits, I have a keen interest in astrophysics software development, including the development of [VegasAfterglow](https://github.com/YihanWangAstro/VegasAfterglow), a high-performance C++ framework for gamma-ray burst afterglow modeling, and [SpaceHub](https://yihanwangastro.github.io/SpaceHubWeb/), a high-precision few-body integration toolkit.
+My research establishes a unified framework for understanding the coupled evolution of AGN disks and their embedded stellar populations. This paradigm connects a broad class of phenomena: rapid AGN state transitions, the puzzling demographics of tidal disruption events, quasi-periodic eruptions, and the formation of gravitational wave sources detectable by LIGO and LISA. I develop open-source simulation tools including [SpaceHub](https://yihanwangastro.github.io/SpaceHubWeb/) for few-body dynamics and [VegasAfterglow](https://github.com/YihanWangAstro/VegasAfterglow) for gamma-ray burst afterglow modeling.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/Yihan's CV.pdf" "newtab" >}}CV{{< /staticref >}}.

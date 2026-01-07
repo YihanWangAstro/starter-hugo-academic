@@ -17,8 +17,8 @@ marketing:
   seo:
     site_type: Person
     local_business_type: 'Academic Website'
-    org_name: 'Stony Brook University'
-    description: 'Yihan Wang, Stony Brook, Astronomy, 王艺涵, SpaceHub'
+    org_name: 'University of Wisconsin-Madison'
+    description: 'Yihan Wang, astrophysicist at UW-Madison, specializing in stellar dynamics, gravitational waves, tidal disruption events, and N-body simulations. Developer of SpaceHub and VegasAfterglow.'
     twitter: ''
   analytics:
     google_analytics: ''
@@ -43,7 +43,7 @@ header:
 
 footer:
   copyright:
-    notice: '© {year} Me. This work is licensed under {license}'
+    notice: '© {year} Yihan Wang. This work is licensed under {license}'
     license:
       enable: true
       allow_derivatives: false
