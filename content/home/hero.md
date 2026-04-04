@@ -42,8 +42,8 @@ cta_note:
 
 <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; margin: 30px 0;">
   <div style="text-align: center; max-width: 45%;">
-    <h4>Runge-Kutta (irreversible)</h4>
-    <img src="/uploads/Picture1.gif" alt="Runge-Kutta (irreversible)" style="width: 100%; height: auto;" />
+    <h4>RK4 (irreversible)</h4>
+    <img src="/uploads/Picture1.gif" alt="RK4 (irreversible)" style="width: 100%; height: auto;" />
   </div>
   <div style="text-align: center; max-width: 45%;">
     <h4>Symplectic (reversible)</h4>
