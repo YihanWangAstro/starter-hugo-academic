@@ -14,15 +14,17 @@ organizations:
     url: https://www.astro.wisc.edu/
 
 # Short bio (displayed in user profile at end of posts)
-bio: Studying stellar dynamics and transients in Active Galactic Nuclei through theory and high-performance simulations.
+bio: Establishing a unified framework of disk-regulated cluster dynamics to understand AGN transients and gravitational wave sources.
 
 # Interests to show in About widget
 interests:
-  - Stellar dynamics in AGN disks
-  - Tidal disruption events and changing-look AGN
-  - Gravitational wave sources (EMRIs, binary BH mergers)
-  - Quasi-periodic eruptions
-  - Free-floating planets and binary planets
+  - "Nuclei cluster dynamics: <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;◦ Tidal disruption events <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;◦ Changing-look AGN <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;◦ Quasi-periodic eruptions <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;◦ Extreme mass ratio inspirals <br>"
+  - Multi-messenger astrophysics
+  - Free floating planets
 
 # Education to show in About widget
 education:
@@ -67,6 +69,8 @@ highlight_name: true
 
 I am a Postdoctoral Research Associate in the Department of Astronomy at the University of Wisconsin-Madison, working with [Nick Stone](https://www.ncstone.space). Previously, I was a Fellow at the Nevada Center for Astrophysics at UNLV, collaborating with [Bing Zhang](https://www.physics.unlv.edu/~bzhang/) and [Zhaohuan Zhu](https://www.physics.unlv.edu/~zhzhu/Home.html). I completed my PhD at Stony Brook University under [Rosalba Perna](https://www.astro.sunysb.edu/rosalba/).
 
-My research establishes a unified framework for understanding the coupled evolution of AGN disks and their embedded stellar populations. This paradigm connects a broad class of phenomena: rapid AGN state transitions, the puzzling demographics of tidal disruption events, quasi-periodic eruptions, and the formation of gravitational wave sources detectable by LIGO and LISA. I develop open-source simulation tools including [SpaceHub](https://yihanwangastro.github.io/SpaceHubWeb/) for few-body dynamics and [VegasAfterglow](https://github.com/YihanWangAstro/VegasAfterglow) for gamma-ray burst afterglow modeling.
+My research establishes a unified framework of disk-regulated cluster dynamics to understand the coupled evolution of AGN disks and stellar populations in galactic nuclei. This paradigm connects a diverse class of AGN transients and gravitational wave sources: tidal disruption events, changing-look AGN, quasi-periodic eruptions, extreme mass-ratio inspirals, and binary black hole mergers detectable by LIGO and LISA. I develop hard-core open-source simulation tools including [SpaceHub](https://github.com/YihanWangAstro/SpaceHub/) for few-body dynamics and [VegasAfterglow](https://github.com/YihanWangAstro/VegasAfterglow) for gamma-ray burst afterglow modeling.
+
+I hate spaghetti code and am a bit stubborn about elegant problem solutions, which wastes a lot of my time.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/Yihan's CV.pdf" "newtab" >}}CV{{< /staticref >}}.

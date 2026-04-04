@@ -25,6 +25,10 @@ I grew up in Chongqing, a city known for its dramatic mountainous terrain and tr
 
 ![image](uploads/drawing.png)
 
+I recently revisited this sketch and used Google Gemini to add color and detail:
+
+![image](uploads/drawing-color.png)
+
 ## Skiing
 
 I picked up skiing during my PhD and quickly got hooked despite an early encounter with ski patrol. What started as a new challenge became a regular pursuit where steady improvement kept me coming back.
