@@ -18,13 +18,13 @@ bio: Establishing a unified framework of disk-regulated cluster dynamics to unde
 
 # Interests to show in About widget
 interests:
-  - "Nuclei cluster dynamics: <br>
-    &nbsp;&nbsp;&nbsp;&nbsp;◦ Tidal disruption events <br>
-    &nbsp;&nbsp;&nbsp;&nbsp;◦ Changing-look AGN <br>
-    &nbsp;&nbsp;&nbsp;&nbsp;◦ Quasi-periodic eruptions <br>
-    &nbsp;&nbsp;&nbsp;&nbsp;◦ Extreme mass ratio inspirals <br>"
-  - Multi-messenger astrophysics
-  - Free floating planets
+  - "nuclei-cluster-dynamics/<br>
+    &nbsp;&nbsp;├── Tidal disruption events<br>
+    &nbsp;&nbsp;├── Changing-look AGN<br>
+    &nbsp;&nbsp;├── Quasi-periodic eruptions<br>
+    &nbsp;&nbsp;└── Extreme mass ratio inspirals"
+  - multi-messenger-astrophysics/
+  - free-floating-planets/
 
 # Education to show in About widget
 education:
