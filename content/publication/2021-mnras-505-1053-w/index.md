@@ -1,15 +1,42 @@
 ---
-# Documentation: https://wowchemy.com/docs/managing-content/
-
 title: 'SpaceHub: A high-performance gravity integration toolkit for few-body problems
   in astrophysics'
-subtitle: ''
-summary: ''
+
+# Authors
+# A YAML list of author names
+# If you created a profile for a user (e.g. the default `admin` user at `content/authors/admin/`), 
+# write the username (folder name) here, and it will be replaced with their full name and linked to their profile.
 authors:
 - Yi-Han Wang
 - Nathan W.~C. Leigh
 - Bin Liu
 - Rosalba Perna
+
+# Author notes (such as 'Equal Contribution')
+# A YAML list of notes for each author in the above `authors` list
+author_notes: []
+
+date: '2021-07-01'
+
+# Date to publish webpage (NOT necessarily Bibtex publication's date).
+publishDate: '2026-05-18T03:11:04.048427Z'
+
+# Publication type.
+# A single CSL publication type but formatted as a YAML list (for Hugo requirements).
+publication_types:
+- article-journal
+
+# Publication name and optional abbreviated publication name.
+publication: '*mnras*'
+publication_short: ''
+
+doi: 10.1093/mnras/stab1189
+
+abstract: ''
+
+# Summary. An optional shortened abstract.
+summary: ''
+
 tags:
 - gravitation
 - 'methods: numerical'
@@ -19,43 +46,43 @@ tags:
 - Astrophysics - Earth and Planetary Astrophysics
 - Astrophysics - Instrumentation and Methods for Astrophysics
 - Physics - Computational Physics
-categories: []
-date: '2021-07-01'
-lastmod: 2022-06-02T03:19:39-04:00
+
+categories:
+- selected
+
+# Display this page in a list of Featured pages?
 featured: true
-draft: false
 
-# Featured image
-# To use, place an image named `featured.jpg/png` in your page's folder.
-# Placement options: 1 = Full column width, 2 = Out-set, 3 = Screen-width
-# Focal point options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
-# Set `preview_only` to `true` to just use the image for thumbnails.
+# Links
+url_pdf: ''
+url_code: ''
+url_dataset: ''
+url_poster: ''
+url_project: ''
+url_slides: ''
+url_source: ''
+url_video: ''
+
+# Custom links (uncomment lines below)
+# links:
+# - name: Custom Link
+#   url: http://example.org
+
+# Publication image
+# Add an image named `featured.jpg/png` to your page's folder then add a caption below.
 image:
-  placement: 2
-  caption: Relative energy error and performance tests on a two body system with extreme
-    eccentricity e=0.9999 and semi-major axis a = 1 AU. The central object has a mass
-    of 1 solar mass and the test particle has a mass of 1 earth mass. We integrate
-    the system for 1000 orbits. This test is designed to quantify how the different
-    integration methods are able to handle extremely eccentric orbits and very close
-    pair-wise approaches between particles.
-  focal_point: Smart
+  caption: ''
+  focal_point: ''
   preview_only: false
-  #alt_text: An optional description of the image for screen readers.
 
-
-# Projects (optional).
-#   Associate this post with one or more of your projects.
+# Associated Projects (optional).
+#   Associate this publication with one or more of your projects.
 #   Simply enter your project's folder or file name without extension.
-#   E.g. `projects = ["internal-project"]` references `content/project/deep-learning/index.md`.
-#   Otherwise, set `projects = []`.
+#   E.g. `projects: ['internal-project']` links to `content/project/internal-project/index.md`.
+#   Otherwise, set `projects: []`.
 projects: []
-publishDate: '2024-05-15T02:11:20.280562Z'
-publication_types:
-- '2'
-abstract: ''
-publication: '*mnras*'
-doi: 10.1093/mnras/stab1189
 links:
 - name: arXiv
   url: https://arxiv.org/abs/2104.06413
 ---
+

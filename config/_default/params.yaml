@@ -17,8 +17,8 @@ marketing:
   seo:
     site_type: Person
     local_business_type: 'Academic Website'
-    org_name: 'University of Wisconsin-Madison'
-    description: 'Yihan Wang, astrophysicist at UW-Madison, specializing in stellar dynamics, gravitational waves, tidal disruption events, and N-body simulations. Developer of SpaceHub and VegasAfterglow.'
+    org_name: 'University of Hong Kong'
+    description: 'Yihan Wang, astrophysicist and incoming Assistant Professor at the University of Hong Kong (HKIAA), specializing in stellar dynamics, gravitational waves, tidal disruption events, and N-body simulations. Developer of SpaceHub and VegasAfterglow.'
     twitter: ''
   analytics:
     google_analytics: ''

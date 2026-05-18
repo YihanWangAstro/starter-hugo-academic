@@ -38,7 +38,7 @@ cta_note:
   label: 
 ---
 
-#### SpaceHub is a state-of-the-art gravitational dynamics framework designed to solve challenging few-body problems with exceptional precision and efficiency. From supermassive black hole binaries to planetary system evolution, SpaceHub handles extreme scenarios, including large mass ratios, highly eccentric orbits, and close gravitational encounters that often challenge conventional numerical integrators. Built with advanced algorithmic regularization and rigorous round-off error control, it enables reliable long-term integrations where standard codes like REBOUND may struggle with numerical accuracy.
+#### SpaceHub is a state-of-the-art gravitational dynamics framework designed to solve challenging few-body problems with exceptional precision and efficiency. From supermassive black hole binaries to planetary system evolution, SpaceHub handles extreme scenarios, including large mass ratios, highly eccentric orbits, and close gravitational encounters that often challenge conventional numerical integrators. Built with advanced algorithmic regularization and rigorous round-off error control, it enables reliable long-term integrations with numerical accuracy.
 
 <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; margin: 30px 0;">
   <div style="text-align: center; max-width: 45%;">

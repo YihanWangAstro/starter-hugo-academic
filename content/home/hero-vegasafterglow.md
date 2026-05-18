@@ -47,7 +47,7 @@ cta_note:
   label: 
 ---
 
-#### VegasAfterglow is a high-performance computational framework for gamma-ray burst afterglow modeling, combining C++ efficiency with Python accessibility. Unlike existing tools such as afterglowpy, VegasAfterglow generates light curves in milliseconds, enabling rapid MCMC parameter inference that would otherwise be computationally prohibitive. The framework also offers more comprehensive physics, including reverse shock emission, synchrotron self-Compton, and flexible jet structures for multi-wavelength afterglow analysis:
+#### VegasAfterglow is a high-performance computational framework for gamma-ray burst afterglow modeling, combining C++ efficiency with Python accessibility. VegasAfterglow generates light curves in milliseconds, enabling rapid MCMC parameter inference that would otherwise be computationally prohibitive. The framework also offers more comprehensive physics, including reverse shock emission, synchrotron self-Compton, and flexible jet structures for multi-wavelength afterglow analysis:
 
 <div style="font-size: 0.75em;">
 
