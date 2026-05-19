@@ -48,7 +48,7 @@ categories:
 - selected
 
 # Display this page in a list of Featured pages?
-featured: true
+featured: false
 
 # Links
 url_pdf: ''
