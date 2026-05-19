@@ -18,8 +18,7 @@ marketing:
     site_type: Person
     local_business_type: 'Academic Website'
     org_name: 'University of Hong Kong'
-    description: 'Yihan Wang, astrophysicist and incoming Assistant Professor at the University of Hong Kong (HKIAA), specializing in stellar dynamics, gravitational waves, tidal disruption events, and N-body simulations. Developer of SpaceHub and VegasAfterglow.'
-    twitter: ''
+    description: 'Yihan Wang — theoretical and computational astrophysicist, incoming Assistant Professor at the University of Hong Kong (HKIAA) in Fall 2026. Research on the few-body gravitational dynamics of dense stellar environments and AGN accretion disks, producing nuclear transients and gravitational-wave sources. Developer of SpaceHub and VegasAfterglow.'
   analytics:
     google_analytics: ''
     baidu_tongji: ''

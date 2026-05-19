@@ -10,7 +10,7 @@ main:
   - name: Publications
     url: '#publications'
     weight: 20
-  - name: Software
+  - name: SpaceHub
     url: '#hero'
     weight: 30
   - name: Talks

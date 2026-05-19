@@ -51,7 +51,7 @@ cta_note:
   </div>
 </div>
 
-[**Read the paper: MNRAS, 503, 6005-6017 (2021)**](https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.1053W/abstract)
+[**Read the paper: MNRAS, 505, 1053-1070 (2021)**](https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.1053W/abstract)
 
 <!---[![GitHub stars](https://img.shields.io/github/stars/YihanWangAstro/SpaceHub.svg?style=social&label=Star&maxAge=2592000)](https://github.com/YihanWangAstro/SpaceHub/stargazers/)--->
 
