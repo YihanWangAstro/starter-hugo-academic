@@ -1,0 +1,23 @@
+{{/* Display author list directly from page params (bypass taxonomy so order and `...` separators are preserved). */}}
+
+{{- $authors := .Params.authors -}}
+{{- if $authors -}}
+  {{- range $index, $name := $authors -}}
+    {{- $clean := trim $name " " -}}
+    {{- if gt $index 0 }}, {{ end -}}
+    {{- $lower := lower $clean -}}
+    {{- $is_wang := or (or (eq $lower "yihan wang") (eq $lower "yi-han wang")) (or (eq $lower "y.-h. wang") (or (eq $lower "y. -h. wang") (eq $lower "yi-han wang"))) -}}
+    {{- if eq $clean "..." -}}
+      <span class="author-ellipsis">…</span>
+    {{- else if $is_wang -}}
+      <span class="author-highlighted">{{ $clean }}</span>
+    {{- else -}}
+      {{ $clean }}
+    {{- end -}}
+    {{- if isset $.Params "author_notes" -}}
+      {{- with (index $.Params.author_notes $index) -}}
+        <i class="author-notes fas fa-info-circle" data-toggle="tooltip" title="{{.}}"></i>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

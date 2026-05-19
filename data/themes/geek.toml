@@ -1,0 +1,36 @@
+# Theme metadata
+name = "Geek"
+
+# Retro computing meets elegant academic — dual mode terminal aesthetic
+
+[light]
+  # Warm amber primary on paper-like background
+  primary = "#a06e1d"
+
+  # Menu — clean header with subtle warmth
+  menu_primary = "#f5f0e8"
+  menu_text = "#4a4a4a"
+  menu_text_active = "#a06e1d"
+  menu_title = "#1e1e1e"
+
+  # Home sections — alternating warm paper tones
+  home_section_odd = "#faf8f2"
+  home_section_even = "#f3f0e6"
+
+[dark]
+  # Terminal green primary on deep black
+  primary = "#39d353"
+
+  link = "#39d353"
+  link_hover = "#6ee77a"
+
+  # Menu — dark terminal header
+  menu_primary = "#0d1117"
+  menu_text = "#8b949e"
+  menu_text_active = "#39d353"
+  menu_title = "#e3b341"
+
+  # Backgrounds — deep terminal black
+  background = "#0d1117"
+  home_section_odd = "#0d1117"
+  home_section_even = "#111921"

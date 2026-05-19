@@ -1,0 +1,276 @@
+// ============================================================
+// GEEK CODE STYLE — Retro computing meets elegant academic
+// ============================================================
+
+// --- Typography foundation ---
+// Unified font stack. Override theme variables at the selector level they're applied.
+// Body/root: IBM Plex Sans. Headings/nav/code/UI: IBM Plex Mono.
+
+$geek-mono: 'IBM Plex Mono', 'Fira Code', 'SF Mono', 'Cascadia Code', monospace;
+
+// Root — monospace everywhere
+html {
+  font-family: $geek-mono !important;
+}
+
+// All headings
+h1, h2, h3, h4, h5, h6 {
+  font-family: $geek-mono !important;
+  letter-spacing: -0.01em;
+}
+
+// Navbar — theme uses .navbar-light
+.navbar,
+.navbar-light,
+.navbar-brand,
+.nav-link,
+.navbar-toggler {
+  font-family: $geek-mono !important;
+}
+
+// Widget subtitles
+.section-subheading {
+  font-family: $geek-mono !important;
+}
+
+// Buttons, badges, cards
+.btn,
+.badge,
+.badge-light,
+.card-title,
+.article-title,
+.section-heading {
+  font-family: $geek-mono !important;
+}
+
+// Hero text
+.hero-title,
+.wg-hero {
+  font-family: $geek-mono !important;
+}
+
+// Code
+pre, code, kbd, samp {
+  font-family: $geek-mono !important;
+}
+
+// Footer
+footer, footer p, .page-footer {
+  font-family: $geek-mono !important;
+}
+
+// Navbar border
+.navbar {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+// --- Terminal prompt on section headings ---
+.home-section .section-heading h2::before,
+.wg-pages .section-heading h2::before,
+.wg-featured .section-heading h2::before {
+  content: '> ';
+  opacity: 0.5;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+}
+
+// --- Squared corners everywhere (retro/geometric) ---
+.card,
+.card-simple,
+.btn,
+.badge,
+.alert,
+.navbar,
+img.avatar,
+.avatar {
+  border-radius: 2px !important;
+}
+
+// Avatar square shape reinforcement
+img.avatar {
+  border-radius: 2px !important;
+}
+
+// Cards: thin solid borders, no shadows
+.card {
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  box-shadow: none !important;
+}
+
+// --- Tags as inline-code blocks ---
+.badge-light {
+  font-size: 0.75em;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  border-radius: 2px !important;
+  padding: 0.2em 0.5em;
+}
+
+// --- Links: dashed underline on hover ---
+a:hover {
+  text-decoration-style: dashed;
+}
+
+// --- CRT scanline overlay — applied globally ---
+body {
+  position: relative;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.03) 0px,
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+// Hero title blinking cursor
+.wg-hero .hero-title::after {
+  content: '█';
+  font-weight: 400;
+  animation: blink-cursor 1s step-end infinite;
+  opacity: 0.7;
+  margin-left: 2px;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0; }
+}
+
+// --- Footer: comment prefix ---
+footer {
+  font-size: 0.8em;
+}
+
+footer p {
+  &::before {
+    content: '// ';
+    opacity: 0.4;
+  }
+}
+
+// --- Custom selection color ---
+::selection {
+  background: rgba(57, 211, 83, 0.25);
+  color: inherit;
+}
+
+// --- Scrollbar (dark mode) ---
+.dark {
+  scrollbar-color: #39d353 #0d1117;
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0d1117;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1e3a2a;
+    border-radius: 2px;
+
+    &:hover {
+      background: #39d353;
+    }
+  }
+}
+
+// Light mode selection tint
+:root:not(.dark) ::selection {
+  background: rgba(160, 110, 29, 0.2);
+}
+
+// --- Dark mode specific enhancements ---
+.dark {
+  // Subtle green glow on primary headings
+  h1, h2, h3 {
+    text-shadow: 0 0 1px rgba(57, 211, 83, 0.1);
+  }
+
+  // Cards with terminal border
+  .card {
+    border-color: rgba(57, 211, 83, 0.15);
+  }
+
+  .badge-light {
+    border-color: rgba(57, 211, 83, 0.2);
+  }
+
+  // Scanlines slightly more visible on dark
+  body::after {
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.06) 0px,
+      rgba(0, 0, 0, 0.06) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+}
+
+// ============================================================
+// PRESERVED: Existing layout & publication styling
+// ============================================================
+
+// Interests list: remove bullet points for folder-tree style
+.ul-interests {
+  list-style: none;
+  padding-left: 0;
+}
+
+// Highlighted author name in publication lists: bold + white in dark mode,
+// black in light mode (override theme's muted `.article-metadata` color).
+.article-metadata .author-highlighted,
+.li-cite-author .author-highlighted {
+  font-weight: bold;
+  color: #000;
+}
+
+.dark .article-metadata .author-highlighted,
+.dark .li-cite-author .author-highlighted {
+  color: #fff;
+}
+
+// Increase content width
+.about-biography {
+  max-width: 100% !important;
+}
+
+.page-body {
+  max-width: 100% !important;
+}
+
+// Target the main content area
+.article-container {
+  max-width: 1200px !important;
+}
+
+// Widen the interests list specifically
+.interests-list {
+  max-width: 100% !important;
+}
+
+// Target the About widget and all content
+.about-widget,
+.wg-about,
+.portrait-title,
+section {
+  max-width: none !important;
+}
+
+ul.ul-interests li {
+  max-width: none !important;
+  width: 100% !important;
+}
