@@ -21,7 +21,7 @@ Then open: `http://localhost:1313/`
 - ✅ **35+ Publications** with citations and featured images
 - ✅ **All Media Assets** (videos, GIFs, images, icons)  
 - ✅ **Author Profile** with avatar and social links
-- ✅ **CV Download** working (`static/uploads/Yihan's CV.pdf`)
+- ✅ **CV Download** working (`static/uploads/Yihan-Wang-CV.pdf`)
 - ✅ **Projects Section** with portfolio display
 - ✅ **All Homepage Widgets** (Hero, About, Publications, etc.)
 - ✅ **Modern Hugo Blox Builder** theme applied

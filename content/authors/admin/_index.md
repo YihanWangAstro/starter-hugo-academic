@@ -62,7 +62,7 @@ social:
     link: https://www.linkedin.com/in/yihan-wang-b724a7132/
   - icon: cv
     icon_pack: ai
-    link: uploads/Yihan's CV.pdf
+    link: uploads/Yihan-Wang-CV.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: 'wang3697@wisc.edu'
@@ -87,4 +87,4 @@ I hate spaghetti code and am a bit stubborn about elegant code solutions, which 
 // EOF
 </pre>
 
-{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/Yihan's CV.pdf" "newtab" >}}CV{{< /staticref >}}.
+{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/Yihan-Wang-CV.pdf" "newtab" >}}CV{{< /staticref >}}.
