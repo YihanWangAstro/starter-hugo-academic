@@ -2,7 +2,7 @@
 # Documentation: https://wowchemy.com/docs/page-builder/
 
 # Activate this widget? true/false
-active: false
+active: true
 
 # This file represents a page section.
 headless: true
