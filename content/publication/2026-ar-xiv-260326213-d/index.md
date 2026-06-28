@@ -112,8 +112,11 @@ abstract: ''
 summary: ''
 
 tags:
-- collaboration
 - High Energy Astrophysical Phenomena
+
+# Co-first (equal-contribution) author -> listed as a lead-author publication.
+categories:
+- selected
 
 # Display this page in a list of Featured pages?
 featured: false

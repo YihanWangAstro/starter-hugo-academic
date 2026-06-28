@@ -274,3 +274,192 @@ ul.ul-interests li {
   max-width: none !important;
   width: 100% !important;
 }
+
+// ============================================================
+// DESIGN FIXES (design-fixes branch) — 2026-06
+// Confirmed issues after rendering at a real viewport:
+//   1. White-background scientific plots/animations glare ("flash-bang")
+//      against the near-black theme. Frame them as bounded figure cards.
+//   2. Off-palette Bootstrap-blue note callout. Recolor to terminal green.
+//   3. Hero titles render in a sans face while section headings are mono.
+//   4. Dense publication lists need spacing + scannable titles.
+// NOTE: the "empty voids" seen earlier were a screenshot artifact of the
+//   sticky-footer grid (.page-wrapper min-height:100vh) captured in an
+//   oversized window — no fix needed at a real viewport.
+// ============================================================
+
+// --- 1. Figure frames for the (now dark-rendered) scientific plots ---
+// The plots/animations are recoloured to the dark theme (white bg -> navy,
+// black ink -> light grey, data colours preserved), so they sit natively on
+// the page. Just a subtle terminal-green hairline to delineate each figure.
+.geek-fig {
+  display: inline-block;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: 0.5rem auto;
+  padding: 6px;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.6);   // black boundary
+  border-radius: 3px;
+  line-height: 0; // remove inline gap beneath media
+}
+.geek-fig img,
+.geek-fig video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+
+// Responsive figure row: two-up on desktop, stacks on narrow screens.
+.geek-fig-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 18px;
+  margin: 1.75rem 0;
+}
+.geek-fig-row .geek-fig { margin: 0; }
+// Keep the two JuMBO clips side-by-side on desktop (matches the caption),
+// wrapping to stacked only when the row no longer fits (mobile).
+.geek-fig-row .geek-fig video { width: 300px; max-width: 100%; }
+
+// SpaceHub hero image (icon-dark.png) is now a dark-rendered scatter plot;
+// a subtle hairline frame keeps it consistent with the other figures.
+// Scoped to #hero ONLY so the VegasAfterglow logo (#hero-vegasafterglow)
+// is left untouched.
+#hero .hero-media img {
+  box-sizing: border-box;
+  padding: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.6);   // black boundary
+  border-radius: 3px;
+}
+
+// --- 2. Note callout: recolor the stock Bootstrap-blue alert to terminal green ---
+.alert-note {
+  background: rgba(57, 211, 83, 0.07);
+  border: 1px solid rgba(57, 211, 83, 0.3);
+  border-left: 3px solid #39d353;
+  border-radius: 3px;
+  color: inherit;
+}
+.dark .alert-note { background: rgba(57, 211, 83, 0.09); }
+
+// --- 3. Hero titles to monospace, matching section headings ---
+.wg-hero .hero-title,
+section.wg-hero h1.hero-title {
+  font-family: $geek-mono !important;
+}
+
+// --- Research catalogue page (/research/) ---
+.research-catalog { max-width: 1000px; margin: 0 auto; }
+
+.research-theme { margin: 0 0 3.25rem; }
+
+.theme-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin: 0 0 0.6rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 2px solid rgba(57, 211, 83, 0.35);
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+.theme-head .theme-num { color: #39d353; font-weight: 700; opacity: 0.85; }
+.theme-head .theme-name { flex: 1 1 auto; }
+.theme-head .theme-count {
+  font-size: 0.68rem;
+  font-weight: 400;
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.theme-intro {
+  opacity: 0.72;
+  line-height: 1.7;
+  max-width: 75ch;
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+.research-grid { display: flex; flex-direction: column; gap: 14px; }
+
+.research-item {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  background: rgba(127, 127, 127, 0.035);
+  border: 1px solid rgba(128, 128, 128, 0.16);
+  border-radius: 8px;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+.research-item:hover {
+  border-color: rgba(57, 211, 83, 0.5);
+  background: rgba(57, 211, 83, 0.045);
+  transform: translateY(-2px);
+}
+
+.research-fig { flex: 0 0 250px; max-width: 250px; display: block; align-self: flex-start; }
+.research-fig img {
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  background: #ffffff;          // white card: legible in both light and dark mode
+  padding: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.8);   // black boundary
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.research-body { flex: 1 1 auto; min-width: 0; }
+.research-meta { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.45rem; flex-wrap: wrap; }
+.research-pub { font-size: 0.78rem; opacity: 0.6; letter-spacing: 0.03em; }
+.role-badge {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.15em 0.55em;
+  border-radius: 3px;
+  border: 1px solid;
+  line-height: 1.4;
+}
+.role-badge.role-lead { color: #39d353; border-color: rgba(57, 211, 83, 0.55); }
+.role-badge.role-collab,
+.role-badge.role-co { color: #9aa4b2; border-color: rgba(128, 128, 128, 0.4); }
+
+.research-body h3 { margin: 0 0 0.5rem; font-size: 1.06rem; line-height: 1.4; font-weight: 600; }
+.research-body h3 a { color: inherit; text-decoration: none; }
+.research-body h3 a:hover { color: #39d353; }
+.research-summary { margin: 0 0 0.7rem; line-height: 1.6; opacity: 0.9; font-size: 0.92rem; }
+
+.research-links a {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 0.74rem;
+  padding: 0.18em 0.7em;
+  border: 1px solid rgba(57, 211, 83, 0.35);
+  border-radius: 3px;
+  text-decoration: none;
+}
+.research-links a:hover { background: rgba(57, 211, 83, 0.12); }
+
+@media (max-width: 768px) {
+  .research-item { flex-direction: column; gap: 14px; }
+  .research-fig { flex: 0 0 auto; max-width: 100%; align-self: stretch; }
+  .theme-head { font-size: 1.25rem; }
+}
+
+// --- 4. Publication lists: more breathing room + scannable titles ---
+.pub-list-item {
+  margin-bottom: 1.1rem !important;
+  line-height: 1.5;
+}
+// The paper-title link is the first <a> after the author/year metadata.
+.pub-list-item > a {
+  font-weight: 600;
+}
+.dark .pub-list-item .article-metadata { color: #c9d1d9; }
