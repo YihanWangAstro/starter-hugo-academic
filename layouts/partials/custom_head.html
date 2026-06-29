@@ -1,0 +1,9 @@
+{{/* Default first-time visitors to dark mode (they can still toggle light/auto).
+     Runs in <head>, before the theme's init script reads localStorage. */}}
+<script>
+  try {
+    if (!localStorage.getItem('wcTheme')) {
+      localStorage.setItem('wcTheme', '1'); // 1 = Dark (0 = Light, 2 = Auto)
+    }
+  } catch (e) {}
+</script>

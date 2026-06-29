@@ -1,19 +1,10 @@
 // research-landscape.js — per-theme canvas animations. Always loop; paused when off-screen.
 (function(){
-  // Pause each animation's rAF loop when its canvas is scrolled out of view.
   var __gatedRAF = function(canvas){
     var visible = true, pending = null;
-    var raf = (window.requestAnimationFrame ? window.requestAnimationFrame.bind(window)
-              : function(cb){ return setTimeout(function(){ cb(Date.now()); }, 16); });
-    try {
-      var io = new IntersectionObserver(function(es){
-        var v = es[0].isIntersecting;
-        if (v && !visible && pending){ var cb = pending; pending = null; raf(cb); }
-        visible = v;
-      }, { threshold: 0 });
-      io.observe(canvas);
-    } catch(e){ visible = true; }
-    return function(cb){ if (visible) return raf(cb); pending = cb; return 0; };
+    var raf = (window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : function(cb){ return setTimeout(function(){ cb(Date.now()); }, 16); });
+    try { var io = new IntersectionObserver(function(es){ var v=es[0].isIntersecting; if(v&&!visible&&pending){var cb=pending;pending=null;raf(cb);} visible=v; }, {threshold:0}); io.observe(canvas); } catch(e){ visible=true; }
+    return function(cb){ if(visible) return raf(cb); pending=cb; return 0; };
   };
   var INIT = {};
   INIT[1] = function(canvas){
@@ -808,201 +799,489 @@
   function resize(){ dpr=Math.min(window.devicePixelRatio||1,2); var r=canvas.getBoundingClientRect(); w=Math.max(1,r.width); h=Math.max(1,r.height); canvas.width=Math.round(w*dpr); canvas.height=Math.round(h*dpr); ctx.setTransform(dpr,0,0,dpr,0,0); }
   resize(); window.addEventListener('resize', resize);
 
-  var GREEN='#39d353', GOLD='#f0a500', WHITE='#e6edf3', MUTED='#9aa4b2';
-  var R=function(){ return Math.random(); };
-  var ejecta=[]; for(var i=0;i<40;i++){ var a=R()*Math.PI*2; ejecta.push({a:a, rr:0.55+R()*0.45, sz:0.6+R()*1.2, ph:R()*6.283}); }
-  var stars=[]; for(i=0;i<46;i++){ stars.push({x:R(), y:R(), s:0.4+R()*1.0, tw:R()*6.283}); }
-  var photons=[]; for(i=0;i<34;i++){ photons.push({a0:(R()-0.5)*0.5, spd:0.5+R()*0.7, jit:R()*6.283, delay:R()*0.5, side:R()<0.5?1:-1, off:(R()-0.5)*0.4}); }
+  // ---- colours: energy -> colour ----
+  var C_GAMMA='#cdd6ff';   // hardest: gamma / hard X-ray (white-blue)
+  var C_VIOLET='#a78bfa';  // hard X-ray / violet
+  var C_OPT='#f0a500';     // optical (amber)
+  var C_RADIO='#39d353';   // radio (green, softest)
+  var BG='#0d1117';
+  var MUTE='#9aa4b2';
 
-  var start=null;
-  function lerp(a,b,t){ return a+(b-a)*t; }
-  function clamp01(x){ return x<0?0:(x>1?1:x); }
-  function env(x,s0,s1,e){ var a=clamp01((x-s0)/e), b=clamp01((s1-x)/e); return Math.min(a,b); }
+  // ---- deterministic background starfield (Math.random only at setup) ----
+  var stars=[];
+  (function(){ for(var i=0;i<70;i++){ stars.push({x:Math.random(),y:Math.random(),b:0.25+Math.random()*0.7,ph:Math.random()*6.28,sp:0.5+Math.random()*1.5}); } })();
+  // deterministic ejecta clumps
+  var clumps=[]; (function(){ for(var i=0;i<60;i++){ var a=Math.random()*6.2832; clumps.push({a:a, r:0.6+Math.random()*0.4, sz:0.4+Math.random()*0.9, ph:Math.random()*6.28}); } })();
+  // deterministic ISM dots (afterglow medium)
+  var ism=[]; (function(){ for(var i=0;i<48;i++){ ism.push({a:Math.random()*6.2832, r:0.2+Math.random()*0.9, b:0.2+Math.random()*0.6}); } })();
+  // deterministic disk speckle (AGN)
+  var disk=[]; (function(){ for(var i=0;i<90;i++){ disk.push({x:Math.random(),y:Math.random()*0.6-0.3,b:0.2+Math.random()*0.8,sp:0.4+Math.random()*1.6,ph:Math.random()*6.28}); } })();
 
-  function label(txt,alpha){
-    ctx.globalAlpha=alpha*0.9; ctx.fillStyle=MUTED;
-    ctx.font='10px ui-monospace,Menlo,monospace'; ctx.textAlign='left'; ctx.textBaseline='alphabetic';
-    ctx.fillText(txt, 10, h-12); ctx.globalAlpha=1;
+  var T=60;
+
+  function lerp(a,b,t){return a+(b-a)*t;}
+  function clamp(x,a,b){return x<a?a:(x>b?b:x);}
+  function ease(t){return t<0?0:(t>1?1:t*t*(3-2*t));}
+  // cross-fade weight for a phase window [s,e] with fade f at edges
+  function pw(lt,s,e,f){
+    var up=ease((lt-s)/f);
+    var dn=1-ease((lt-(e-f))/f);
+    return clamp(Math.min(up,dn),0,1);
+  }
+  function withA(hex,a){
+    var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+    return 'rgba('+r+','+g+','+b+','+a+')';
   }
 
-  function drawStars(t,alpha){
-    ctx.fillStyle=WHITE;
-    for(var i=0;i<stars.length;i++){ var s=stars[i]; var tw=0.4+0.6*(0.5+0.5*Math.sin(t*1.3+s.tw));
-      ctx.globalAlpha=alpha*tw*0.5; ctx.beginPath(); ctx.arc(s.x*w, s.y*h, s.s, 0, 6.283); ctx.fill(); }
-    ctx.globalAlpha=1;
-  }
-
-  function phase1(t,lt,alpha){
-    var cx=w/2, cy=h/2, S=Math.min(w,h);
-    var prog=clamp01(lt/30);
-    drawStars(t,alpha*0.7);
-
-    var shellR=S*(0.10+0.34*prog);
-    ctx.save();
-    var sg=ctx.createRadialGradient(cx,cy,shellR*0.55,cx,cy,shellR);
-    sg.addColorStop(0,'rgba(240,165,0,0)');
-    sg.addColorStop(0.85,'rgba(240,165,0,'+(0.05*alpha)+')');
-    sg.addColorStop(1,'rgba(240,165,0,0)');
-    ctx.fillStyle=sg; ctx.beginPath(); ctx.arc(cx,cy,shellR,0,6.283); ctx.fill();
-    for(var i=0;i<ejecta.length;i++){ var e=ejecta[i];
-      var rr=shellR*e.rr; var ex=cx+Math.cos(e.a)*rr, ey=cy+Math.sin(e.a)*rr;
-      var fl=0.5+0.5*Math.sin(t*0.8+e.ph);
-      ctx.globalAlpha=alpha*0.28*fl; ctx.fillStyle=MUTED;
-      ctx.beginPath(); ctx.arc(ex,ey,e.sz,0,6.283); ctx.fill();
+  function background(t){
+    ctx.fillStyle=BG; ctx.fillRect(0,0,w,h);
+    var S=Math.min(w,h);
+    for(var i=0;i<stars.length;i++){ var st=stars[i];
+      var tw=0.5+0.5*Math.sin(t*st.sp+st.ph);
+      ctx.fillStyle=withA('#c8d0e0', st.b*0.5*tw);
+      ctx.fillRect(st.x*w, st.y*h, 1.2, 1.2);
     }
-    ctx.globalAlpha=1; ctx.restore();
+  }
 
-    var bubL=S*(0.05+0.40*prog);
-    var bubW=S*(0.03+0.10*prog);
+  function label(txt){
     ctx.save();
-    for(var pole=-1;pole<=1;pole+=2){
-      var lg=ctx.createRadialGradient(cx,cy+pole*bubL*0.45,0, cx,cy+pole*bubL*0.45, bubL*0.7);
-      lg.addColorStop(0,'rgba(57,211,83,'+(0.30*alpha)+')');
-      lg.addColorStop(0.5,'rgba(57,211,83,'+(0.12*alpha)+')');
-      lg.addColorStop(1,'rgba(57,211,83,0)');
-      ctx.fillStyle=lg;
-      ctx.beginPath();
-      ctx.ellipse(cx, cy+pole*bubL*0.42, bubW, bubL*0.62, 0, 0, 6.283);
-      ctx.fill();
+    ctx.font='10px -apple-system,Segoe UI,Roboto,sans-serif';
+    var tw=ctx.measureText(txt).width;
+    ctx.fillStyle='rgba(5,8,14,0.62)';
+    ctx.fillRect(8,8,tw+12,17);
+    ctx.fillStyle=MUTE;
+    ctx.textBaseline='middle';
+    ctx.fillText(txt,14,17);
+    ctx.restore();
+  }
+
+  // ============ PHASE 1: MAGNETAR ENGINE & JET BREAKOUT ============
+  function phase1(t,lt,A){
+    if(A<=0) return;
+    var S=Math.min(w,h), cx=w/2, cy=h/2;
+    var p=clamp((lt-0)/16,0,1); // local progress
+    ctx.save(); ctx.globalAlpha=A;
+
+    // expanding SN ejecta shell (spherical)
+    var shellR=S*(0.10+0.30*ease(p));
+    // ejecta body (clumpy, dim, reddish)
+    ctx.save();
+    for(var i=0;i<clumps.length;i++){ var c=clumps[i];
+      var rr=shellR*c.r;
+      var px=cx+Math.cos(c.a)*rr, py=cy+Math.sin(c.a)*rr*0.92;
+      var fl=0.4+0.3*Math.sin(t*1.2+c.ph);
+      ctx.fillStyle=withA('#7a4a3a',0.18*fl);
+      ctx.beginPath(); ctx.arc(px,py,c.sz*S*0.018,0,6.2832); ctx.fill();
     }
     ctx.restore();
+    // shell outline
+    ctx.strokeStyle=withA('#9a5a44',0.30); ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.ellipse(cx,cy,shellR,shellR*0.92,0,0,6.2832); ctx.stroke();
+    ctx.strokeStyle=withA('#c08060',0.12); ctx.lineWidth=4;
+    ctx.beginPath(); ctx.ellipse(cx,cy,shellR,shellR*0.92,0,0,6.2832); ctx.stroke();
 
-    var jetLen=bubL*0.95;
-    ctx.save();
-    ctx.globalCompositeOperation='lighter';
-    for(pole=-1;pole<=1;pole+=2){
-      var jg=ctx.createLinearGradient(cx,cy, cx, cy+pole*jetLen);
-      jg.addColorStop(0,'rgba(230,237,243,'+(0.55*alpha)+')');
-      jg.addColorStop(0.4,'rgba(240,165,0,'+(0.30*alpha)+')');
-      jg.addColorStop(1,'rgba(240,165,0,0)');
-      ctx.strokeStyle=jg; ctx.lineWidth=Math.max(1.5,S*0.012); ctx.lineCap='round';
-      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx, cy+pole*jetLen); ctx.stroke();
-      for(var k=0;k<5;k++){
-        var fp=((t*0.5 + k*0.2 + (pole>0?0:0.1))%1);
-        var py=cy+pole*jetLen*fp;
-        ctx.globalAlpha=alpha*(1-fp)*0.8; ctx.fillStyle=GOLD;
-        ctx.beginPath(); ctx.arc(cx, py, Math.max(1,S*0.008*(1-fp*0.5)), 0, 6.283); ctx.fill();
+    // --- narrow ultra-relativistic bipolar jet along spin axis (vertical) ---
+    // jet drills out: length grows, breaks out once it exceeds shell
+    var jetLen=S*(0.06+0.50*ease(clamp((p-0.12)/0.88,0,1)));
+    var broke=jetLen>shellR*0.96;
+    var halfAng=0.05; // ~ a few degrees opening angle (very narrow)
+    var dirs=[-1,1];
+    for(var d=0;d<2;d++){
+      var sgn=dirs[d];
+      var tipY=cy+sgn*jetLen;
+      var baseW=S*0.010;
+      var tipW=baseW+jetLen*halfAng; // small opening angle
+      // jet body gradient (white-violet, hardest)
+      var g=ctx.createLinearGradient(cx,cy,cx,tipY);
+      g.addColorStop(0,withA(C_GAMMA,0.95));
+      g.addColorStop(0.5,withA(C_VIOLET,0.55));
+      g.addColorStop(1,withA(C_VIOLET,0.0));
+      ctx.fillStyle=g;
+      ctx.beginPath();
+      ctx.moveTo(cx-baseW,cy);
+      ctx.lineTo(cx+baseW,cy);
+      ctx.lineTo(cx+tipW,tipY);
+      ctx.lineTo(cx-tipW,tipY);
+      ctx.closePath(); ctx.fill();
+      // bright thin spindle core moving fast
+      ctx.strokeStyle=withA(C_GAMMA,0.9); ctx.lineWidth=1.4;
+      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx,tipY); ctx.stroke();
+      // fast-moving knots along the jet
+      for(var k=0;k<4;k++){
+        var f=((t*0.9+k*0.27)%1);
+        var ky=cy+sgn*f*jetLen;
+        var kr=baseW*0.7*(1-f*0.4);
+        ctx.fillStyle=withA(C_GAMMA,0.85*(1-f));
+        ctx.beginPath(); ctx.arc(cx,ky,kr,0,6.2832); ctx.fill();
+      }
+      // breakout flash at shell surface
+      if(broke){
+        var bx=cx, by=cy+sgn*shellR*0.96;
+        var bg=ctx.createRadialGradient(bx,by,0,bx,by,S*0.06);
+        bg.addColorStop(0,withA(C_GAMMA,0.55));
+        bg.addColorStop(1,withA(C_VIOLET,0));
+        ctx.fillStyle=bg;
+        ctx.beginPath(); ctx.arc(bx,by,S*0.06,0,6.2832); ctx.fill();
       }
     }
-    ctx.globalAlpha=1; ctx.restore();
 
-    var spin=t*2.2;
-    var nsR=Math.max(2.2,S*0.018);
+    // --- newborn magnetar: small bright rapidly spinning neutron star ---
+    var spin=t*7.5; // rapid spin
+    // glow
+    var ng=ctx.createRadialGradient(cx,cy,0,cx,cy,S*0.05);
+    ng.addColorStop(0,withA('#ffffff',0.95));
+    ng.addColorStop(0.5,withA(C_VIOLET,0.5));
+    ng.addColorStop(1,withA(C_VIOLET,0));
+    ctx.fillStyle=ng;
+    ctx.beginPath(); ctx.arc(cx,cy,S*0.05,0,6.2832); ctx.fill();
+    // core
+    ctx.fillStyle='#ffffff';
+    ctx.beginPath(); ctx.arc(cx,cy,S*0.012,0,6.2832); ctx.fill();
+    // magnetic field-line arcs (dipole), rotating with the star
     ctx.save();
-    ctx.strokeStyle='rgba(57,211,83,'+(0.5*alpha)+')'; ctx.lineWidth=1;
-    for(var f=0;f<3;f++){
-      var ang=spin + f*Math.PI/3;
-      ctx.save(); ctx.translate(cx,cy); ctx.rotate(ang);
-      var aw=nsR*3.2;
-      ctx.beginPath(); ctx.moveTo(0,-nsR*0.5);
-      ctx.bezierCurveTo(aw,-nsR*2.2, aw,nsR*2.2, 0,nsR*0.5); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(0,-nsR*0.5);
-      ctx.bezierCurveTo(-aw,-nsR*2.2, -aw,nsR*2.2, 0,nsR*0.5); ctx.stroke();
-      ctx.restore();
-    }
-    var pulse=0.7+0.3*Math.sin(t*8);
-    ctx.shadowBlur=14; ctx.shadowColor=WHITE;
-    var cg=ctx.createRadialGradient(cx,cy,0,cx,cy,nsR*2);
-    cg.addColorStop(0,'rgba(230,237,243,'+(alpha)+')');
-    cg.addColorStop(0.5,'rgba(230,237,243,'+(0.6*alpha*pulse)+')');
-    cg.addColorStop(1,'rgba(57,211,83,0)');
-    ctx.fillStyle=cg; ctx.beginPath(); ctx.arc(cx,cy,nsR*2,0,6.283); ctx.fill();
-    ctx.shadowBlur=0; ctx.restore();
-
-    label('MAGNETAR ENGINE', alpha);
-  }
-
-  function phase2(t,lt,alpha){
-    var cx=w/2, cy=h/2, S=Math.min(w,h);
-    var local=lt-30;
-    drawStars(t,alpha*0.4);
-
-    var diskH=S*0.30, diskHalf=diskH/2;
-    ctx.save();
-    var dg=ctx.createLinearGradient(0, cy-diskHalf, 0, cy+diskHalf);
-    dg.addColorStop(0,'rgba(240,165,0,0)');
-    dg.addColorStop(0.5,'rgba(240,165,0,'+(0.34*alpha)+')');
-    dg.addColorStop(1,'rgba(240,165,0,0)');
-    ctx.fillStyle=dg; ctx.fillRect(0, cy-diskHalf, w, diskH);
-    ctx.globalAlpha=alpha*0.18; ctx.strokeStyle=GOLD; ctx.lineWidth=1;
-    for(var i=0;i<6;i++){
-      var yy=cy-diskHalf + diskH*(i+0.5)/6;
+    ctx.translate(cx,cy); ctx.rotate(spin*0.15);
+    ctx.strokeStyle=withA(C_VIOLET,0.55); ctx.lineWidth=1.1;
+    for(var m=0;m<2;m++){
+      var side=(m===0)?1:-1;
       ctx.beginPath();
-      for(var x=0;x<=w;x+=8){ var yo=Math.sin(x*0.04 + t*0.6 + i)*2.0; if(x===0)ctx.moveTo(x,yy+yo); else ctx.lineTo(x,yy+yo); }
+      ctx.moveTo(0,-S*0.012);
+      ctx.bezierCurveTo(side*S*0.07,-S*0.02, side*S*0.07,S*0.02, 0,S*0.012);
       ctx.stroke();
     }
-    ctx.globalAlpha=1; ctx.restore();
-
-    var burst=(local%8)/8;
-    var srcx=cx, srcy=cy;
-    var jetReach=clamp01(burst*3);
-
-    ctx.save();
-    ctx.globalCompositeOperation='lighter';
-    if(burst<0.35){
-      var sharpA=alpha*(0.35-burst)/0.35;
-      var topY=srcy - diskHalf*0.8*jetReach;
-      var bg=ctx.createLinearGradient(srcx,srcy,srcx,topY);
-      bg.addColorStop(0,'rgba(230,237,243,'+(0.8*sharpA)+')');
-      bg.addColorStop(1,'rgba(120,170,255,0)');
-      ctx.strokeStyle=bg; ctx.lineWidth=Math.max(1.5,S*0.012); ctx.lineCap='round';
-      ctx.beginPath(); ctx.moveTo(srcx,srcy); ctx.lineTo(srcx,topY); ctx.stroke();
-    }
+    // rotating polar beam hint (lighthouse), aligned to spin
+    ctx.rotate(spin);
+    ctx.strokeStyle=withA(C_GAMMA,0.25); ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(0,-S*0.02); ctx.lineTo(0,-S*0.045); ctx.stroke();
     ctx.restore();
 
-    ctx.save();
-    ctx.globalCompositeOperation='lighter';
-    for(i=0;i<photons.length;i++){
-      var p=photons[i];
-      var ph=((local*0.10*p.spd + p.delay)%1);
-      var dist=Math.sqrt(ph)*(diskHalf + S*0.32);
-      var spread=ph;
-      var baseAng=-Math.PI/2 + p.a0;
-      var ang=lerp(baseAng, baseAng + p.off*Math.PI*1.6, spread);
-      ang += Math.sin(local*1.2 + p.jit)*0.15*spread;
-      var px=srcx + Math.cos(ang)*dist;
-      var py=srcy + Math.sin(ang)*dist;
-      var redT=clamp01(ph*1.3);
-      var col;
-      if(redT<0.5){ var u=redT/0.5; col='rgb('+Math.round(lerp(230,240,u))+','+Math.round(lerp(237,165,u))+','+Math.round(lerp(243,0,u))+')'; }
-      else { var u2=(redT-0.5)/0.5; col='rgb('+Math.round(lerp(240,200,u2))+','+Math.round(lerp(165,40,u2))+',0)'; }
-      var aa=alpha*(1-ph)*0.7;
-      var sz=Math.max(1, S*0.012*(0.5+ph*0.9));
-      ctx.globalAlpha=aa; ctx.fillStyle=col;
-      ctx.beginPath(); ctx.arc(px,py,sz,0,6.283); ctx.fill();
-    }
-    ctx.globalAlpha=1; ctx.restore();
-
-    var emA=alpha*0.5*(0.6+0.4*Math.sin(local*0.5));
-    ctx.save();
-    ctx.globalCompositeOperation='lighter';
-    for(var side=-1;side<=1;side+=2){
-      var gy=cy + side*diskHalf*1.1;
-      var eg=ctx.createRadialGradient(cx,gy,0,cx,gy,S*0.30);
-      eg.addColorStop(0,'rgba(220,90,30,'+(0.30*emA)+')');
-      eg.addColorStop(0.5,'rgba(200,60,20,'+(0.10*emA)+')');
-      eg.addColorStop(1,'rgba(200,40,10,0)');
-      ctx.fillStyle=eg; ctx.beginPath(); ctx.ellipse(cx,gy,S*0.30,S*0.20,0,0,6.283); ctx.fill();
-    }
     ctx.restore();
-
-    var fl=0.6+0.4*Math.sin(local*7);
-    ctx.shadowBlur=10; ctx.shadowColor=GOLD;
-    ctx.fillStyle='rgba(240,165,0,'+(alpha*fl)+')';
-    ctx.beginPath(); ctx.arc(srcx,srcy,Math.max(1.6,S*0.012),0,6.283); ctx.fill();
-    ctx.shadowBlur=0;
-
-    label('GRB IN AN AGN DISK', alpha);
+    if(A>0.5) label('MAGNETAR ENGINE & JET BREAKOUT');
   }
 
-  function frame(ts){ if(start==null)start=ts; var t=(ts-start)/1000;
-    if(w<2||h<2){ requestAnimationFrame(frame); return; }
-    var T=60, lt=t%T;
-    ctx.fillStyle='#0d1117'; ctx.fillRect(0,0,w,h);
-    var a1=env(lt,0,30,2.5);
-    var a2=env(lt,30,60,2.5);
-    if(a1>0.01) phase1(t,lt,a1);
-    if(a2>0.01) phase2(t,lt,a2);
+  // ============ PHASE 2: PROMPT GAMMA-RAY EMISSION ============
+  function phase2(t,lt,A){
+    if(A<=0) return;
+    var S=Math.min(w,h), cx=w/2, cy=h/2;
+    ctx.save(); ctx.globalAlpha=A;
+
+    // faint residual ejecta shell (now far out)
+    ctx.strokeStyle=withA('#9a5a44',0.10); ctx.lineWidth=1.2;
+    ctx.beginPath(); ctx.ellipse(cx,cy,S*0.42,S*0.40,0,0,6.2832); ctx.stroke();
+
+    // narrow relativistic jet channel (vertical, both poles), faint
+    var jetLen=S*0.46, halfAng=0.05;
+    for(var d=0;d<2;d++){
+      var sgn=(d===0)?-1:1;
+      var tipY=cy+sgn*jetLen, baseW=S*0.010, tipW=baseW+jetLen*halfAng;
+      var g=ctx.createLinearGradient(cx,cy,cx,tipY);
+      g.addColorStop(0,withA(C_VIOLET,0.25));
+      g.addColorStop(1,withA(C_VIOLET,0));
+      ctx.fillStyle=g;
+      ctx.beginPath();
+      ctx.moveTo(cx-baseW,cy); ctx.lineTo(cx+baseW,cy);
+      ctx.lineTo(cx+tipW,tipY); ctx.lineTo(cx-tipW,tipY);
+      ctx.closePath(); ctx.fill();
+    }
+
+    // --- internal shocks: brief, highly variable HARD pulses beamed along axis ---
+    // build a rapid variable light-curve value (sum of fast spikes), deterministic
+    function lc(time){
+      var v=0;
+      v+=Math.max(0,Math.sin(time*9.0))*Math.max(0,Math.sin(time*23.0));
+      v+=0.7*Math.max(0,Math.sin(time*15.0+1.3))*Math.max(0,Math.sin(time*31.0));
+      v+=0.5*Math.pow(Math.max(0,Math.sin(time*5.0+0.6)),3);
+      return clamp(v,0,1.4);
+    }
+    var amp=lc(t);
+
+    // shooting hard flashes along the jet (both poles), collimated
+    for(var d=0;d<2;d++){
+      var sgn=(d===0)?-1:1;
+      for(var k=0;k<5;k++){
+        var seed=k*0.41+d*0.13;
+        var f=((t*1.4+seed)%1);
+        var pulse=lc(t*1.0+k*0.7+d*2.0);
+        if(pulse<0.18) continue;
+        var py=cy+sgn*f*jetLen;
+        var px=cx+(((k%2)*2-1)*S*0.004*(1-f)); // tiny jitter, stays collimated
+        var rad=S*(0.006+0.02*pulse)*(1-f*0.3);
+        var col=(pulse>0.7)?C_GAMMA:C_VIOLET;
+        var pg=ctx.createRadialGradient(px,py,0,px,py,rad*2.4);
+        pg.addColorStop(0,withA(col,0.9*pulse));
+        pg.addColorStop(0.4,withA(col,0.4*pulse));
+        pg.addColorStop(1,withA(col,0));
+        ctx.fillStyle=pg;
+        ctx.beginPath(); ctx.arc(px,py,rad*2.4,0,6.2832); ctx.fill();
+        ctx.fillStyle=withA(C_GAMMA,0.95*pulse);
+        ctx.beginPath(); ctx.arc(px,py,rad*0.5,0,6.2832); ctx.fill();
+      }
+    }
+
+    // central engine still bright & spiking
+    var cg=ctx.createRadialGradient(cx,cy,0,cx,cy,S*(0.03+0.04*amp));
+    cg.addColorStop(0,withA('#ffffff',0.9));
+    cg.addColorStop(0.5,withA(C_VIOLET,0.4*clamp(amp,0,1)));
+    cg.addColorStop(1,withA(C_VIOLET,0));
+    ctx.fillStyle=cg;
+    ctx.beginPath(); ctx.arc(cx,cy,S*(0.03+0.04*amp),0,6.2832); ctx.fill();
+
+    // --- prompt light curve inset (rapid flicker), bottom-right ---
+    var iw=S*0.30, ih=S*0.11, ix=w-iw-10, iy=h-ih-10;
+    ctx.fillStyle='rgba(5,8,14,0.5)'; ctx.fillRect(ix,iy,iw,ih);
+    ctx.strokeStyle=withA(MUTE,0.35); ctx.lineWidth=1;
+    ctx.strokeRect(ix,iy,iw,ih);
+    ctx.beginPath();
+    for(var xi=0;xi<=Math.round(iw);xi+=2){
+      var tt=t-(iw-xi)/iw*4.0; // last 4s scroll
+      var vv=lc(tt)/1.4;
+      var yy=iy+ih-2-vv*(ih-4);
+      if(xi===0) ctx.moveTo(ix+xi,yy); else ctx.lineTo(ix+xi,yy);
+    }
+    ctx.strokeStyle=withA(C_GAMMA,0.9); ctx.lineWidth=1.2; ctx.stroke();
+    ctx.fillStyle=withA(MUTE,0.7);
+    ctx.font='8px -apple-system,sans-serif'; ctx.textBaseline='alphabetic';
+    ctx.fillText('count rate',ix+3,iy+10);
+
+    ctx.restore();
+    if(A>0.5) label('PROMPT GAMMA-RAY EMISSION');
+  }
+
+  // ============ PHASE 3: AFTERGLOW — FORWARD SHOCK ============
+  function phase3(t,lt,A){
+    if(A<=0) return;
+    var S=Math.min(w,h), cx=w/2, cy=h/2;
+    var p=clamp((lt-30)/16,0,1);
+    ctx.save(); ctx.globalAlpha=A;
+
+    // external medium (ISM dots) being swept up
+    for(var i=0;i<ism.length;i++){ var m=ism[i];
+      var rr=S*0.45*m.r;
+      ctx.fillStyle=withA('#5a6b7a',0.18*m.b);
+      ctx.fillRect(cx+Math.cos(m.a)*rr, cy+Math.sin(m.a)*rr, 1.4,1.4);
+    }
+
+    // decelerating jet (short, fading) along axis
+    var jetLen=S*0.30*(1-0.4*ease(p));
+    for(var d=0;d<2;d++){
+      var sgn=(d===0)?-1:1, tipY=cy+sgn*jetLen;
+      var g=ctx.createLinearGradient(cx,cy,cx,tipY);
+      g.addColorStop(0,withA(C_VIOLET,0.35*(1-p)));
+      g.addColorStop(1,withA(C_VIOLET,0));
+      ctx.strokeStyle=g; ctx.lineWidth=2.2;
+      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx,tipY); ctx.stroke();
+    }
+
+    // --- COLLIMATED forward (external) shock: a narrow CAP/CONE at the head of
+    // each bipolar jet, expanding ALONG the spin axis (not a sphere). It plows
+    // into the swept-up medium with the jet's small opening angle.
+    // LATE-TIME JET BREAK: once the jet decelerates (Gamma ~ 1/theta_jet) it
+    // spreads laterally -> the cap widens toward quasi-spherical only at the end.
+    var jb=ease(clamp((p-0.62)/0.38,0,1)); // jet-break / lateral-spreading factor
+    var headDist=S*(0.16+0.30*ease(p));     // distance of shock head along axis
+    var halfAng=0.09+(0.75)*jb;             // small opening angle early, widens after break
+    var bands=[C_GAMMA,C_OPT,C_RADIO];
+    for(var d2=0;d2<2;d2++){
+      var sgn2=(d2===0)?-1:1;
+      var hx=cx, hy=cy+sgn2*headDist;       // head position along axis
+      var halfW=headDist*Math.sin(halfAng); // lateral half-width of the cap
+      // multi-band synchrotron shock cap (curved arc), drawn as an arc segment
+      for(var b=0;b<3;b++){
+        var col=bands[b];
+        var off=b*S*0.012;
+        var capR=headDist+off;
+        // angular half-extent of the cap as seen from the source
+        var ang=halfAng+0.03*b;
+        var a0=(sgn2<0)?(-Math.PI/2-ang):(Math.PI/2-ang);
+        var a1=(sgn2<0)?(-Math.PI/2+ang):(Math.PI/2+ang);
+        ctx.strokeStyle=withA(col,0.30*(1-0.18*b)*(0.6+0.4*(1-p)));
+        ctx.lineWidth=2.2-b*0.4;
+        ctx.beginPath(); ctx.arc(cx,cy,capR,a0,a1); ctx.stroke();
+      }
+      // bright leading rim of the cap (synchrotron glow concentrated at the head)
+      var rg=ctx.createRadialGradient(hx,hy,0,hx,hy,S*0.10*(1+0.6*jb));
+      rg.addColorStop(0,withA(C_GAMMA,0.30*(0.7+0.3*(1-p))));
+      rg.addColorStop(0.5,withA(C_OPT,0.14));
+      rg.addColorStop(1,withA(C_OPT,0));
+      ctx.fillStyle=rg;
+      ctx.beginPath();
+      ctx.ellipse(hx,hy,Math.max(halfW,S*0.03),S*0.06*(1+0.5*jb),0,0,6.2832);
+      ctx.fill();
+      // thin cone walls from source to cap edges (the collimated channel head)
+      ctx.strokeStyle=withA(C_VIOLET,0.18*(1-jb)*(1-0.4*p)); ctx.lineWidth=1;
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.lineTo(hx-halfW,hy);
+      ctx.moveTo(cx,cy);
+      ctx.lineTo(hx+halfW,hy);
+      ctx.stroke();
+    }
+
+    // central engine fading
+    ctx.fillStyle=withA(C_VIOLET,0.5*(1-p));
+    ctx.beginPath(); ctx.arc(cx,cy,S*0.012,0,6.2832); ctx.fill();
+
+    // --- multi-band light-curve inset (log-log): X-ray & optical peak early, radio late ---
+    var iw=S*0.36, ih=S*0.26, ix=w-iw-10, iy=h-ih-10;
+    ctx.fillStyle='rgba(5,8,14,0.55)'; ctx.fillRect(ix,iy,iw,ih);
+    ctx.strokeStyle=withA(MUTE,0.45); ctx.lineWidth=1;
+    // axes (log-log)
+    ctx.beginPath(); ctx.moveTo(ix+18,iy+4); ctx.lineTo(ix+18,iy+ih-12); ctx.lineTo(ix+iw-4,iy+ih-12); ctx.stroke();
+    // faint log gridlines
+    ctx.strokeStyle=withA(MUTE,0.16); ctx.lineWidth=0.6;
+    for(var gx=1;gx<4;gx++){ var X=ix+18+(iw-22)*gx/4; ctx.beginPath(); ctx.moveTo(X,iy+4); ctx.lineTo(X,iy+ih-12); ctx.stroke(); }
+    for(var gy=1;gy<3;gy++){ var Y=iy+4+(ih-16)*gy/3; ctx.beginPath(); ctx.moveTo(ix+18,Y); ctx.lineTo(ix+iw-4,Y); ctx.stroke(); }
+    ctx.fillStyle=withA(MUTE,0.7); ctx.font='8px -apple-system,sans-serif'; ctx.textBaseline='alphabetic';
+    ctx.fillText('log F',ix+1,iy+12);
+    ctx.fillText('log t',ix+iw-22,iy+ih-2);
+
+    // log-log light curve: F = (t/tp)^a rise then ^-b decay; radio tp larger
+    function band(tp,rise,decay,col,reveal){
+      ctx.beginPath();
+      var n=60;
+      for(var s=0;s<=n;s++){
+        var lx=s/n; // log time 0..1
+        // map to a relative time
+        var ratio=Math.pow(10,(lx*2.2-0.4)); // ~10^-0.4 .. 10^1.8
+        var rel=ratio/tp;
+        var F;
+        if(rel<1) F=Math.pow(rel,rise); else F=Math.pow(rel,-decay);
+        var ly=clamp(0.18+0.7*(1+Math.log(F+1e-3)/Math.LN10/2.2),0,1);
+        var PX=ix+18+(iw-22)*lx;
+        var PY=iy+ih-12-(ih-16)*ly;
+        if(s===0) ctx.moveTo(PX,PY); else ctx.lineTo(PX,PY);
+      }
+      ctx.strokeStyle=withA(col,0.85*reveal); ctx.lineWidth=1.3; ctx.stroke();
+    }
+    // reveal bands progressively as afterglow ages
+    band(0.4,1.6,1.2,C_GAMMA, clamp(p*2,0,1));         // X-ray: peaks earliest
+    band(0.9,1.4,1.0,C_OPT,   clamp((p-0.1)*2,0,1));    // optical: peaks early
+    band(3.5,1.0,0.7,C_RADIO, clamp((p-0.25)*1.8,0,1)); // radio: peaks much later
+    // legend
+    ctx.font='7px -apple-system,sans-serif';
+    ctx.fillStyle=withA(C_GAMMA,0.9); ctx.fillText('X-ray',ix+22,iy+12);
+    ctx.fillStyle=withA(C_OPT,0.9); ctx.fillText('opt',ix+22+30,iy+12);
+    ctx.fillStyle=withA(C_RADIO,0.9); ctx.fillText('radio',ix+22+54,iy+12);
+
+    ctx.restore();
+    if(A>0.5) label('AFTERGLOW: FORWARD SHOCK');
+  }
+
+  // ============ PHASE 4: AFTERGLOW IN AN AGN DISK ============
+  function phase4(t,lt,A){
+    if(A<=0) return;
+    var S=Math.min(w,h), cx=w/2, cy=h/2;
+    var p=clamp((lt-46)/14,0,1);
+    ctx.save(); ctx.globalAlpha=A;
+
+    // --- thick optically-thick AGN accretion-disk slab (horizontal) ---
+    var slabH=S*0.42;
+    var dg=ctx.createLinearGradient(0,cy-slabH/2,0,cy+slabH/2);
+    dg.addColorStop(0,withA('#1a1410',0));
+    dg.addColorStop(0.5,withA('#3a2418',0.9));
+    dg.addColorStop(1,withA('#1a1410',0));
+    ctx.fillStyle=dg; ctx.fillRect(0,cy-slabH/2,w,slabH);
+    // hot mid-plane glow (reddened)
+    var mg=ctx.createLinearGradient(0,cy-slabH*0.12,0,cy+slabH*0.12);
+    mg.addColorStop(0,withA('#5a3018',0));
+    mg.addColorStop(0.5,withA('#8a4422',0.55));
+    mg.addColorStop(1,withA('#5a3018',0));
+    ctx.fillStyle=mg; ctx.fillRect(0,cy-slabH*0.12,w,slabH*0.24);
+    // disk speckle / turbulence (shearing)
+    for(var i=0;i<disk.length;i++){ var s=disk[i];
+      var sx=((s.x+ t*0.02*s.sp)%1)*w;
+      var sy=cy+s.y*slabH;
+      var fl=0.4+0.4*Math.sin(t*s.sp+s.ph);
+      ctx.fillStyle=withA('#a85a30',0.18*s.b*fl);
+      ctx.fillRect(sx,sy,1.6,1.6);
+    }
+
+    // burst location embedded in disk
+    var bx=cx, by=cy;
+
+    // --- GHOST: would-be sharp beamed afterglow (clean case), shown faint for contrast ---
+    var ghostA=0.30*(1-0.4*p);
+    var gShock=S*(0.12+0.30*ease(p));
+    ctx.setLineDash([3,4]);
+    for(var b2=0;b2<2;b2++){
+      var gc=[C_GAMMA,C_OPT][b2];
+      ctx.strokeStyle=withA(gc,ghostA*(1-0.3*b2));
+      ctx.lineWidth=1;
+      ctx.beginPath(); ctx.ellipse(bx,by,gShock+b2*S*0.012,(gShock+b2*S*0.012)*0.96,0,0,6.2832); ctx.stroke();
+    }
+    // ghost beamed jet (sharp, vertical) — but it's buried in the disk
+    var gj=ctx.createLinearGradient(bx,by,bx,by-S*0.22);
+    gj.addColorStop(0,withA(C_VIOLET,ghostA));
+    gj.addColorStop(1,withA(C_VIOLET,0));
+    ctx.strokeStyle=gj; ctx.lineWidth=1.2;
+    ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(bx,by-S*0.22); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(bx,by+S*0.22); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // --- REAL signal: diffused, reddened, delayed, isotropic glow seeping out ---
+    // diffusion delay: emergence lags; low freq (radio/optical) suppressed first
+    var emerge=ease(clamp((p-0.25)/0.75,0,1)); // delayed & smeared emergence
+    var rOut=S*(0.05+0.22*emerge);
+    // self-absorption: radio & optical dim out; survives mostly as reddened mid-band
+    var glow=ctx.createRadialGradient(bx,by,0,bx,by,rOut*1.6);
+    // reddened core (hard photons survive somewhat but reddened toward optical/red)
+    glow.addColorStop(0,withA('#ffd9a0',0.55*emerge));
+    glow.addColorStop(0.35,withA(C_OPT,0.32*emerge));
+    glow.addColorStop(0.7,withA('#b04a22',0.22*emerge)); // reddened
+    glow.addColorStop(1,withA('#b04a22',0));
+    ctx.fillStyle=glow;
+    ctx.beginPath(); ctx.arc(bx,by,rOut*1.6,0,6.2832); ctx.fill();
+
+    // smeared isotropic seepage above/below disk surface (photon diffusion, blurred)
+    for(var pdir=0;pdir<2;pdir++){
+      var sgn=(pdir===0)?-1:1;
+      var puffY=by+sgn*slabH*0.5;
+      var puff=ctx.createRadialGradient(bx,puffY,0,bx,puffY,S*0.16*emerge);
+      puff.addColorStop(0,withA('#c0683a',0.30*emerge));
+      puff.addColorStop(1,withA('#c0683a',0));
+      ctx.fillStyle=puff;
+      ctx.beginPath(); ctx.ellipse(bx,puffY,S*0.20*emerge,S*0.10*emerge,0,0,6.2832); ctx.fill();
+    }
+
+    // small annotation contrasting clean vs disk afterglow
+    var iw=S*0.40, ih=S*0.085, ix=w-iw-10, iy=h-ih-10;
+    ctx.fillStyle='rgba(5,8,14,0.5)'; ctx.fillRect(ix,iy,iw,ih);
+    ctx.font='8px -apple-system,sans-serif'; ctx.textBaseline='middle';
+    ctx.setLineDash([3,3]);
+    ctx.strokeStyle=withA(C_GAMMA,0.7); ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(ix+6,iy+ih*0.32); ctx.lineTo(ix+24,iy+ih*0.32); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle=withA(MUTE,0.85); ctx.fillText('clean beamed afterglow',ix+28,iy+ih*0.32);
+    ctx.strokeStyle=withA('#c0683a',0.9); ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.moveTo(ix+6,iy+ih*0.72); ctx.lineTo(ix+24,iy+ih*0.72); ctx.stroke();
+    ctx.fillStyle=withA('#d08a55',0.95); ctx.fillText('reddened, diffused, delayed',ix+28,iy+ih*0.72);
+
+    ctx.restore();
+    if(A>0.5) label('AFTERGLOW IN AN AGN DISK');
+  }
+
+  var start=null;
+  function frame(ts){
+    if(start==null)start=ts;
+    var t=(ts-start)/1000;
+    if(w<2||h<2){requestAnimationFrame(frame);return;}
+    var lt=t%T;
+    var F=1.5; // cross-fade duration
+
+    background(t);
+
+    // phase windows: 0-16, 16-30, 30-46, 46-60 with cross-fade
+    var a1=pw(lt,0,16,F);
+    var a2=pw(lt,16,30,F);
+    var a3=pw(lt,30,46,F);
+    var a4=pw(lt,46,60,F);
+    // handle wrap fade at the very end -> start of phase1
+    if(lt>60-F){ a1=Math.max(a1, ease((lt-(60-F))/F)); }
+
+    phase1(t,lt,a1);
+    phase2(t,lt,a2);
+    phase3(t,lt,a3);
+    phase4(t,lt,a4);
+
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
@@ -1192,10 +1471,6 @@
   requestAnimationFrame(frame);
 };
 
-  function boot(){
-    var cards=document.querySelectorAll('canvas[data-theme]');
-    for(var i=0;i<cards.length;i++){(function(cv){var n=parseInt(cv.getAttribute('data-theme'),10);
-      try{ if(INIT[n]) INIT[n](cv); }catch(e){ if(window.console&&console.error) console.error('landscape anim '+n,e); }})(cards[i]);}
-  }
+  function boot(){ var c=document.querySelectorAll('canvas[data-theme]'); for(var i=0;i<c.length;i++){(function(cv){var n=parseInt(cv.getAttribute('data-theme'),10); try{ if(INIT[n]) INIT[n](cv);}catch(e){ if(window.console&&console.error) console.error('anim '+n,e);} })(c[i]);} }
   if(document.readyState!=='loading') boot(); else document.addEventListener('DOMContentLoaded',boot);
 })();
