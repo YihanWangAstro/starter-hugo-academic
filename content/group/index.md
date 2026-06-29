@@ -1,4 +1,4 @@
 ---
-title: News
+title: Group
 type: widget_page
 ---

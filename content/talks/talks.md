@@ -16,8 +16,6 @@ design:
   columns: '1'
 ---
 
-## Recent Invited Talks & Presentations
-
 <pre style="font-size:0.85em; line-height:1.8;">
 talks/
 ├── 2026/

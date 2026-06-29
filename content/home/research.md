@@ -67,5 +67,3 @@ Published in [JHEAp (2026)](https://ui.adsabs.harvard.edu/abs/2026JHEAp..5000490
 ---
 
 ### [Browse all my research by theme →](/research/)
-
-Explore my work grouped by research theme — each paper distilled into a plain-language summary and a key figure.

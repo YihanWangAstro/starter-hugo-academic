@@ -10,18 +10,15 @@ main:
   - name: Research
     url: '/research/'
     weight: 20
-  - name: Publications
-    url: '/publications/'
-    weight: 30
   - name: Software
     url: '/software/'
-    weight: 40
+    weight: 30
   - name: Talks & Teaching
     url: '/talks/'
+    weight: 40
+  - name: Group
+    url: '/group/'
     weight: 50
-  - name: News
-    url: '/news/'
-    weight: 60
   - name: CV
     url: uploads/Yihan-Wang-CV.pdf
-    weight: 70
+    weight: 60
