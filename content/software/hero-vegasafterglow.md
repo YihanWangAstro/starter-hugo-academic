@@ -1,7 +1,7 @@
 ---
 widget: hero
 headless: true  # This file represents a page section.
-weight: 35
+weight: 25
 # ... Put Your Section Options Here (title etc.) ...
 
 title: VegasAfterglow

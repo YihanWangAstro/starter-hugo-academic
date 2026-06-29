@@ -81,8 +81,6 @@ I am a theoretical and computational astrophysicist, currently a Postdoctoral Re
 
 I work on the fundamental dynamics of few-body gravitational systems in dense astrophysical environments. A particular focus is how stellar and compact-object populations evolve in AGN accretion disks, producing nuclear transients and gravitational-wave sources observable across the electromagnetic and gravitational-wave spectrum. I develop the open-source codes [SpaceHub](https://github.com/YihanWangAstro/SpaceHub/) and [VegasAfterglow](https://github.com/YihanWangAstro/VegasAfterglow) for high-precision few-body integration and gamma-ray burst afterglow modeling.
 
-I hate spaghetti code and am a bit stubborn about elegant code solutions, which wastes a lot of my time.
-
 <pre style="font-size:0.75em; line-height:1.4; color:var(--sl-color-text-muted, #888); margin-top:1.5rem; background:none; border:none; padding:0;">
 // EOF
 </pre>
