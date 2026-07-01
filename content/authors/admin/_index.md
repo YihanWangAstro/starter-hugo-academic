@@ -22,13 +22,10 @@ bio: Establishing a unified framework of disk-regulated cluster dynamics to unde
 
 # Interests to show in About widget
 interests:
-  - "nuclei-cluster-dynamics/<br>
-    &nbsp;&nbsp;├── Tidal disruption events<br>
-    &nbsp;&nbsp;├── Changing-look AGN<br>
-    &nbsp;&nbsp;├── Quasi-periodic eruptions<br>
-    &nbsp;&nbsp;└── Extreme mass ratio inspirals"
-  - multi-messenger-astrophysics/
-  - free-floating-planets/
+  - Dense stellar systems.
+  - Explosive transients.
+  - Gravitational waves.
+  - "<em class=\"interest-tagline\">Theory and computation for the messy environments where compact objects form and collide.</em>"
 
 # Education to show in About widget
 education:

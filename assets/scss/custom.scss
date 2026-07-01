@@ -291,6 +291,14 @@ section.wg-hero h1.hero-title {
   letter-spacing: 0.08em;
   white-space: nowrap;
 }
+// The driving "big question" that frames each theme as a scientific program.
+.theme-question {
+  color: #39d353;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.45;
+  margin: 0 0 0.7rem;
+}
 .theme-intro {
   opacity: 0.72;
   line-height: 1.7;
@@ -911,4 +919,13 @@ pre { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
   .lc-name { color: #e8edf5; }
   .lc-summary { color: #c2ccd8; }
   .lc-count { color: #8a94a3; }
+}
+
+// Interests slogan: italic caption sits a notch below the three research pillars
+.interest-tagline {
+  display: block;
+  margin-top: 0.55rem;
+  font-style: italic;
+  color: #9aa4b2;
+  line-height: 1.5;
 }
