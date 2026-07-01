@@ -1,11 +1,8 @@
-{{/* Default first-time visitors to dark mode (they can still toggle light/auto).
-     Runs in <head>, before the theme's init script reads localStorage. */}}
+{{/* Dark-only site: force the dark theme on every visit and ignore any stored
+     light/auto choice. Runs in <head>, before the theme's init script reads
+     localStorage. The light/dark toggle is also disabled in params.yaml. */}}
 <script>
-  try {
-    if (!localStorage.getItem('wcTheme')) {
-      localStorage.setItem('wcTheme', '1'); // 1 = Dark (0 = Light, 2 = Auto)
-    }
-  } catch (e) {}
+  try { localStorage.setItem('wcTheme', '1'); } catch (e) {} // 1 = Dark
 </script>
 
 {{/* Glass acrylic treatment — applied site-wide via `.glass-ui`. The homepage
@@ -24,7 +21,7 @@
     var frames = [
       [3,   3,   2, 360, 'd1', 16,   0],
       [1,   6,  64, 300, 'd2', 18,  -4],
-      [4,  50,  -6, 280, 'd1', 14,  -9],
+      [4,  40,  40, 280, 'd1', 14,  -9],
       [2,  46,  70, 300, 'd2', 17,  -6],
       [3,  86,  10, 300, 'd3', 16, -11]
     ];
