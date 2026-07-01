@@ -7,3 +7,67 @@
     }
   } catch (e) {}
 </script>
+
+{{/* Glass acrylic treatment — applied site-wide via `.glass-ui`. The homepage
+     additionally gets `.glass-home` for its bespoke section layout. Adding the
+     classes in <head> avoids a flash of the flat theme. */}}
+<script>document.documentElement.classList.add('glass-ui');</script>
+{{ if .IsHome }}<script>document.documentElement.classList.add('glass-home');</script>{{ end }}
+
+{{/* Floating research artwork behind the translucent cards, on every page. It
+     supplies the light and colour that the glass surfaces pick up. The same
+     engine also drives the framed animation cards on the /research/ page. */}}
+<script>
+(function () {
+  function build() {
+    if (document.getElementById('bg-anim') || !document.body) return;
+    var frames = [
+      [1,   3,   2, 360, 'd1', 16,   0],
+      [3,   6,  64, 300, 'd2', 18,  -4],
+      [4,  50,  -6, 280, 'd1', 14,  -9],
+      [2,  46,  70, 300, 'd2', 17,  -6],
+      [1,  86,  10, 300, 'd3', 16, -11],
+      [3,  84,  66, 280, 'd2', 20, -14]
+    ];
+    var keyframes = {
+      d1: [{ transform: 'translate(-60px,34px) rotate(-3deg)' }, { transform: 'translate(95px,-92px) rotate(3deg)' }],
+      d2: [{ transform: 'translate(54px,-42px) rotate(2.5deg)' }, { transform: 'translate(-104px,82px) rotate(-3deg)' }],
+      d3: [{ transform: 'translate(-44px,-54px) rotate(-2deg)' }, { transform: 'translate(86px,96px) rotate(3deg)' }]
+    };
+    var field = document.createElement('div');
+    field.id = 'bg-anim';
+    field.setAttribute('aria-hidden', 'true');
+    document.body.insertBefore(field, document.body.firstChild);
+    for (var i = 0; i < frames.length; i++) {
+      var frame = frames[i];
+      var shell = document.createElement('div');
+      shell.className = 'bg-anim-frame';
+      shell.style.top = frame[1] + '%';
+      shell.style.left = frame[2] + '%';
+      shell.style.width = frame[3] + 'px';
+      var canvas = document.createElement('canvas');
+      canvas.setAttribute('data-theme', frame[0]);
+      canvas.setAttribute('data-bg-float', '1');
+      shell.appendChild(canvas);
+      field.appendChild(shell);
+      try {
+        shell.animate(keyframes[frame[4]], {
+          duration: frame[5] * 1000,
+          delay: frame[6] * 1000,
+          iterations: Infinity,
+          direction: 'alternate',
+          easing: 'ease-in-out'
+        });
+      } catch (e) {}
+    }
+    if (!document.getElementById('rl-engine')) {
+      var script = document.createElement('script');
+      script.id = 'rl-engine';
+      script.src = '/js/research-landscape.js';
+      document.body.appendChild(script);
+    }
+  }
+  if (document.readyState !== 'loading') build();
+  else document.addEventListener('DOMContentLoaded', build);
+})();
+</script>

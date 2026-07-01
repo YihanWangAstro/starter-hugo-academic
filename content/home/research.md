@@ -19,13 +19,19 @@ content:
       - post
 ---
 
+<div class="g-stack">
+
+<div class="g-card">
+
 ## Galactic Center Black Hole Merger
 
 Our Milky Way's central black hole, Sagittarius A*, shows a peculiar spin orientation misaligned with the Galactic plane. We proposed that this misalignment is evidence of a past merger with another massive black hole roughly 9 billion years ago. This work provides a new window into the assembly history of supermassive black holes.
 
 Published in [Nature Astronomy (2024)](https://www.nature.com/articles/s41550-024-02358-w). Featured in [Phys.org](https://phys.org/news/2024-09-massive-merger-reveals-evidence-supermassive.html) and [ScienceDaily](https://www.sciencedaily.com/releases/2024/09/240906141300.htm).
 
----
+</div>
+
+<div class="g-card">
 
 ## Stellar Dynamics in AGN Disks
 
@@ -33,7 +39,9 @@ Star-disk coupling in Active Galactic Nuclei fundamentally reshapes nuclear clus
 
 Published in [MNRAS (2024)](https://doi.org/10.1093/mnras/stae321).
 
----
+</div>
+
+<div class="g-card">
 
 ## Jupiter Mass Binary Objects (JuMBOs)
 
@@ -52,7 +60,9 @@ JWST discovered Jupiter-Mass Binary Objects in the Orion Nebula—pairs of plane
 
 Published in [Nature Astronomy (2024)](https://www.nature.com/articles/s41550-024-02239-2). Featured in [Quanta Magazine](https://www.quantamagazine.org/rogue-worlds-throw-planetary-ideas-out-of-orbit-20231116/) and [Physics World](https://physicsworld.com/a/pairs-of-rogue-planets-found-wandering-in-the-orion-nebula/).
 
----
+</div>
+
+<div class="g-card">
 
 ## Gamma-Ray Burst Afterglows with VegasAfterglow
 
@@ -64,6 +74,8 @@ To keep pace with the multi-wavelength data flooding in from gamma-ray bursts, I
 
 Published in [JHEAp (2026)](https://ui.adsabs.harvard.edu/abs/2026JHEAp..5000490W/abstract). Open source on [GitHub](https://github.com/YihanWangAstro/VegasAfterglow).
 
----
+</div>
+
+</div>
 
 ### [Browse all my research by theme →](/research/)

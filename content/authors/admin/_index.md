@@ -71,18 +71,8 @@ email: 'wang3697@wisc.edu'
 highlight_name: true
 ---
 
-<pre style="font-size:0.75em; line-height:1.4; color:var(--sl-color-text-muted, #888); margin-bottom:1rem; background:none; border:none; padding:0;">
-┌──────────────────────────────────────┐
-│  ~/research $ cat about.md           │
-└──────────────────────────────────────┘
-</pre>
-
 I am a theoretical and computational astrophysicist, currently a Postdoctoral Research Associate in the Department of Astronomy at the University of Wisconsin-Madison, working with [Nick Stone](https://www.ncstone.space). In Fall 2026, I will join the [Department of Physics](https://www.physics.hku.hk/) at The University of Hong Kong and the [Hong Kong Institute for Astronomy and Astrophysics (HKIAA)](https://hkiaa.hku.hk/) as an Assistant Professor. Previously, I was a Fellow at the Nevada Center for Astrophysics at UNLV, collaborating with [Bing Zhang](https://www.physics.unlv.edu/~bzhang/) and [Zhaohuan Zhu](https://www.physics.unlv.edu/~zhzhu/Home.html). I completed my PhD at Stony Brook University under [Rosalba Perna](https://www.astro.sunysb.edu/rosalba/).
 
 I work on the fundamental dynamics of few-body gravitational systems in dense astrophysical environments. A particular focus is how stellar and compact-object populations evolve in AGN accretion disks, producing nuclear transients and gravitational-wave sources observable across the electromagnetic and gravitational-wave spectrum. I develop the open-source codes [SpaceHub](https://github.com/YihanWangAstro/SpaceHub/) and [VegasAfterglow](https://github.com/YihanWangAstro/VegasAfterglow) for high-precision few-body integration and gamma-ray burst afterglow modeling.
-
-<pre style="font-size:0.75em; line-height:1.4; color:var(--sl-color-text-muted, #888); margin-top:1.5rem; background:none; border:none; padding:0;">
-// EOF
-</pre>
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/Yihan-Wang-CV.pdf" "newtab" >}}CV{{< /staticref >}}.

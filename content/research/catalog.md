@@ -82,4 +82,3 @@ design:
 </div>
 </section>
 </div>
-<script src="/js/research-landscape.js" defer></script>

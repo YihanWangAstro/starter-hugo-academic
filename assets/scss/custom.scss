@@ -86,11 +86,6 @@ img.avatar,
   border-radius: 2px !important;
 }
 
-// Avatar square shape reinforcement
-img.avatar {
-  border-radius: 2px !important;
-}
-
 // Cards: thin solid borders, no shadows
 .card {
   border: 1px solid rgba(128, 128, 128, 0.15);
@@ -593,3 +588,535 @@ pre { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
   footer { padding-left: 1rem; padding-right: 1rem; }   // gutters so the license line doesn't hit the edge
   pre { font-size: 0.72em; }                            // fit more of the ASCII tree before scrolling
 }
+
+// ============================================================
+// HOMEPAGE GLASS POLISH
+// Preserve the existing composition and animated background; only refine the
+// material response of the surfaces while this treatment is being reviewed.
+// ============================================================
+
+// 1. Kill the CRT scanline overlay
+.glass-ui body::after { display: none !important; }
+
+// 2. Glass tokens (theme-aware via the existing `.dark` class on <body>)
+:root {
+  --glass-bg:        rgba(255, 255, 255, 0.16);
+  --glass-bg-strong: transparent;
+  --nav-bg:          rgba(255, 255, 255, 0.55);
+  --panel-bg:        transparent;                 // group panel: transparent fill (edges only)
+  --glass-border:    rgba(255, 255, 255, 0.90);
+  --glass-rim:       rgba(255, 255, 255, 0.95);
+  --glass-hairline:  rgba(20, 30, 60, 0.10);
+  --glass-shadow:    0 8px 30px rgba(31, 38, 80, 0.12);
+  --glass-blur:      blur(20px) saturate(150%);
+  --glass-glow:      rgba(57, 211, 83, 0.45);
+}
+.glass-ui .dark,
+.glass-ui body.dark {
+  --glass-bg:        rgba(255, 255, 255, 0.045);
+  --glass-border:    rgba(225, 237, 255, 0.30);
+  --glass-rim:       rgba(255, 255, 255, 0.54);
+  --glass-hairline:  rgba(255, 255, 255, 0.12);
+  --glass-shadow:    0 8px 30px rgba(0, 0, 0, 0.45);
+  --glass-glow:      rgba(57, 211, 83, 0.50);
+  --nav-bg:          rgba(12, 16, 26, 0.55);
+}
+
+// 3. Soft gradient backdrop (replaces the flat solid background).
+//    NOTE: this theme puts the `.dark` class on <body>, so target `body.dark`.
+//    A faint on-brand radial glow gives the frosted glass something to refract.
+// Calm gradient base — the floating research-animation frames (#bg-anim,
+// built in custom_head.html) provide the visual interest above this.
+.glass-ui body {
+  background: linear-gradient(160deg, #eef2fc 0%, #f3eefb 50%, #e9f5ff 100%) !important;
+  background-attachment: fixed !important;   // static: doesn't scroll with the page
+  min-height: 100vh;
+}
+.glass-ui body.dark,
+.glass-ui .dark body {
+  background: url('/media/starfield.svg') repeat top center, #15161b !important;
+  background-attachment: fixed !important;   // static starry sky (fixed to the viewport)
+  min-height: 100vh;
+}
+
+// Make the theme's opaque section/widget backgrounds transparent so the
+// gradient shows through site-wide (otherwise the glass has nothing behind it).
+.glass-ui .home-section,
+.glass-ui .home-section.wg-about,
+.glass-ui .home-section.wg-markdown,
+.glass-ui .home-section.wg-contact,
+.glass-ui .home-section.wg-pages,
+.glass-ui .home-section.wg-featured,
+.glass-ui .home-section.wg-portfolio { background: transparent !important; }
+
+// 4. Reusable frosted-glass surface (translucent fill + blur + lit rim)
+@mixin glass($bg: var(--glass-bg)) {
+  background: $bg !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: inset 0 1px 0 var(--glass-rim), var(--glass-shadow);
+}
+
+// 5. Apply to card-like surfaces ------------------------------
+
+// Sticky frosted nav bar (the single most visible glass element)
+.glass-ui .navbar,
+.glass-ui #navbar-main {
+  background: var(--nav-bg) !important;
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: 1px solid var(--glass-hairline) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+// Generic cards
+.glass-ui .card {
+  @include glass;
+}
+
+// Figure frames — dark-rendered media sits inside a glass frame
+.glass-ui .geek-fig { @include glass; }
+
+// Note callout — green-tinted glass
+.glass-ui .alert-note {
+  @include glass(rgba(57, 211, 83, 0.10));
+  border-left: 3px solid #39d353 !important;
+}
+.glass-ui .dark .alert-note,
+.glass-ui body.dark .alert-note { background: rgba(57, 211, 83, 0.12) !important; }
+
+// Buttons -> glass chips (accent colour stays on text/border)
+.glass-ui .btn-outline-primary,
+.glass-ui .btn-secondary,
+.glass-ui .btn-outline-secondary,
+.glass-ui .article-container .btn-outline-primary { @include glass; }
+
+// Keep the primary CTA prominent: green-tinted glass
+.glass-ui .btn-primary {
+  background: rgba(57, 211, 83, 0.18) !important;
+  border: 1px solid var(--glass-glow) !important;
+  box-shadow: inset 0 1px 0 var(--glass-rim), var(--glass-shadow);
+}
+.glass-ui .btn-primary:hover { background: rgba(57, 211, 83, 0.28) !important; }
+
+// Real code blocks become glass; the inline-styled ASCII art (bio boxes)
+// uses `style="..."` and is excluded so it stays transparent.
+.glass-ui pre:not([style]) {
+  @include glass;
+  padding: 1rem 1.1rem;
+}
+
+// Avatar: soft glass ring to tie it into the frosted surfaces
+.glass-ui img.avatar {
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+// Accent glow on interactive glass hover
+.glass-ui .btn:hover { box-shadow: 0 0 0 1px var(--glass-glow), var(--glass-shadow); }
+
+// Existing floating research artwork remains the colour source behind the
+// clear slabs. A slight softening keeps it atmospheric rather than illustrative.
+.glass-ui #bg-anim {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.glass-ui .bg-anim-frame {
+  position: absolute;
+  aspect-ratio: 4 / 3;
+  opacity: 0.40;
+  filter: none;
+  will-change: transform;
+}
+.glass-ui .bg-anim-frame canvas { display: block; width: 100%; height: 100%; }
+.glass-ui body.dark .bg-anim-frame { opacity: 0.56; }
+.glass-ui .page-wrapper,
+.glass-ui .wg-page,
+.glass-ui .home-sections,
+.glass-ui footer { position: relative; z-index: 1; }
+@media (max-width: 760px) { .glass-ui #bg-anim { display: none; } }
+
+// ============================================================
+// STRONG GLASS CARDS — thick "3D" frosted slabs, viewed flat
+//   Content is divided into discrete floating glass cards.
+//   Depth = lit top rim + bottom inner shadow +
+//   layered drop shadow. No perspective tilt (face-on).
+// ============================================================
+
+// Card depth tokens (merge into the theme-aware sets above)
+:root {
+  --glass-inner-shadow: rgba(49, 56, 98, 0.15);
+  --glass-shadow-3d:    0 4px 0 rgba(170, 195, 235, 0.18), 0 9px 18px -9px rgba(45, 52, 93, 0.20), 0 27px 54px -16px rgba(45, 52, 93, 0.34);
+  --glass-shadow-3d-h:  0 5px 0 rgba(170, 195, 235, 0.22), 0 12px 22px -9px rgba(45, 52, 93, 0.24), 0 34px 64px -16px rgba(45, 52, 93, 0.40);
+  --glass-edge:         rgba(255, 255, 255, 0.34);
+  --glass-edge-bot:     rgba(119, 142, 184, 0.14);
+  --glass-lift:         rgba(71, 130, 246, 0.10);
+  --glass-underlight:   rgba(80, 137, 255, 0);     // default: no glow (only "selected" cards override)
+  --glass-radius:       18px;
+}
+.glass-ui .dark,
+.glass-ui body.dark {
+  --glass-inner-shadow: rgba(0, 0, 0, 0.30);
+  --glass-shadow-3d:    0 4px 0 rgba(126, 158, 211, 0.14), 0 9px 18px -8px rgba(0, 0, 0, 0.62), 0 29px 56px -15px rgba(0, 0, 0, 0.82);
+  --glass-shadow-3d-h:  0 5px 0 rgba(136, 171, 229, 0.18), 0 12px 22px -8px rgba(0, 0, 0, 0.68), 0 36px 68px -15px rgba(0, 0, 0, 0.88);
+  --glass-edge:         rgba(255, 255, 255, 0.13);
+  --glass-edge-bot:     rgba(200, 221, 255, 0.08);
+  --glass-lift:         rgba(87, 143, 255, 0.16);
+  --glass-underlight:   rgba(74, 132, 255, 0);     // default: no glow (only "selected" cards override)
+}
+
+@mixin glass-card {
+  position: relative;
+  isolation: isolate;
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  border-top-color: var(--glass-rim);
+  border-bottom-color: var(--glass-edge-bot);
+  border-radius: var(--glass-radius);
+  box-shadow:
+    inset 0 1px 0 var(--glass-rim),
+    inset 0 0 0 1px var(--glass-edge),            // continuous edge ring — wraps all 4 corners
+    inset 0 -18px 28px -24px var(--glass-inner-shadow),
+    var(--glass-shadow-3d),
+    0 0 34px -9px var(--glass-lift),
+    0 14px 30px -12px var(--glass-underlight);    // soft colour glow (selected cards only)
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+@mixin glass-sheen {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  z-index: 0;
+  border-radius: calc(var(--glass-radius) - 4px);
+  box-shadow:
+    inset 0 1px 0 var(--glass-rim),
+    inset 0 0 0 1px var(--glass-edge);            // continuous edge ring — wraps all 4 corners
+  // top-left specular light removed per request (no radial/linear sheen gradients)
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.glass-ui .g-card {
+  @include glass-card;
+  padding: 1.45rem 1.6rem;
+  margin: 0;
+}
+.glass-ui .g-card::before { @include glass-sheen; }
+.glass-ui .g-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--glass-rim);
+  box-shadow:
+    inset 0 1px 0 var(--glass-rim),
+    inset 0 0 0 1px var(--glass-edge),
+    inset 0 -18px 28px -24px var(--glass-inner-shadow),
+    0 0 22px -4px rgba(255, 255, 255, 0.48),
+    var(--glass-shadow-3d-h);
+}
+// tidy first/last margins inside cards
+.glass-ui .g-card > :first-child,
+.glass-ui .g-card h2:first-child,
+.glass-ui .g-card h3:first-child { margin-top: 0; }
+.glass-ui .g-card > :last-child { margin-bottom: 0; }
+.glass-ui .g-card h2,
+.glass-ui .g-card h3 { margin-top: 0; }
+
+// Stacked list of cards (research highlights, personal)
+.glass-ui .g-stack { display: flex; flex-direction: column; gap: 24px; margin: 0; }
+
+// Nested figure frames inside a card -> flatten so they don't compete
+.glass-ui .g-card .geek-fig {
+  background: transparent !important;
+  border-color: var(--glass-hairline) !important;
+  box-shadow: none !important;
+}
+
+// Make the theme's section background layer transparent too (gradient shows)
+.glass-ui .home-section-bg { background: transparent !important; }
+
+// ---- About widget -> profile / bio / details cards -----------------
+.glass-home .wg-about .col-lg-4 > div {            // avatar + name + role + social
+  @include glass-card;
+  padding: 1.6rem 1.4rem;
+}
+.glass-home .wg-about .col-lg-4 > div::before { @include glass-sheen; }
+
+.glass-home .wg-about .article-style {             // biography prose
+  @include glass-card;
+  padding: 1.5rem 1.7rem;
+  margin: 0.2rem 0 0;
+}
+.glass-home .wg-about .article-style::before { @include glass-sheen; }
+
+.glass-home .wg-about .col-lg-8 > .row {           // interests + education (one card, two columns)
+  @include glass-card;
+  padding: 1.4rem 1.6rem;
+  margin: 1.5rem 0 0;
+}
+.glass-home .wg-about .col-lg-8 > .row::before { @include glass-sheen; }
+.glass-home .wg-about .col-lg-8 > .row > [class*="col"] { padding-top: 0; padding-bottom: 0; }
+
+// ---- Contact -> glass card -----------------------------------------
+.glass-home .wg-contact .col-lg-8 {
+  @include glass-card;
+  padding: 1.5rem 1.7rem;
+}
+.glass-home .wg-contact .col-lg-8::before { @include glass-sheen; }
+
+// A few lit surfaces establish the selected-card hierarchy seen in the
+// references without changing the page's content or interaction model.
+.glass-home .wg-about .col-lg-4 > div,
+.glass-home #research .g-card:first-child {
+  --glass-underlight: rgba(74, 132, 255, 0.52);
+}
+.glass-home #posts .g-card:first-child {
+  --glass-underlight: rgba(255, 158, 78, 0.42);
+}
+
+// Card content sits above the ::before sheen
+.glass-home .g-card > *,
+.glass-home .wg-about .article-style > *,
+.glass-home .wg-about .col-lg-8 > .row > *,
+.glass-home .wg-about .col-lg-4 > div > *,
+.glass-home .wg-contact .col-lg-8 > * { position: relative; z-index: 1; }
+
+// Mobile keeps the same acrylic construction at a tighter corner radius.
+@media (max-width: 760px) {
+  .glass-home .g-card,
+  .glass-home .wg-about .col-lg-4 > div,
+  .glass-home .wg-about .article-style,
+  .glass-home .wg-about .col-lg-8 > .row,
+  .glass-home .wg-contact .col-lg-8 {
+    --glass-radius: 14px;
+    border-radius: 14px;
+  }
+}
+
+// ============================================================
+// SECTION TITLES (homepage) — plain '> heading', no chip, bold.
+//   Research / Personal / Contact: collapse the title+cards row into one
+//   narrow (cards-width) group, title stacked on TOP of the cards.
+//   About: title sits at the top of the bio panel (avatar stays separate).
+// ============================================================
+.glass-home .home-section .section-heading h1,
+.glass-home .home-section.wg-about h1 {
+  font-weight: 700;
+}
+
+// RPC: shrink the group to the cards' width and stack title above cards
+.glass-home .home-section.wg-markdown > .container > .row,
+.glass-home .home-section.wg-contact > .container > .row {
+  flex-direction: column;
+  width: 66.667%;
+  margin-left: auto;
+  margin-right: 0;
+}
+.glass-home .home-section.wg-markdown > .container > .row > [class*="col"],
+.glass-home .home-section.wg-contact > .container > .row > [class*="col"] {
+  flex: 0 0 100%;
+  max-width: 100%;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+.glass-home .home-section.wg-markdown .section-heading {
+  margin-bottom: 1.4rem !important;  // space title->first card (beats Bootstrap's mb-lg-0)
+}
+.glass-home .home-section.wg-about h1 {
+  margin-bottom: 1.4rem;
+}
+// Contact: drop the title — leave just the email/address glass card
+// (needs !important to beat Bootstrap's `.d-flex { display:flex !important }`)
+.glass-home .home-section.wg-contact .section-heading {
+  display: none !important;
+}
+
+// ============================================================
+// LARGER GLASS PANEL per section — groups the small cards
+//   A subtle translucent panel wraps each section's content (title +
+//   the small glass cards), like the reference's glass tablet holding
+//   the material cards. No backdrop-filter (large area = perf-heavy).
+// ============================================================
+// About: panel wraps the bio column only (the avatar stays a separate card).
+// Research / Personal: panel wraps the shrunk title+cards group (the .row).
+// Contact: NO panel — just the bare email/address glass card (below).
+.glass-home .home-section.wg-about .col-12.col-lg-8,
+.glass-home .home-section.wg-markdown > .container > .row {
+  position: relative;
+  isolation: isolate;                             // stacking context for the ::before sheen
+  padding: 1.6rem 1.8rem 1.9rem;
+  border-radius: 22px;
+  background: var(--panel-bg);                    // transparent fill
+  border: 1px solid var(--glass-border);          // glass-card-like boundary
+  border-top-color: var(--glass-rim);
+  border-bottom-color: var(--glass-edge-bot);
+  box-shadow:
+    inset 0 1px 0 var(--glass-rim),               // bright top bevel
+    inset 0 0 0 1px var(--glass-edge),            // edge ring
+    inset 0 -18px 28px -24px var(--glass-inner-shadow),
+    var(--glass-shadow-3d),                        // soft float
+    0 0 34px -9px var(--glass-lift);
+}
+@media (max-width: 760px) {
+  .glass-home .home-section.wg-about .col-12.col-lg-8,
+  .glass-home .home-section.wg-markdown > .container > .row {
+    padding: 1.2rem 1rem 1.4rem;
+    border-radius: 18px;
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+// In-panel glass cards keep their glass look — bevelled edges + soft shadow —
+// with a fully transparent fill, so they read as see-through glass cards.
+
+// ============================================================
+// Contact: drop the glass card box — just the email/address on the page
+// (overrides the @include glass-card from the contact column above)
+// ============================================================
+.glass-home .home-section.wg-contact .col-12.col-lg-8 {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+// ============================================================
+// Group panel: add the glass-card top-left specular sheen (left-upper light)
+// ============================================================
+.glass-home .home-section.wg-about .col-12.col-lg-8::before,
+.glass-home .home-section.wg-markdown > .container > .row::before {
+  @include glass-sheen;
+  border-radius: 20px;   // match the 22px panel (sheen is inset 2px)
+}
+.glass-home .home-section.wg-about .col-12.col-lg-8 > *,
+.glass-home .home-section.wg-markdown > .container > .row > * {
+  position: relative;
+  z-index: 1;            // content above the panel sheen
+}
+
+// Contact: also kill the sheen ::before edge-ring (the leftover glass boundary)
+.glass-home .home-section.wg-contact .col-12.col-lg-8::before,
+.glass-home .home-section.wg-contact .col-12.col-lg-8::after {
+  display: none !important;
+  content: none !important;
+}
+
+// ============================================================
+// Name in the profile card -> match the section titles (2rem, bold)
+// ============================================================
+.glass-home .wg-about .portrait-title h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+// Slightly larger navigation-bar fonts
+.navbar .nav-link,
+.navbar .navbar-nav .nav-link {
+  font-size: 1.12rem !important;
+}
+.navbar-brand {
+  font-size: 1.28rem !important;
+}
+
+// ============================================================
+// SITE-WIDE INNER PAGES — extend the homepage glass to every page.
+//   Background + generic glass come from the `.glass-ui` rules above.
+//   These add the frosted glass CARDS to the non-home page types:
+//     · widget pages (Talks / Group): the wg-markdown content column
+//     · hero pages (Software): the wg-hero text column
+//     · article pages (Publications / Projects / Posts): .article-style
+//     · research catalogue: .research-item rows + .landscape-card
+//   `:not(.glass-home)` guards the one structure (wg-markdown) that the
+//   homepage styles with its own bespoke .g-card panel layout.
+// ============================================================
+
+// Lift inner-page content above the fixed floating background
+.glass-ui .page-body,
+.glass-ui .pub,
+.glass-ui .article-container,
+.glass-ui .research-catalog { position: relative; z-index: 1; }
+
+// Bold section titles everywhere (homepage does this via .glass-home)
+.glass-ui .home-section .section-heading h1 { font-weight: 700; }
+
+// ---- Widget pages (Talks / Group): card the whole group (title + content) ----
+// The section title stacks INSIDE the card, at the top, like the homepage.
+.glass-ui:not(.glass-home) .home-section.wg-markdown > .container > .row {
+  @include glass-card;
+  flex-direction: column;          // stack the section title above the content
+  margin-left: 0;
+  margin-right: 0;
+  padding: 1.7rem 1.9rem;
+  margin-bottom: 0.5rem;
+}
+.glass-ui:not(.glass-home) .home-section.wg-markdown > .container > .row::before { @include glass-sheen; }
+.glass-ui:not(.glass-home) .home-section.wg-markdown > .container > .row > * { position: relative; z-index: 1; }
+.glass-ui:not(.glass-home) .home-section.wg-markdown > .container > .row > [class*="col"] {
+  flex: 0 0 100%;
+  max-width: 100%;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+// Section title inside the card: left-aligned, tight to the content below it
+.glass-ui:not(.glass-home) .home-section.wg-markdown .section-heading {
+  text-align: left;
+  margin-bottom: 1rem !important;
+}
+// Flatten the ASCII/code blocks so they don't double-card inside the panel
+.glass-ui:not(.glass-home) .home-section.wg-markdown .col-12 pre:not([style]) {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+// ---- Hero pages (Software): card the hero text column ----
+.glass-ui .home-section.wg-hero .col-md-6.text-md-left {
+  @include glass-card;
+  padding: 1.8rem 2rem;
+}
+.glass-ui .home-section.wg-hero .col-md-6.text-md-left::before { @include glass-sheen; }
+.glass-ui .home-section.wg-hero .col-md-6.text-md-left > * { position: relative; z-index: 1; }
+
+// ---- Article pages (Publications / Projects / Posts): card the prose ----
+.glass-ui .article-container .article-style {
+  @include glass-card;
+  padding: 1.8rem 2rem;
+  margin-top: 1.5rem;
+}
+.glass-ui .article-container .article-style::before { @include glass-sheen; }
+.glass-ui .article-container .article-style > * { position: relative; z-index: 1; }
+
+// ---- Research catalogue: theme rows become glass cards ----
+.glass-ui .research-item {
+  @include glass-card;
+  align-items: flex-start;
+}
+.glass-ui .research-item::before { @include glass-sheen; }
+.glass-ui .research-item > * { position: relative; z-index: 1; }
+
+// Landscape cards: solid white -> frosted glass (caption text follows theme)
+.glass-ui .landscape-card {
+  @include glass-card;
+  overflow: hidden;
+}
+.glass-ui .landscape-card::before { @include glass-sheen; }
+.glass-ui .landscape-card > * { position: relative; z-index: 1; }
+.glass-ui .landscape-cap { background: transparent; }
+// Caption text is inside an <a>, so it must override the theme's green link
+// colour with explicit, theme-aware values (light gradient vs. starfield).
+.glass-ui .landscape-cap .lc-num { color: #1a7f37; }
+.glass-ui .landscape-cap .lc-name { color: #15181d; }
+.glass-ui .landscape-cap .lc-summary { color: #3a4150; }
+.glass-ui .landscape-cap .lc-count { color: #5a6473; }
+.glass-ui body.dark .landscape-cap .lc-num { color: #39d353; }
+.glass-ui body.dark .landscape-cap .lc-name { color: #e8edf5; }
+.glass-ui body.dark .landscape-cap .lc-summary { color: #c2ccd8; }
+.glass-ui body.dark .landscape-cap .lc-count { color: #8a94a3; }
