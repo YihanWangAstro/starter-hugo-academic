@@ -26,14 +26,20 @@
       [1,   6,  64, 300, 'd2', 18,  -4],
       [4,  50,  -6, 280, 'd1', 14,  -9],
       [2,  46,  70, 300, 'd2', 17,  -6],
-      [3,  86,  10, 300, 'd3', 16, -11],
-      [1,  84,  66, 280, 'd2', 20, -14]
+      [3,  86,  10, 300, 'd3', 16, -11]
     ];
-    var keyframes = {
-      d1: [{ transform: 'translate(-60px,34px) rotate(-3deg)' }, { transform: 'translate(95px,-92px) rotate(3deg)' }],
-      d2: [{ transform: 'translate(54px,-42px) rotate(2.5deg)' }, { transform: 'translate(-104px,82px) rotate(-3deg)' }],
-      d3: [{ transform: 'translate(-44px,-54px) rotate(-2deg)' }, { transform: 'translate(86px,96px) rotate(3deg)' }]
-    };
+    // Each frame drifts along a randomly-chosen direction (random angle,
+    // magnitude and gentle rotation), so the motion differs on every load.
+    function randDrift() {
+      var ang = Math.random() * Math.PI * 2;              // random heading
+      var dist = 70 + Math.random() * 70;                 // 70–140px of travel
+      var dx = Math.cos(ang) * dist, dy = Math.sin(ang) * dist;
+      var rot = Math.random() * 6 - 3;                    // −3°…+3°
+      return [
+        { transform: 'translate(' + (-dx).toFixed(1) + 'px,' + (-dy).toFixed(1) + 'px) rotate(' + (-rot).toFixed(2) + 'deg)' },
+        { transform: 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) rotate(' + rot.toFixed(2) + 'deg)' }
+      ];
+    }
     var field = document.createElement('div');
     field.id = 'bg-anim';
     field.setAttribute('aria-hidden', 'true');
@@ -51,7 +57,7 @@
       shell.appendChild(canvas);
       field.appendChild(shell);
       try {
-        shell.animate(keyframes[frame[4]], {
+        shell.animate(randDrift(), {
           duration: frame[5] * 1000,
           delay: frame[6] * 1000,
           iterations: Infinity,
