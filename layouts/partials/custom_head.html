@@ -19,11 +19,10 @@
   function build() {
     if (document.getElementById('bg-anim') || !document.body) return;
     var frames = [
-      [3,   3,   2, 360, 'd1', 16,   0],
+      [3,  14,   2, 360, 'd1', 16,   0],
       [1,   6,  64, 300, 'd2', 18,  -4],
       [4,  40,  40, 280, 'd1', 14,  -9],
-      [2,  46,  70, 300, 'd2', 17,  -6],
-      [3,  86,  10, 300, 'd3', 16, -11]
+      [2,  46,  70, 300, 'd2', 17,  -6]
     ];
     // Each frame drifts along a randomly-chosen direction (random angle,
     // magnitude and gentle rotation), so the motion differs on every load.
