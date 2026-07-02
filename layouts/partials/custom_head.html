@@ -18,11 +18,12 @@
 (function () {
   function build() {
     if (document.getElementById('bg-anim') || !document.body) return;
+    // [animation theme, top %, left %, width px, drift duration s, drift delay s]
     var frames = [
-      [3,  30,   2, 360, 'd1', 16,   0],
-      [1,   6,  64, 300, 'd2', 18,  -4],
-      [4,  40,  40, 280, 'd1', 14,  -9],
-      [2,  46,  70, 300, 'd2', 17,  -6]
+      [3,  30,   2, 360, 16,   0],
+      [1,   6,  64, 300, 18,  -4],
+      [4,  40,  40, 280, 14,  -9],
+      [2,  46,  70, 300, 17,  -6]
     ];
     // Each frame drifts along a randomly-chosen direction (random angle,
     // magnitude and gentle rotation), so the motion differs on every load.
@@ -54,8 +55,8 @@
       field.appendChild(shell);
       try {
         shell.animate(randDrift(), {
-          duration: frame[5] * 1000,
-          delay: frame[6] * 1000,
+          duration: frame[4] * 1000,
+          delay: frame[5] * 1000,
           iterations: Infinity,
           direction: 'alternate',
           easing: 'ease-in-out'

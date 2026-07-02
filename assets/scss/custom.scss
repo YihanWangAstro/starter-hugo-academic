@@ -104,11 +104,6 @@ footer {
   font-size: 0.8em;
 }
 
-// Dark-mode tag chip border
-.dark .badge-light {
-  border-color: rgba(57, 211, 83, 0.2);
-}
-
 // ============================================================
 // PRESERVED: Existing layout & publication styling
 // ============================================================
@@ -223,7 +218,8 @@ section.wg-hero h1.hero-title {
 }
 
 // --- Research catalogue page (/research/) ---
-.research-catalog { margin: 0 auto; }
+// Width matched to the article container used elsewhere.
+.research-catalog { margin: 0 auto; max-width: 1200px; }
 .research-ads { text-align: center; opacity: 0.6; font-size: 0.88rem; line-height: 1.6; margin: 0 auto 2.75rem; max-width: 70ch; }
 
 // Research landscape: a row of animated theme cards at the top.
@@ -262,9 +258,10 @@ section.wg-hero h1.hero-title {
   flex-direction: column;
   gap: 3px;
 }
-.landscape-cap .lc-name { color: #15181d; font-size: 1.02rem; line-height: 1.3; font-weight: 600; }
-.landscape-cap .lc-summary { color: #3a4150; font-size: 0.83rem; line-height: 1.55; margin: 2px 0 4px; }
-.landscape-cap .lc-count { color: #5a6473; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; }
+// Caption colours live in the glass section (.glass-ui .landscape-cap) below.
+.landscape-cap .lc-name { font-size: 1.02rem; line-height: 1.3; font-weight: 600; }
+.landscape-cap .lc-summary { font-size: 0.83rem; line-height: 1.55; margin: 2px 0 4px; }
+.landscape-cap .lc-count { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; }
 @media (max-width: 600px) {
   .landscape-card { flex-basis: 100%; max-width: 100%; }
 }
@@ -337,7 +334,7 @@ section.wg-hero h1.hero-title {
 .research-meta { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.45rem; flex-wrap: wrap; }
 .research-pub { font-size: 0.78rem; opacity: 0.6; letter-spacing: 0.03em; }
 .role-badge {
-  font-size: 0.62rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   padding: 0.15em 0.55em;
@@ -400,9 +397,6 @@ section.wg-hero h1.hero-title {
 .home-section.wg-about h1::before { content: '> '; color: #39d353; opacity: 0.7; font-weight: 400; }
 .home-section.wg-about h1 { font-size: 2rem; letter-spacing: -0.02em; }
 
-// Unify content width (research catalogue matched to the article container elsewhere)
-.research-catalog { max-width: 1200px; }
-
 // Shared, tighter vertical rhythm across pages
 .home-section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
 
@@ -423,8 +417,7 @@ section.wg-hero h1.hero-title {
   overflow: hidden;
 }
 
-// One deliberate micro-meta size; lift the dimmest count off the contrast floor
-.role-badge, .theme-count, .lc-count { font-size: 0.72rem; }
+// Lift the dimmest count off the contrast floor
 .theme-head .theme-count { opacity: 0.6; }
 
 // Tags: drop the grey Bootstrap fill -> terminal green-hairline chip
@@ -442,8 +435,6 @@ section.wg-hero h1.hero-title {
 // Share icons: green hover like the rest of the site
 .share-box a { color: #9aa4b2; transition: color 0.15s ease; }
 .share-box a:hover { color: #39d353; }
-
-// Footer: keep the '//' comment prefix on text lines, not the CC icon row
 
 // Long ASCII trees / code: scroll instead of clipping
 pre { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
@@ -463,9 +454,9 @@ pre { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
 }
 
 // ============================================================
-// HOMEPAGE GLASS POLISH
-// Preserve the existing composition and animated background; only refine the
-// material response of the surfaces while this treatment is being reviewed.
+// GLASS SYSTEM (site-wide via `.glass-ui`)
+// Tokens, mixins, and the generic frosted surfaces. The homepage-only
+// layout lives further down under `.glass-home`.
 // ============================================================
 
 // Glass tokens (dark-only site)
@@ -490,8 +481,8 @@ pre { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
   --glass-radius:       18px;
 }
 
-// 3. Static starry-sky backdrop behind the glass. The floating research-
-//    animation frames (#bg-anim, built in custom_head.html) add motion above it.
+// Static starry-sky backdrop behind the glass. The floating research-
+// animation frames (#bg-anim, built in custom_head.html) add motion above it.
 .glass-ui body {
   background: url('/media/starfield.svg') repeat top center, #15161b !important;
   background-attachment: fixed !important;   // static starry sky (fixed to the viewport)
@@ -508,14 +499,14 @@ pre { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
 .glass-ui .home-section.wg-featured,
 .glass-ui .home-section.wg-portfolio { background: transparent !important; }
 
-// 4. Reusable frosted-glass surface (translucent fill + blur + lit rim)
+// Reusable frosted-glass surface (translucent fill + blur + lit rim)
 @mixin glass($bg: var(--glass-bg)) {
   background: $bg !important;
   border: 1px solid var(--glass-border) !important;
   box-shadow: inset 0 1px 0 var(--glass-rim), var(--glass-shadow);
 }
 
-// 5. Apply to card-like surfaces ------------------------------
+// Apply to card-like surfaces ------------------------------
 
 // Sticky frosted nav bar (the single most visible glass element)
 .glass-ui .navbar,
@@ -598,7 +589,7 @@ pre { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
 @media (max-width: 760px) { .glass-ui #bg-anim { display: none; } }
 
 // ============================================================
-// STRONG GLASS CARDS — thick "3D" frosted slabs, viewed flat
+// GLASS CARDS — "3D" frosted slabs, viewed flat
 //   Content is divided into discrete floating glass cards.
 //   Depth = lit top rim + bottom inner shadow +
 //   layered drop shadow. No perspective tilt (face-on).
@@ -829,6 +820,15 @@ pre { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
   font-weight: 700;
 }
 
+// Interests slogan: italic caption sits a notch below the three research pillars
+.interest-tagline {
+  display: block;
+  margin-top: 0.55rem;
+  font-style: italic;
+  color: #9aa4b2;
+  line-height: 1.5;
+}
+
 // Slightly larger navigation-bar fonts
 .navbar .nav-link,
 .navbar .navbar-nav .nav-link {
@@ -919,13 +919,4 @@ pre { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
   .lc-name { color: #e8edf5; }
   .lc-summary { color: #c2ccd8; }
   .lc-count { color: #8a94a3; }
-}
-
-// Interests slogan: italic caption sits a notch below the three research pillars
-.interest-tagline {
-  display: block;
-  margin-top: 0.55rem;
-  font-style: italic;
-  color: #9aa4b2;
-  line-height: 1.5;
 }
