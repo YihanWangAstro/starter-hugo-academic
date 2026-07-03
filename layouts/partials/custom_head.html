@@ -11,59 +11,65 @@
 <script>document.documentElement.classList.add('glass-ui');</script>
 {{ if .IsHome }}<script>document.documentElement.classList.add('glass-home');</script>{{ end }}
 
-{{/* Floating research artwork behind the translucent cards, on every page. It
-     supplies the light and colour that the glass surfaces pick up. The same
-     engine also drives the framed animation cards on the /research/ page. */}}
+{{/* Floating research artwork behind the translucent cards. Enabled ONLY on the
+     Talks and Group pages; every other page keeps a clean static starfield. The
+     same engine also drives the framed animation cards on the /research/ page,
+     so it is loaded wherever a data-theme canvas is present. */}}
 <script>
 (function () {
+  var buildFloating = {{ if in (slice "/talks/" "/group/") .RelPermalink }}true{{ else }}false{{ end }};
   function build() {
-    if (document.getElementById('bg-anim') || !document.body) return;
-    // [animation theme, top %, left %, width px, drift duration s, drift delay s]
-    var frames = [
-      [3,  30,   2, 360, 16,   0],
-      [1,   6,  64, 300, 18,  -4],
-      [4,  40,  40, 280, 14,  -9],
-      [2,  46,  70, 300, 17,  -6]
-    ];
-    // Each frame drifts along a randomly-chosen direction (random angle,
-    // magnitude and gentle rotation), so the motion differs on every load.
-    function randDrift() {
-      var ang = Math.random() * Math.PI * 2;              // random heading
-      var dist = 70 + Math.random() * 70;                 // 70–140px of travel
-      var dx = Math.cos(ang) * dist, dy = Math.sin(ang) * dist;
-      var rot = Math.random() * 6 - 3;                    // −3°…+3°
-      return [
-        { transform: 'translate(' + (-dx).toFixed(1) + 'px,' + (-dy).toFixed(1) + 'px) rotate(' + (-rot).toFixed(2) + 'deg)' },
-        { transform: 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) rotate(' + rot.toFixed(2) + 'deg)' }
+    if (!document.body) return;
+    if (buildFloating && !document.getElementById('bg-anim')) {
+      // [animation theme, top %, left %, width px, drift duration s, drift delay s]
+      var frames = [
+        [3,  30,   2, 360, 16,   0],
+        [1,   6,  64, 300, 18,  -4],
+        [4,  40,  40, 280, 14,  -9],
+        [2,  46,  70, 300, 17,  -6]
       ];
+      // Each frame drifts along a randomly-chosen direction (random angle,
+      // magnitude and gentle rotation), so the motion differs on every load.
+      var randDrift = function () {
+        var ang = Math.random() * Math.PI * 2;              // random heading
+        var dist = 70 + Math.random() * 70;                 // 70–140px of travel
+        var dx = Math.cos(ang) * dist, dy = Math.sin(ang) * dist;
+        var rot = Math.random() * 6 - 3;                    // −3°…+3°
+        return [
+          { transform: 'translate(' + (-dx).toFixed(1) + 'px,' + (-dy).toFixed(1) + 'px) rotate(' + (-rot).toFixed(2) + 'deg)' },
+          { transform: 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) rotate(' + rot.toFixed(2) + 'deg)' }
+        ];
+      };
+      var field = document.createElement('div');
+      field.id = 'bg-anim';
+      field.setAttribute('aria-hidden', 'true');
+      document.body.insertBefore(field, document.body.firstChild);
+      for (var i = 0; i < frames.length; i++) {
+        var frame = frames[i];
+        var shell = document.createElement('div');
+        shell.className = 'bg-anim-frame';
+        shell.style.top = frame[1] + '%';
+        shell.style.left = frame[2] + '%';
+        shell.style.width = frame[3] + 'px';
+        var canvas = document.createElement('canvas');
+        canvas.setAttribute('data-theme', frame[0]);
+        canvas.setAttribute('data-bg-float', '1');
+        shell.appendChild(canvas);
+        field.appendChild(shell);
+        try {
+          shell.animate(randDrift(), {
+            duration: frame[4] * 1000,
+            delay: frame[5] * 1000,
+            iterations: Infinity,
+            direction: 'alternate',
+            easing: 'ease-in-out'
+          });
+        } catch (e) {}
+      }
     }
-    var field = document.createElement('div');
-    field.id = 'bg-anim';
-    field.setAttribute('aria-hidden', 'true');
-    document.body.insertBefore(field, document.body.firstChild);
-    for (var i = 0; i < frames.length; i++) {
-      var frame = frames[i];
-      var shell = document.createElement('div');
-      shell.className = 'bg-anim-frame';
-      shell.style.top = frame[1] + '%';
-      shell.style.left = frame[2] + '%';
-      shell.style.width = frame[3] + 'px';
-      var canvas = document.createElement('canvas');
-      canvas.setAttribute('data-theme', frame[0]);
-      canvas.setAttribute('data-bg-float', '1');
-      shell.appendChild(canvas);
-      field.appendChild(shell);
-      try {
-        shell.animate(randDrift(), {
-          duration: frame[4] * 1000,
-          delay: frame[5] * 1000,
-          iterations: Infinity,
-          direction: 'alternate',
-          easing: 'ease-in-out'
-        });
-      } catch (e) {}
-    }
-    if (!document.getElementById('rl-engine')) {
+    // Load the animation engine wherever a data-theme canvas exists: the
+    // floating frames above (Talks/Group) or the framed cards on /research/.
+    if (document.querySelector('canvas[data-theme]') && !document.getElementById('rl-engine')) {
       var script = document.createElement('script');
       script.id = 'rl-engine';
       script.src = '/js/research-landscape.js';
