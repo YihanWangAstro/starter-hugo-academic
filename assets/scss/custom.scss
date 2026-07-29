@@ -4,18 +4,21 @@
 
 // --- Typography foundation ---
 // Unified font stack. Override theme variables at the selector level they're applied.
-// Body/root: IBM Plex Sans. Headings/nav/code/UI: IBM Plex Mono.
+// Poppins throughout, matching hkiaa.hku.hk (Noto Sans SC covers the CJK name).
+// Mono survives only where it's structural: code + ASCII art.
 
-$geek-mono: 'IBM Plex Mono', 'Fira Code', 'SF Mono', 'Cascadia Code', monospace;
+$site-sans:    'Poppins', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$site-display: $site-sans;
+$geek-mono:    'IBM Plex Mono', 'Fira Code', 'SF Mono', 'Cascadia Code', monospace;
 
-// Root — monospace everywhere
+// Root — body text
 html {
-  font-family: $geek-mono !important;
+  font-family: $site-sans !important;
 }
 
 // All headings
 h1, h2, h3, h4, h5, h6 {
-  font-family: $geek-mono !important;
+  font-family: $site-display !important;
   letter-spacing: -0.01em;
 }
 
@@ -25,38 +28,42 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-brand,
 .nav-link,
 .navbar-toggler {
-  font-family: $geek-mono !important;
+  font-family: $site-sans !important;
 }
 
 // Widget subtitles
 .section-subheading {
-  font-family: $geek-mono !important;
+  font-family: $site-sans !important;
 }
 
-// Buttons, badges, cards
+// Buttons, badges — UI chrome in the body face
 .btn,
 .badge,
-.badge-light,
+.badge-light {
+  font-family: $site-sans !important;
+}
+
+// Titles — display face
 .card-title,
 .article-title,
 .section-heading {
-  font-family: $geek-mono !important;
+  font-family: $site-display !important;
 }
 
 // Hero text
 .hero-title,
 .wg-hero {
-  font-family: $geek-mono !important;
+  font-family: $site-display !important;
 }
 
-// Code
+// Code + ASCII art — the one place mono is structural
 pre, code, kbd, samp {
   font-family: $geek-mono !important;
 }
 
 // Footer
 footer, footer p, .page-footer {
-  font-family: $geek-mono !important;
+  font-family: $site-sans !important;
 }
 
 // Navbar border
@@ -211,10 +218,10 @@ ul.ul-interests li {
   color: inherit;
 }
 
-// --- 3. Hero titles to monospace, matching section headings ---
+// --- 3. Hero titles to the display face, matching section headings ---
 .wg-hero .hero-title,
 section.wg-hero h1.hero-title {
-  font-family: $geek-mono !important;
+  font-family: $site-display !important;
 }
 
 // --- Research catalogue page (/research/) ---
@@ -392,10 +399,10 @@ section.wg-hero h1.hero-title {
 }
 // Clear hierarchy step + left-align all section headings (on-brand with the '>' prompt)
 .home-section .section-heading { text-align: left; align-items: flex-start; }
-.home-section .section-heading h1 { font-size: 2rem; letter-spacing: -0.02em; text-align: left; }
+.home-section .section-heading h1 { font-size: 1.5rem; letter-spacing: -0.02em; text-align: left; }
 // About widget 'Biography' heading is a bare <h1> (not .section-heading) — match it
 .home-section.wg-about h1::before { content: '> '; color: #39d353; opacity: 0.7; font-weight: 400; }
-.home-section.wg-about h1 { font-size: 2rem; letter-spacing: -0.02em; }
+.home-section.wg-about h1 { font-size: 1.5rem; letter-spacing: -0.02em; }
 
 // Shared, tighter vertical rhythm across pages
 .home-section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
@@ -816,7 +823,7 @@ pre { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
 // Name in the profile card -> match the section titles (2rem, bold)
 // ============================================================
 .glass-home .wg-about .portrait-title h2 {
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 700;
 }
 
@@ -829,13 +836,13 @@ pre { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
   line-height: 1.5;
 }
 
-// Slightly larger navigation-bar fonts
+// Navigation-bar type: compact modern scale
 .navbar .nav-link,
 .navbar .navbar-nav .nav-link {
-  font-size: 1.12rem !important;
+  font-size: 0.95rem !important;
 }
 .navbar-brand {
-  font-size: 1.28rem !important;
+  font-size: 1.05rem !important;
 }
 
 // ============================================================
@@ -920,3 +927,98 @@ pre { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
   .lc-summary { color: #c2ccd8; }
   .lc-count { color: #8a94a3; }
 }
+
+// ============================================================
+// FLAT OUTLINE STYLE — overrides the glass material above with
+// flat wireframe panels: transparent fills, rounded 1px hairlines,
+// no blur / shadows / glow. Green accents and the starfield stay.
+// (Overrides rather than replaces the glass rules; delete this
+// block to restore the full glass look.)
+// ============================================================
+$flat-panel-outer: transparent;               // large group panels — starfield shows through
+$flat-panel-inner: transparent;               // nested cards — outline only
+$flat-radius-outer: 18px;                     // large group panels
+$flat-radius-inner: 12px;                     // nested cards / buttons / callouts
+$flat-hairline:    rgba(255, 255, 255, 0.16);
+$flat-green:       #39d353;
+
+// Nav: solid bar, no blur
+.glass-ui .navbar,
+.glass-ui #navbar-main {
+  background: #0d1017 !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+// Large wrappers (homepage group panels, inner-page content cards) -> outer tone
+.glass-ui .research-item,
+.glass-ui .landscape-card,
+.glass-ui .article-container .article-style,
+.glass-ui .home-section.wg-hero .col-md-6.text-md-left,
+.glass-ui:not(.glass-home) .home-section.wg-markdown > .container > .row,
+.glass-home .home-section.wg-about .col-12.col-lg-8,
+.glass-home .home-section.wg-markdown > .container > .row {
+  background: $flat-panel-outer !important;
+  border: 1px solid $flat-hairline !important;
+  border-radius: $flat-radius-outer !important;
+  box-shadow: none !important;
+}
+
+// Small surfaces / nested cards -> slightly lighter tone (flat depth = tonal step)
+.glass-ui .card,
+.glass-ui .geek-fig,
+.glass-ui pre:not([style]),
+.glass-ui .btn-outline-primary,
+.glass-ui .btn-secondary,
+.glass-ui .btn-outline-secondary,
+.glass-ui .article-container .btn-outline-primary,
+.glass-ui .g-card,
+.glass-home .wg-about .col-lg-4 > div,
+.glass-home .wg-about .article-style,
+.glass-home .wg-about .col-lg-8 > .row {
+  background: $flat-panel-inner !important;
+  border: 1px solid $flat-hairline !important;
+  border-radius: $flat-radius-inner !important;
+  box-shadow: none !important;
+}
+
+// Kill the glass edge-sheen pseudo-elements
+.glass-ui .g-card::before,
+.glass-ui .research-item::before,
+.glass-ui .landscape-card::before,
+.glass-ui .article-container .article-style::before,
+.glass-ui .home-section.wg-hero .col-md-6.text-md-left::before,
+.glass-ui .home-section.wg-markdown > .container > .row::before,
+.glass-home .wg-about .col-lg-4 > div::before,
+.glass-home .wg-about .article-style::before,
+.glass-home .wg-about .col-lg-8 > .row::before,
+.glass-home .home-section.wg-about .col-12.col-lg-8::before { display: none !important; }
+
+// Flat hover idiom: no lift, no glow — the border wakes up green
+.glass-ui .g-card:hover,
+.glass-ui .btn:hover,
+.glass-ui .landscape-card:hover,
+.glass-ui .research-item:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: rgba(57, 211, 83, 0.55) !important;
+}
+
+// Accent surfaces: same tints, flat construction
+.glass-ui .btn-primary {
+  background: rgba(57, 211, 83, 0.15) !important;
+  border: 1px solid $flat-green !important;
+  border-radius: $flat-radius-inner !important;
+  box-shadow: none !important;
+}
+.glass-ui .alert-note {
+  background: rgba(57, 211, 83, 0.08) !important;
+  border: 1px solid rgba(57, 211, 83, 0.35) !important;
+  border-left: 3px solid $flat-green !important;
+  border-radius: $flat-radius-inner !important;
+  box-shadow: none !important;
+}
+
+// Avatar: keep the circle, drop the glass shadow
+.glass-ui img.avatar { box-shadow: none !important; }

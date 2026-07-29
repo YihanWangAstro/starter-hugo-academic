@@ -1,11 +1,14 @@
 # Font style metadata
 name = "Geek"
 
-# Google Fonts — IBM Plex Mono everywhere for full geek look
-google_fonts = "family=IBM+Plex+Mono:wght@400;500;600;700"
+# Google Fonts — Poppins to match HKIAA (hkiaa.hku.hk embeds Poppins;
+# its declared Sofia Pro/Europa are commercial Adobe faces and Poppins is
+# their standard free equivalent). Noto Sans SC covers the Chinese name.
+# IBM Plex Mono retained for code and ASCII art only.
+google_fonts = "family=Poppins:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500"
 
 # Font families
-heading_font = "IBM Plex Mono"
-body_font = "IBM Plex Mono"
-nav_font = "IBM Plex Mono"
+heading_font = "Poppins"
+body_font = "Poppins"
+nav_font = "Poppins"
 mono_font = "IBM Plex Mono"
