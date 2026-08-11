@@ -62,7 +62,7 @@ social:
     link: uploads/Yihan-Wang-CV.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
-email: 'wang3697@wisc.edu'
+email: 'yhwang1@hku.hk'
 
 # Highlight the author in author lists? (true/false)
 highlight_name: true

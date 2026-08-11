@@ -25,7 +25,7 @@ content:
   #    captcha: false
 
   # Contact details (edit or remove options as required)
-  email: wang3697@wisc.edu
+  email: yhwang1@hku.hk
   #phone: 888 888 88 88
   address:
     street: 500 Lincoln Dr
