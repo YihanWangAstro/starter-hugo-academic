@@ -24,7 +24,7 @@ design:
 └──────────────────────────────────────┘
 </pre>
 
-I am building a research group at the [Department of Physics, The University of Hong Kong](https://www.physics.hku.hk/) and [HKIAA](https://hkiaa.hku.hk/), at the intersection of **gravitational dynamics, high-energy astrophysics, and theoretical/computational physics**. I will be joining as an Assistant Professor in **Fall 2026**, and am actively looking for students. Whether you prefer deriving things on a whiteboard or running simulations on a supercomputer — there's a place for you here.
+I am building a research group at the [Department of Physics, The University of Hong Kong](https://www.physics.hku.hk/) and [HKIAA](https://hkiaa.hku.hk/), at the intersection of **gravitational dynamics, high-energy astrophysics, and theoretical/computational physics**. I am an Assistant Professor there and am actively looking for students. Whether you prefer deriving things on a whiteboard or running simulations on a supercomputer — there's a place for you here.
 
 ### Research Themes
 

@@ -6,15 +6,13 @@ title: Yihan Wang
 superuser: true
 
 # Role/position/tagline
-role: Postdoctoral Research Associate (Assistant Professor at HKU, Fall 2026)
+role: Assistant Professor
 
 # Organizations/Affiliations to show in About widget
 organizations:
-  - name: Department of Astronomy, University of Wisconsin-Madison
-    url: https://www.astro.wisc.edu/
-  - name: Hong Kong Institute for Astronomy and Astrophysics (joining Fall 2026)
+  - name: Hong Kong Institute for Astronomy and Astrophysics
     url: https://hkiaa.hku.hk/
-  - name: Department of Physics, The University of Hong Kong (joining Fall 2026)
+  - name: Department of Physics, The University of Hong Kong
     url: https://www.physics.hku.hk/
 
 # Short bio (displayed in user profile at end of posts)
@@ -68,7 +66,7 @@ email: 'yhwang1@hku.hk'
 highlight_name: true
 ---
 
-I am a theoretical and computational astrophysicist, currently a Postdoctoral Research Associate in the Department of Astronomy at the University of Wisconsin-Madison, working with [Nick Stone](https://www.ncstone.space). In Fall 2026, I will join the [Hong Kong Institute for Astronomy and Astrophysics (HKIAA)](https://hkiaa.hku.hk/) and the [Department of Physics](https://www.physics.hku.hk/) at The University of Hong Kong as an Assistant Professor. Previously, I was a Fellow at the Nevada Center for Astrophysics at UNLV, collaborating with [Bing Zhang](https://www.physics.unlv.edu/~bzhang/) and [Zhaohuan Zhu](https://www.physics.unlv.edu/~zhzhu/Home.html). I completed my PhD at Stony Brook University under [Rosalba Perna](https://www.astro.sunysb.edu/rosalba/).
+I am a theoretical and computational astrophysicist and an Assistant Professor at the [Hong Kong Institute for Astronomy and Astrophysics (HKIAA)](https://hkiaa.hku.hk/) and the [Department of Physics](https://www.physics.hku.hk/) at The University of Hong Kong. Before joining HKU, I was a Postdoctoral Research Associate in the Department of Astronomy at the University of Wisconsin-Madison, working with [Nick Stone](https://www.ncstone.space), and a Fellow at the Nevada Center for Astrophysics at UNLV, collaborating with [Bing Zhang](https://www.physics.unlv.edu/~bzhang/) and [Zhaohuan Zhu](https://www.physics.unlv.edu/~zhzhu/Home.html). I completed my PhD at Stony Brook University under [Rosalba Perna](https://www.astro.sunysb.edu/rosalba/).
 
 I work on the fundamental dynamics of few-body gravitational systems in dense astrophysical environments. A particular focus is how stellar and compact-object populations evolve in AGN accretion disks, producing nuclear transients and gravitational-wave sources observable across the electromagnetic and gravitational-wave spectrum. I develop the open-source codes [SpaceHub](https://github.com/YihanWangAstro/SpaceHub/) and [VegasAfterglow](https://github.com/YihanWangAstro/VegasAfterglow) for high-precision few-body integration and gamma-ray burst afterglow modeling.
 

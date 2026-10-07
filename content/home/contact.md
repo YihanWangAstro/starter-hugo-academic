@@ -28,12 +28,12 @@ content:
   email: yhwang1@hku.hk
   #phone: 888 888 88 88
   address:
-    street: 500 Lincoln Dr
-    city: Madison
-    region: WI
-    postcode: '53706'
-    country: United States
-    country_code: US
+    street: Department of Physics, The University of Hong Kong
+    city: Pokfulam Road
+    region: Hong Kong SAR, China
+    postcode: ''
+    country: China
+    country_code: CN
   #coordinates:
   #  latitude: '37.4275'
   #  longitude: '-122.1697'
