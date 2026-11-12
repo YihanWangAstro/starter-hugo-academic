@@ -1,36 +1,31 @@
 # Theme metadata
 name = "Geek"
 
-# Retro computing meets elegant academic — dual mode terminal aesthetic
+# Institutional blue + muted gold on white, after nsfc.gov.cn.
+# The site is light-only (forced in layouts/partials/custom_head.html).
 
 [light]
-  # Warm amber primary on paper-like background
-  primary = "#a06e1d"
+  primary = "#1f4e83"
+  background = "#ffffff"
 
-  # Menu — clean header with subtle warmth
-  menu_primary = "#f5f0e8"
-  menu_text = "#4a4a4a"
-  menu_text_active = "#a06e1d"
-  menu_title = "#1e1e1e"
+  # Menu — solid blue bar, white links
+  menu_primary = "#1f4e83"
+  menu_text = "#ffffff"
+  menu_text_active = "#ffffff"
+  menu_title = "#ffffff"
 
-  # Home sections — alternating warm paper tones
-  home_section_odd = "#faf8f2"
-  home_section_even = "#f3f0e6"
+  home_section_odd = "#ffffff"
+  home_section_even = "#ffffff"
 
 [dark]
-  # Terminal green primary on deep black
-  primary = "#39d353"
-
-  link = "#39d353"
-  link_hover = "#6ee77a"
-
-  # Menu — dark terminal header
-  menu_primary = "#0d1117"
-  menu_text = "#8b949e"
-  menu_text_active = "#39d353"
-  menu_title = "#e3b341"
-
-  # Backgrounds — deep terminal black
-  background = "#0d1117"
-  home_section_odd = "#0d1117"
-  home_section_even = "#111921"
+  # Unused (light-only site); kept in step with the light palette.
+  primary = "#5f9ccc"
+  link = "#5f9ccc"
+  link_hover = "#b6cee3"
+  menu_primary = "#0a3a6a"
+  menu_text = "#ffffff"
+  menu_text_active = "#ffffff"
+  menu_title = "#ffffff"
+  background = "#0b1f38"
+  home_section_odd = "#0b1f38"
+  home_section_even = "#0b1f38"

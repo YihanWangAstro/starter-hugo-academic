@@ -18,7 +18,7 @@ design:
   columns: '1'
 ---
 
-<pre style="font-size:0.85em; line-height:1.4; color:var(--sl-color-text-muted, #888); margin-bottom:1rem; background:none; border:none; padding:0;">
+<pre style="font-size:0.85em; line-height:1.4; margin-bottom:1rem; background:none; border:none; padding:0;">
 ┌──────────────────────────────────────┐
 │  ~/group $ cat openings.md           │
 └──────────────────────────────────────┘
@@ -55,7 +55,7 @@ This is a group where physical intuition comes first — whether that leads to a
 
 You don't need prior expertise in my specific topics — a strong physics foundation and genuine curiosity are what matter most. If you're comfortable with mathematical derivations, interested in how extreme astrophysical environments work, and eager to develop skills in analytical theory, numerical methods, or both — you'll do well here.
 
-<pre style="font-size:0.75em; line-height:1.4; color:var(--sl-color-text-muted, #888); margin-top:1.5rem; background:none; border:none; padding:0;">
+<pre style="font-size:0.75em; line-height:1.4; margin-top:1.5rem; background:none; border:none; padding:0;">
 // Positions available for PhD students, Master's students, and undergraduates.
 // Visiting students and postdocs are also welcome to inquire.
 </pre>

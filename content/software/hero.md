@@ -13,8 +13,8 @@ hero_media: 'icon-dark.png'
 
 design:
   background:
-    gradient_start: '#1a1e2e'
-    gradient_end: '#0d1117'
+    gradient_start: '#1f4e83'
+    gradient_end: '#0a3a6a'
     gradient_angle: 180
     #Text color (true=light, false=dark, or remove for the dynamic theme color).
     text_color_light: true
