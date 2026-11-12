@@ -1,0 +1,7 @@
+{{/* Latest N publications as portal list rows: title left, date right. */}}
+{{ $n := int (.Get 0 | default 8) }}
+<ul class="p-list">
+{{ range first $n (where site.RegularPages "Type" "publication").ByDate.Reverse }}
+<li><a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a><span class="p-date">{{ .Date.Format "2006-01" }}</span></li>
+{{ end }}
+</ul>

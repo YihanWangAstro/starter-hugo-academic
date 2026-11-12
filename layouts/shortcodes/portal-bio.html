@@ -1,0 +1,14 @@
+{{/* Portrait + biography, read from the primary author profile (content/authors/admin). */}}
+{{ with site.GetPage "authors/admin" }}
+<div class="p-bio">
+<div class="p-bio-side">
+{{ with .Resources.GetMatch "avatar*" }}{{ $img := .Fill "360x360 Center" }}<img class="p-portrait" src="{{ $img.RelPermalink }}" width="180" height="180" alt="{{ $.Page.Site.Title }}">{{ end }}
+<div class="p-bio-name">{{ .Title }}</div>
+<div class="p-bio-role">{{ .Params.role }}</div>
+<ul class="p-social">
+{{ range .Params.social }}{{ $pack := .icon_pack | default "fas" }}{{ $link := .link }}{{ if not (or (hasPrefix $link "http") (hasPrefix $link "/")) }}{{ $link = $link | relURL }}{{ end }}<li><a href="{{ $link }}"{{ if hasPrefix $link "http" }} target="_blank" rel="noopener"{{ end }} aria-label="{{ .icon }}"><i class="{{ $pack }} {{ if eq $pack "ai" }}ai-{{ else }}fa-{{ end }}{{ .icon }}"></i></a></li>{{ end }}
+</ul>
+</div>
+<div class="p-bio-text">{{ .Content }}</div>
+</div>
+{{ end }}

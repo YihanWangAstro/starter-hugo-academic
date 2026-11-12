@@ -1,0 +1,7 @@
+{{/* Interests and education as gold-edged cards, read from the primary author profile. */}}
+{{ with site.GetPage "authors/admin" }}
+<div class="p-cards">
+<div class="p-card"><div class="p-card-label">Interests</div><ul class="p-plain">{{ range .Params.interests }}<li>{{ . | safeHTML }}</li>{{ end }}</ul></div>
+{{ range .Params.education.courses }}<div class="p-card"><div class="p-card-head">{{ .course }} <span class="p-date">{{ .year }}</span></div><div class="p-card-sub">{{ .institution }}</div></div>{{ end }}
+</div>
+{{ end }}

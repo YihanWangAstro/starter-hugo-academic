@@ -1,0 +1,19 @@
+{{/* Portal header: a white masthead (name + affiliation + quick links) above the
+     theme's navigation bar. The masthead scrolls away; the nav bar stays pinned
+     (see `.page-header` in assets/scss/custom.scss). */}}
+{{ $author := site.GetPage "authors/admin" }}
+<div class="masthead">
+  <div class="container masthead-inner">
+    <a class="masthead-brand" href="{{ "/" | relURL }}">
+      <span class="masthead-name">Yihan Wang <span class="masthead-cjk">王艺涵</span></span>
+      <span class="masthead-sub">Theoretical &amp; Computational Astrophysics &middot; The University of Hong Kong</span>
+    </a>
+    {{ with $author }}
+    <ul class="masthead-links">
+      {{ range .Params.organizations }}<li><a href="{{ .url }}" target="_blank" rel="noopener">{{ if in .name "Institute" }}HKIAA{{ else }}HKU Physics{{ end }}</a></li>{{ end }}
+      <li><a href="{{ "uploads/Yihan-Wang-CV.pdf" | relURL }}" target="_blank" rel="noopener">CV</a></li>
+    </ul>
+    {{ end }}
+  </div>
+</div>
+{{ partial "components/headers/navbar.html" . }}

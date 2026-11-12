@@ -277,90 +277,254 @@ ul.ul-interests li { max-width: none !important; width: 100% !important; }
 .ul-interests { list-style: none; padding-left: 0; }
 
 // ============================================================
-// Homepage
+// Portal header — white masthead above the pinned blue nav bar
 // ============================================================
-
-// ---- Profile card (avatar + name + role + links) ----
-.nsfc-home .wg-about .col-lg-4 > div {
+$masthead-h: 92px;
+.nsfc-ui .page-header.header--fixed { top: -$masthead-h; }   // masthead scrolls away, nav stays pinned
+.masthead {
+  height: $masthead-h;
   background: #fff;
-  border-top: 3px solid $gold;
-  box-shadow: $card-shadow;
-  padding: 1.6rem 1.4rem;
+  display: flex;
+  align-items: center;
 }
-.nsfc-home .wg-about .portrait-title h2 {
-  font-size: 1.5rem;
+.masthead-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.masthead-brand { display: flex; flex-direction: column; text-decoration: none !important; min-width: 0; }
+.masthead-name {
+  font-size: 1.85rem;
   font-weight: 700;
+  line-height: 1.2;
   color: $blue-deep;
+  letter-spacing: 0.01em;
 }
-.nsfc-home .wg-about .portrait-title h3 { color: $muted; font-size: 1rem; }
-.nsfc-home .wg-about .portrait-title h3 a { color: $blue; }
-.nsfc-home .wg-about .network-icon a { color: $blue; transition: color 0.15s ease; }
-.nsfc-home .wg-about .network-icon a:hover { color: $gold; }
+.masthead-cjk { font-weight: 600; margin-left: 0.35em; }
+.masthead-sub {
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: $blue;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.masthead-links { display: flex; gap: 1.4rem; list-style: none; margin: 0; padding: 0; font-size: 0.95rem; }
+.masthead-links a { color: $blue; }
+.masthead-links a:hover { color: $gold-ink; }
+// The masthead carries the name, so the nav bar starts straight at the links.
+.nsfc-ui .navbar .navbar-brand { display: none; }
+.nsfc-ui .navbar .navbar-nav .nav-link { padding-left: 2rem !important; padding-right: 2rem !important; }
+@media (max-width: 991px) {
+  .masthead-links { display: none; }
+  .masthead-name { font-size: 1.45rem; }
+  .masthead-sub { font-size: 0.66rem; letter-spacing: 0.05em; }
+}
 
-// ---- Biography prose + interests/education ----
-.nsfc-home .wg-about .article-style {
-  @include card;
-  padding: 1.4rem 1.7rem;
+// ============================================================
+// Portal homepage — wide page of two-column blocks
+// ============================================================
+.nsfc-ui .container,
+.nsfc-ui .navbar > .container-xl { max-width: 1400px; }
+.nsfc-home body { background: #fff !important; }
+
+.nsfc-home .home-section.portal-block { padding-top: 3.2rem; padding-bottom: 3.2rem; }
+.nsfc-home .home-section.portal-block .col-12 { text-align: left; }
+.p-row { display: flex; flex-wrap: wrap; gap: 3rem; }
+.p-col { min-width: 0; }
+.p-col-wide { flex: 1 1 0; }
+.p-col-narrow { flex: 0 0 34%; max-width: 34%; }
+
+// ---- Headline banner: big blue serif headline on the sky wash ----
+.nsfc-home .home-section.portal-banner {
+  padding: 2.6rem 0 2.8rem;
+  background: linear-gradient(180deg, rgba($sky, 0.30) 0%, $wash 100%) !important;
+}
+.p-headline { text-align: center; }
+.p-headline h1 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: $blue;
+  margin: 0 0 0.6rem;
+}
+.p-headline p { font-size: 1.15rem; color: $blue; margin: 0; }
+.p-headline .p-headline-topics {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $gold-ink;
+}
+
+// ---- Block title: serif on a gold rule, "more" link at the right ----
+.p-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.p-title h2 {
+  position: relative;
   margin: 0;
-}
-.nsfc-home .wg-about .col-lg-8 > .row {
-  @include card;
-  padding: 1.3rem 1.6rem;
-  margin: 1.25rem 0 0;
-  > [class*="col"] { padding-top: 0; padding-bottom: 0; }
-}
-.nsfc-home .wg-about .section-subheading,
-.nsfc-home .wg-about .col-lg-8 > .row h3 {
-  font-size: 1.1rem;
+  padding-bottom: 0.6rem;
+  font-size: 1.75rem;
   font-weight: 600;
-  color: $blue-deep;
+  color: $ink;
 }
-.nsfc-home .wg-about .ul-edu .institution { color: $gold-ink; }
-.interest-tagline {
+.p-title h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2.6em;
+  height: 3px;
+  background: $gold;
+}
+.p-more { font-size: 0.95rem; color: $gold-ink; white-space: nowrap; }
+.p-more:hover { color: $gold; }
+
+// ---- List rows: gold dash, title, date at the right ----
+.p-list { list-style: none; margin: 0; padding: 0; }
+.p-list li {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 0.55rem 0 0.55rem 1.1rem;
+}
+.p-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.4rem;
+  width: 0.45rem;
+  height: 1px;
+  background: $gold;
+}
+.p-list li > a {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: $ink;
+  font-size: 1.06rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.p-list li > a:hover { color: $blue; font-weight: 600; text-decoration: none; }
+.p-date { flex: 0 0 auto; color: $gold-ink; font-size: 0.95rem; white-space: nowrap; }
+
+// Rich rows: a one-line summary under the title
+.p-list-rich li { flex-wrap: wrap; row-gap: 0.1rem; padding-top: 0.5rem; padding-bottom: 0.7rem; }
+.p-list-rich li > a { flex: 1 1 0; font-size: 1.15rem; font-weight: 600; white-space: normal; }
+.p-list-rich li p { flex: 0 0 100%; margin: 0; font-size: 0.95rem; line-height: 1.55; }
+
+// ---- Gold-edged cards (right-hand columns) ----
+.p-cards { display: flex; flex-direction: column; gap: 1rem; }
+.p-card {
   display: block;
-  margin-top: 0.55rem;
-  font-style: italic;
-  color: $muted;
-  line-height: 1.5;
+  padding: 0.95rem 1.2rem;
+  background: #fff;
+  border-left: 3px solid $gold;
+  box-shadow: $card-shadow;
+  color: $ink;
+  line-height: 1.55;
+  transition: box-shadow 0.18s ease;
 }
+a.p-card:hover { box-shadow: $card-shadow-h; color: $blue; text-decoration: none; }
+.p-card .p-date { margin-left: 0.4rem; }
+.p-card-label {
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $gold-ink;
+  margin-bottom: 0.2rem;
+}
+.p-card-head { font-weight: 600; color: $ink-strong; }
+.p-card-sub { font-size: 0.95rem; color: $muted; }
+.p-plain { list-style: none; margin: 0; padding: 0; }
 
-// ---- Research / Personal: title stacked above a right-hand column of cards ----
-.nsfc-home .home-section.wg-markdown > .container > .row,
-.nsfc-home .home-section.wg-contact > .container > .row {
+// ---- Biography ----
+.p-bio { display: flex; gap: 2rem; align-items: flex-start; }
+.p-bio-side { flex: 0 0 180px; text-align: center; }
+.p-portrait { display: block; width: 180px; height: 180px; object-fit: cover; margin: 0 0 0.8rem; }
+.p-bio-name { font-size: 1.2rem; font-weight: 700; color: $blue-deep; }
+.p-bio-role { font-size: 0.95rem; color: $muted; }
+.p-social { display: flex; justify-content: center; gap: 0.7rem; list-style: none; margin: 0.6rem 0 0; padding: 0; font-size: 1.15rem; }
+.p-social a { color: $blue; }
+.p-social a:hover { color: $gold; }
+.p-bio-text { flex: 1 1 auto; min-width: 0; font-size: 1.04rem; line-height: 1.8; }
+.p-bio-text p:last-child { margin-bottom: 0; }
+
+// ---- Blue band (research highlights + software) ----
+.nsfc-home .home-section.portal-band {
+  background: linear-gradient(135deg, #2b62a3 0%, $blue 45%, #2f6cb0 100%) !important;
+  color: #fff;
+}
+.portal-band .p-title h2 { color: #fff; }
+.portal-band .p-more { color: #fff; }
+.portal-band .p-more:hover { color: $gold-pale; }
+.portal-band .p-list li > a { color: #fff; }
+.portal-band .p-list li > a:hover { color: #e9c75a; }
+.portal-band .p-list li::before { background: #fff; }
+.portal-band .p-list li:first-child > a { color: #e9c75a; }   // lead item in gold, as on the reference
+.portal-band .p-list li p { color: rgba(255, 255, 255, 0.82); }
+.portal-band .p-date { color: #fff; }
+
+.p-feature-row { display: flex; gap: 2rem; align-items: flex-start; }
+.p-feature { flex: 0 0 300px; margin: 0; }
+.p-feature video, .p-feature img { display: block; width: 100%; height: auto; border: 4px solid #fff; background: #0d1117; }
+.p-feature figcaption { margin-top: 0.7rem; font-size: 0.92rem; line-height: 1.5; color: rgba(255, 255, 255, 0.9); }
+.p-feature-row .p-list { flex: 1 1 auto; min-width: 0; }
+
+// Software entry tiles: pale sky panels with a corner tag
+.p-tile {
+  position: relative;
+  display: flex;
   flex-direction: column;
-  width: 66.667%;
-  margin-left: auto;
-  margin-right: 0;
-  > [class*="col"] {
-    flex: 0 0 100%;
-    max-width: 100%;
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-  }
+  justify-content: center;
+  min-height: 132px;
+  padding: 1.2rem 1.6rem;
+  margin-bottom: 1.1rem;
+  background: linear-gradient(160deg, #ffffff 0%, #e4f0fb 55%, #c6def5 100%);
+  border: 4px solid rgba(255, 255, 255, 0.55);
+  background-clip: padding-box;
+  text-decoration: none !important;
+  transition: transform 0.18s ease;
 }
-.nsfc-home .home-section.wg-markdown .section-heading { margin-bottom: 0 !important; }
-// "Browse all …" line under the cards -> gold "more" link, right-aligned
-.nsfc-home .home-section.wg-markdown .g-stack + h3 {
-  text-align: right;
-  font-size: 1rem;
-  font-weight: 400;
-  margin-top: 1rem;
-  a { color: $gold-ink; }
-  a:hover { color: $gold; }
-}
+.p-tile:hover { transform: translateY(-2px); }
+.p-tile-tag { position: absolute; top: 0.7rem; right: 1.1rem; font-weight: 700; letter-spacing: 0.06em; color: rgba($blue, 0.45); }
+.p-tile-name { font-size: 1.6rem; font-weight: 700; color: $blue; line-height: 1.25; }
+.p-tile-sub { font-size: 0.95rem; color: $blue-deep; }
 
-// ---- Contact: details only, no heading ----
-.nsfc-home .home-section.wg-contact .section-heading { display: none !important; }
-.nsfc-home .home-section.wg-contact .col-12.col-lg-8 {
-  border-top: 1px solid $line;
-  padding-top: 1.5rem !important;
+// ---- Pale sky band (personal + contact) ----
+.nsfc-home .home-section.portal-wash {
+  background: linear-gradient(180deg, rgba($sky, 0.20) 0%, $wash 100%) !important;
 }
-.nsfc-home .home-section.wg-contact .fa-ul .fa-li { color: $gold; }
+.p-media-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; }
+.p-media { margin: 0; }
+.p-media img, .p-media video { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: #000; }
+.p-media figcaption, .p-feature figcaption { text-align: left; }
+.p-media figcaption { margin-top: 0.7rem; font-size: 0.95rem; line-height: 1.6; }
 
-@media (max-width: 760px) {
-  .nsfc-home .home-section.wg-markdown > .container > .row,
-  .nsfc-home .home-section.wg-contact > .container > .row { width: 100%; margin-left: 0; }
+.nsfc-home footer.site-footer, .nsfc-home .page-footer { margin-top: 0; }
+
+@media (max-width: 991px) {
+  .p-row { gap: 2.2rem; }
+  .p-col-wide, .p-col-narrow { flex: 0 0 100%; max-width: 100%; }
+  .p-headline h1 { font-size: 1.6rem; }
+}
+@media (max-width: 680px) {
+  .p-bio, .p-feature-row { flex-direction: column; }
+  .p-bio-side { flex: 0 0 auto; align-self: center; }
+  .p-feature { flex: 0 0 auto; width: 100%; }
+  .p-media-row { grid-template-columns: 1fr; }
+  .p-list li { gap: 0.8rem; }
+  .p-list li > a { white-space: normal; }
 }
 
 // ============================================================

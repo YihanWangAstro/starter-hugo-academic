@@ -31,6 +31,7 @@ marketing:
 header:
   navbar:
     enable: true
+    block: navbar-portal
     align: l
     show_logo: true
     show_language: false
