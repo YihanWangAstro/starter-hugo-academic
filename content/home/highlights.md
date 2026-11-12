@@ -13,8 +13,8 @@ design:
 <div class="p-title"><h2>Research Highlights</h2><a class="p-more" href="/research/">All research by theme &raquo;</a></div>
 <div class="p-feature-row">
 <figure class="p-feature">
-<img src="/uploads/research/2024-mnras-528-4958-w.png" alt="A star on an inclined orbit crossing the mid-plane of an AGN accretion disk">
-<figcaption>Stars and black holes from the surrounding nuclear cluster are captured into the AGN accretion disk as they repeatedly cross its mid-plane.</figcaption>
+<canvas class="landscape-anim" data-theme="1" aria-hidden="true"></canvas>
+<figcaption>Stars and black holes from the surrounding nuclear cluster are captured into the accretion disk of an active galactic nucleus.</figcaption>
 </figure>
 <ul class="p-list p-list-rich">
 <li><a href="https://doi.org/10.1093/mnras/stae321" target="_blank" rel="noopener">Stellar Dynamics in AGN Disks</a><span class="p-date">MNRAS 2024</span><p>Star-disk coupling reshapes nuclear clusters, with consequences for tidal disruptions, changing-look AGN, and gravitational-wave sources.</p></li>

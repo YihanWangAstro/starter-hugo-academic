@@ -483,6 +483,7 @@ a.p-card:hover { box-shadow: $card-shadow-h; color: $blue; text-decoration: none
 .p-feature { flex: 0 0 300px; margin: 0; }
 .p-feature video, .p-feature img { display: block; width: 100%; height: auto; border: 4px solid #fff; background: #0d1117; }
 .p-feature img { background: #fff; padding: 8px; }
+.p-feature canvas { box-sizing: border-box; border: 4px solid #fff; }
 .p-feature figcaption { margin-top: 0.7rem; font-size: 0.92rem; line-height: 1.5; color: rgba(255, 255, 255, 0.9); }
 .p-feature-row .p-list { flex: 1 1 auto; min-width: 0; }
 
