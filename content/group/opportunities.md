@@ -1,51 +1,21 @@
 ---
-# An instance of the Blank widget.
+# Group page: prospective-student text (left) + research themes (right).
 widget: blank
 
 # HIDDEN — set active: true when ready to announce
 active: true
-
-# This file represents a page section.
 headless: true
-
-# Order that this section appears on the page.
 weight: 115
-
-title: 'Prospective Students'
-subtitle:
-
 design:
   columns: '1'
+  css_class: portal-block
 ---
 
-<pre style="font-size:0.85em; line-height:1.4; margin-bottom:1rem; background:none; border:none; padding:0;">
-┌──────────────────────────────────────┐
-│  ~/group $ cat openings.md           │
-└──────────────────────────────────────┘
-</pre>
+<div class="p-row">
+<div class="p-col p-col-wide p-prose">
+<div class="p-title"><h2>Prospective Students</h2></div>
 
 I am building a research group at the [Department of Physics, The University of Hong Kong](https://www.physics.hku.hk/) and [HKIAA](https://hkiaa.hku.hk/), at the intersection of **gravitational dynamics, high-energy astrophysics, and theoretical/computational physics**. I am an Assistant Professor there and am actively looking for students. Whether you prefer deriving things on a whiteboard or running simulations on a supercomputer — there's a place for you here.
-
-### Research Themes
-
-<pre style="font-size:0.85em; line-height:1.8;">
-research/
-├── agn-disk-dynamics/
-│   ├── Stellar capture and migration in AGN disks
-│   ├── Disk-mediated binary formation
-│   └── Population evolution in nuclear clusters
-├── nuclear-transients/
-│   ├── Tidal disruption events
-│   ├── Changing-look AGN
-│   └── Quasi-periodic eruptions
-├── gravitational-waves/
-│   ├── Extreme mass-ratio inspirals
-│   └── Binary black hole mergers (LIGO/LISA)
-└── computational-tools/
-    ├── SpaceHub — few-body dynamics
-    ├── VegasAfterglow — GRB afterglow modeling
-    └── New projects — open to ideas
-</pre>
 
 ### The Group
 
@@ -55,7 +25,16 @@ This is a group where physical intuition comes first — whether that leads to a
 
 You don't need prior expertise in my specific topics — a strong physics foundation and genuine curiosity are what matter most. If you're comfortable with mathematical derivations, interested in how extreme astrophysical environments work, and eager to develop skills in analytical theory, numerical methods, or both — you'll do well here.
 
-<pre style="font-size:0.75em; line-height:1.4; margin-top:1.5rem; background:none; border:none; padding:0;">
-// Positions available for PhD students, Master's students, and undergraduates.
-// Visiting students and postdocs are also welcome to inquire.
-</pre>
+<p class="p-note">Positions available for PhD students, Master's students, and undergraduates. Visiting students and postdocs are also welcome to inquire.</p>
+
+</div>
+<div class="p-col p-col-narrow">
+<div class="p-title"><h2>Research Themes</h2></div>
+<div class="p-cards">
+<div class="p-card"><div class="p-card-head">AGN disk dynamics</div><ul class="p-plain"><li>Stellar capture and migration in AGN disks</li><li>Disk-mediated binary formation</li><li>Population evolution in nuclear clusters</li></ul></div>
+<div class="p-card"><div class="p-card-head">Nuclear transients</div><ul class="p-plain"><li>Tidal disruption events</li><li>Changing-look AGN</li><li>Quasi-periodic eruptions</li></ul></div>
+<div class="p-card"><div class="p-card-head">Gravitational waves</div><ul class="p-plain"><li>Extreme mass-ratio inspirals</li><li>Binary black hole mergers (LIGO/LISA)</li></ul></div>
+<div class="p-card"><div class="p-card-head">Computational tools</div><ul class="p-plain"><li>SpaceHub &mdash; few-body dynamics</li><li>VegasAfterglow &mdash; GRB afterglow modeling</li><li>New projects &mdash; open to ideas</li></ul></div>
+</div>
+</div>
+</div>

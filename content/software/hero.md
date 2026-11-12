@@ -43,11 +43,11 @@ cta_note:
 <div class="geek-fig-row">
   <div style="text-align: center; max-width: 45%;">
     <h4>RK4 (irreversible)</h4>
-    <span class="geek-fig"><img src="/uploads/Picture1-dark.gif" alt="RK4 (irreversible)" /></span>
+    <span class="geek-fig"><img src="/uploads/Picture1.gif" alt="RK4 (irreversible)" /></span>
   </div>
   <div style="text-align: center; max-width: 45%;">
     <h4>Symplectic (reversible)</h4>
-    <span class="geek-fig"><img src="/uploads/Picture2-dark.gif" alt="Symplectic (reversible)" /></span>
+    <span class="geek-fig"><img src="/uploads/Picture2.gif" alt="Symplectic (reversible)" /></span>
   </div>
 </div>
 
