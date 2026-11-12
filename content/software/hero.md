@@ -9,7 +9,7 @@ title: SpaceHub
 # Hero image (optional). Enter filename of an image in the assets/media/ folder.
 
 
-hero_media: 'icon-dark.png'
+hero_media: 'icon.png'
 
 design:
   background:
