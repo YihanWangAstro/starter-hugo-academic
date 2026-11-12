@@ -101,7 +101,7 @@ publication_types:
 - article-journal
 
 # Publication name and optional abbreviated publication name.
-publication: '*arXiv e-prints*'
+publication: '*Science* (in press)'
 publication_short: ''
 
 doi: 10.48550/arXiv.2603.26213

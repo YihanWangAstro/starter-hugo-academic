@@ -13,13 +13,13 @@ design:
 <div class="p-title"><h2>Research Highlights</h2><a class="p-more" href="/research/">All research by theme &raquo;</a></div>
 <div class="p-feature-row">
 <figure class="p-feature">
-<video autoplay loop muted playsinline><source src="uploads/face-on-dark.mp4" type="video/mp4"></video>
-<figcaption>A stellar flyby ejects two planets that stay bound to each other: the formation of a Jupiter-mass binary object.</figcaption>
+<img src="/uploads/research/2024-mnras-528-4958-w.png" alt="A star on an inclined orbit crossing the mid-plane of an AGN accretion disk">
+<figcaption>Stars and black holes from the surrounding nuclear cluster are captured into the AGN accretion disk as they repeatedly cross its mid-plane.</figcaption>
 </figure>
 <ul class="p-list p-list-rich">
 <li><a href="https://doi.org/10.1093/mnras/stae321" target="_blank" rel="noopener">Stellar Dynamics in AGN Disks</a><span class="p-date">MNRAS 2024</span><p>Star-disk coupling reshapes nuclear clusters, with consequences for tidal disruptions, changing-look AGN, and gravitational-wave sources.</p></li>
 <li><a href="https://ui.adsabs.harvard.edu/abs/2026JHEAp..5000490W/abstract" target="_blank" rel="noopener">Gamma-Ray Burst Afterglows with VegasAfterglow</a><span class="p-date">JHEAp 2026</span><p>Afterglow light curves in milliseconds, fast enough to make full MCMC parameter inference tractable.</p></li>
-<li><a href="https://arxiv.org/abs/2603.26213" target="_blank" rel="noopener">An Energetic Dirty Fireball in Soft X-rays</a><span class="p-date">Science</span><p>EP241113a, an Einstein Probe transient with GRB-like energy but a slow, baryon-loaded jet: the long-sought prototype of a dirty fireball.</p></li>
+<li><a href="https://arxiv.org/abs/2603.26213" target="_blank" rel="noopener">An Energetic Dirty Fireball in Soft X-rays</a><span class="p-date">Science, in press</span><p>EP241113a, an Einstein Probe transient with GRB-like energy but a slow, baryon-loaded jet: the long-sought prototype of a dirty fireball.</p></li>
 <li><a href="https://www.nature.com/articles/s41550-024-02239-2" target="_blank" rel="noopener">Jupiter-Mass Binary Objects (JuMBOs)</a><span class="p-date">Nature Astronomy 2024</span><p>Close stellar flybys can eject pairs of planets that remain gravitationally bound, as JWST found in the Orion Nebula.</p></li>
 <li><a href="https://www.nature.com/articles/s41550-024-02358-w" target="_blank" rel="noopener">Galactic Center Black Hole Merger</a><span class="p-date">Nature Astronomy 2024</span><p>The misaligned spin of Sagittarius A* as evidence of a merger with another massive black hole about 9 billion years ago.</p></li>
 </ul>

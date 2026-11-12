@@ -25,10 +25,10 @@ publication_types:
 - article-journal
 
 # Publication name and optional abbreviated publication name.
-publication: '*arXiv e-prints*'
+publication: '*apj* (in press)'
 publication_short: ''
 
-doi: 10.48550/arXiv.2505.01606
+doi: 10.3847/1538-4357/ae5535
 
 abstract: ''
 

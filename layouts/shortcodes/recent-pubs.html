@@ -1,10 +1,18 @@
-{{/* Latest N publications as portal list rows: title left, journal and date right. */}}
+{{/* Latest N publications as portal list rows: title left, journal and date right.
+     The journal comes from each entry's `publication` field; a trailing
+     parenthetical there is its status, e.g. "*Science* (in press)". Entries with
+     no journal yet show "ApJ, submitted" (from "submitted to ApJ") or "Preprint". */}}
 {{ $n := int (.Get 0 | default 8) }}
-{{ $abbr := dict "mnras" "MNRAS" "apj" "ApJ" "apjl" "ApJL" "arxiv e-prints" "arXiv" "journal of high energy astrophysics" "JHEAp" }}
+{{ $abbr := dict "mnras" "MNRAS" "apj" "ApJ" "apjl" "ApJL" "journal of high energy astrophysics" "JHEAp" }}
 <ul class="p-list p-list-pubs">
 {{ range first $n (where site.RegularPages "Type" "publication").ByDate.Reverse }}
-{{ $j := .Params.publication | default "" | replaceRE `\*` "" | replaceRE `\s*\(.*\)$` "" | strings.TrimSpace }}
+{{ $raw := .Params.publication | default "" | replaceRE `\*` "" | strings.TrimSpace }}
+{{ $status := "" }}{{ with findRESubmatch `\((.*)\)$` $raw }}{{ $status = index (index . 0) 1 }}{{ end }}
+{{ $j := $raw | replaceRE `\s*\(.*\)$` "" }}
 {{ $j = index $abbr (lower $j) | default $j }}
+{{ if hasPrefix (lower $j) "arxiv" }}
+  {{ if hasPrefix $status "submitted to " }}{{ $j = printf "%s, submitted" (strings.TrimPrefix "submitted to " $status) }}{{ else }}{{ $j = "Preprint" }}{{ end }}
+{{ else if $status }}{{ $j = printf "%s, %s" $j $status }}{{ end }}
 <li><a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a><span class="p-journal">{{ $j }}</span><span class="p-date">{{ .Date.Format "2006-01" }}</span></li>
 {{ end }}
 </ul>
