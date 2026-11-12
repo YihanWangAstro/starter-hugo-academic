@@ -1,40 +1,42 @@
 // ============================================================
-// SITE STYLE — institutional blue + muted gold on white, serif type.
-// Modelled on nsfc.gov.cn: solid blue nav bar with a gold active tab,
-// section titles on a short gold rule, white cards with a gold edge and
-// a soft shadow, gold dates and "more" links.
+// SITE STYLE — night-sky navy with an ember accent, on white.
+// A portal layout (masthead, pinned nav bar, two-column blocks of dated
+// rows and cards) in the site's own palette: deep navy for structure, the
+// orange of an accretion disk for accents. Serif headings, sans body.
 //
 // Hooks: `.nsfc-ui` on <html> for every page, `.nsfc-home` on the
 // homepage (both added in layouts/partials/custom_head.html).
 // ============================================================
 
 // --- Tokens ---
-$blue:        #1f4e83;   // nav bar, links, primary
-$blue-deep:   #0a3a6a;   // headings on white, footer
-$blue-bright: #1e80d5;   // link hover
-$sky:         #5f9ccc;   // top-of-page wash
-$wash:        #f5fafd;   // pale blue surface
-$gold:        #b49839;   // rules, edges, active tab
-$gold-ink:    #836e2a;   // gold used as text (dates, "more" links)
-$gold-pale:   #ece6d2;   // gold tint surface
-$ink:         #444444;   // body text
-$ink-strong:  #222222;
-$muted:       #767676;
-$line:        #d8d8d8;
-$card-shadow:   0 2px 8px 0 #ededed;
-$card-shadow-h: 0 4px 16px rgba(0, 0, 0, 0.10);
+$blue:        #16305a;   // nav bar, primary
+$blue-deep:   #0c1c38;   // headings on white, footer, dark bands
+$blue-bright: #2d68c4;   // links
+$wash:        #f4f6fa;   // cool pale surface
+$warm:        #f7f4ee;   // warm pale surface
+$gold:        #e08a2c;   // ember accent: markers, active tab, hovers
+$gold-ink:    #a65d14;   // ember as text (dates, "more" links)
+$gold-pale:   #f7e7d3;   // ember tint surface
+$ember-light: #ffb968;   // ember on dark bands
+$ink:         #3d4350;   // body text
+$ink-strong:  #1a2130;
+$muted:       #6f7684;
+$line:        #dfe3ea;
+$radius:      8px;
+$card-shadow:   0 1px 2px rgba(12, 28, 56, 0.05);
+$card-shadow-h: 0 6px 18px rgba(12, 28, 56, 0.10);
 
 $site-serif: 'Source Serif 4', 'Noto Serif SC', 'Songti SC', 'SimSun', Georgia, serif;
+$site-sans:  'Source Sans 3', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 $site-mono:  'IBM Plex Mono', 'Fira Code', 'SF Mono', 'Cascadia Code', monospace;
 
-// White card with a gold left edge — the site's one card construction.
+// Outlined, softly rounded card — the site's one card construction.
 @mixin card {
   background: #fff !important;
-  border: 0 !important;
-  border-left: 3px solid $gold !important;
-  border-radius: 0 !important;
+  border: 1px solid $line !important;
+  border-radius: $radius !important;
   box-shadow: $card-shadow !important;
-  transition: box-shadow 0.18s ease;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 // ============================================================
@@ -42,15 +44,16 @@ $site-mono:  'IBM Plex Mono', 'Fira Code', 'SF Mono', 'Cascadia Code', monospace
 // ============================================================
 html,
 body,
-.navbar, .navbar-brand, .nav-link, .navbar-toggler,
+.navbar, .nav-link, .navbar-toggler,
 .section-subheading,
 .btn, .badge,
-.card-title, .article-title, .section-heading,
-.hero-title, .wg-hero,
 footer, footer p, .page-footer {
-  font-family: $site-serif !important;
+  font-family: $site-sans !important;
 }
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6,
+.navbar-brand,
+.card-title, .article-title, .section-heading,
+.hero-title {
   font-family: $site-serif !important;
   color: $ink-strong;
   letter-spacing: 0;
@@ -59,14 +62,14 @@ pre, code, kbd, samp { font-family: $site-mono !important; }
 
 body { color: $ink; line-height: 1.7; }
 
-a { color: $blue; }
-a:hover { color: $blue-bright; }
+a { color: $blue-bright; }
+a:hover { color: $blue; }
 
 // ============================================================
 // Page backdrop — white, with the pale sky wash at the very top
 // ============================================================
 .nsfc-ui body {
-  background: linear-gradient(180deg, rgba($sky, 0.22) 0, rgba($wash, 0.6) 260px, #fff 520px) no-repeat #fff !important;
+  background: linear-gradient(180deg, $wash 0, #fff 420px) no-repeat #fff !important;
   min-height: 100vh;
 }
 // Sections are transparent so the wash shows through; hero bands keep their own fill.
@@ -101,8 +104,9 @@ a:hover { color: $blue-bright; }
 }
 .nsfc-ui .navbar .nav-link:hover { background: rgba(255, 255, 255, 0.12); }
 .nsfc-ui .navbar .nav-link.active {
-  background: $gold;
+  background: transparent;
   color: #fff !important;
+  box-shadow: inset 0 -3px 0 $gold;
 }
 // Search / toggler icons sit on blue
 .nsfc-ui .navbar .nav-icons .nav-link,
@@ -124,7 +128,7 @@ a:hover { color: $blue-bright; }
   font-weight: 600;
   color: $ink;
   text-align: left;
-  padding-bottom: 0.55rem;
+  padding-left: 0.85rem;
   margin-bottom: 1.4rem;
 }
 .nsfc-ui .home-section .section-heading h1::after,
@@ -132,9 +136,10 @@ a:hover { color: $blue-bright; }
   content: '';
   position: absolute;
   left: 0;
-  bottom: 0;
-  width: 2.6em;
-  height: 3px;
+  top: 0.2em;
+  bottom: 0.2em;
+  width: 4px;
+  border-radius: 2px;
   background: $gold;
 }
 
@@ -149,7 +154,7 @@ a:hover { color: $blue-bright; }
   @include card;
 }
 .nsfc-ui .g-card:hover,
-.nsfc-ui .research-item:hover { box-shadow: $card-shadow-h !important; }
+.nsfc-ui .research-item:hover { box-shadow: $card-shadow-h !important; border-color: $gold !important; }
 
 .nsfc-ui .g-card {
   padding: 1.35rem 1.6rem;
@@ -196,7 +201,7 @@ a:hover { color: $blue-bright; }
 .geek-fig-row .geek-fig video { width: 300px; max-width: 100%; }
 
 // Buttons
-.nsfc-ui .btn { border-radius: 0 !important; box-shadow: none !important; }
+.nsfc-ui .btn { border-radius: 6px !important; box-shadow: none !important; }
 .nsfc-ui .btn-primary {
   background: $blue !important;
   border: 1px solid $blue !important;
@@ -228,10 +233,9 @@ a.badge-light:hover { border-color: $gold; }
 
 // Note callout
 .alert-note {
-  background: $wash !important;
+  background: $gold-pale !important;
   border: 0 !important;
-  border-left: 3px solid $gold !important;
-  border-radius: 0 !important;
+  border-radius: $radius !important;
   color: inherit;
 }
 
@@ -249,7 +253,7 @@ pre { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; colo
   color: $ink !important;
 }
 
-img.avatar, .avatar { border-radius: 0 !important; }
+img.avatar, .avatar { border-radius: $radius !important; }
 
 // Footer — deep blue band
 .nsfc-ui footer.site-footer,
@@ -295,6 +299,7 @@ $masthead-h: 92px;
 }
 .masthead-brand { display: flex; flex-direction: column; text-decoration: none !important; min-width: 0; }
 .masthead-name {
+  font-family: $site-serif;
   font-size: 1.85rem;
   font-weight: 700;
   line-height: 1.2;
@@ -331,7 +336,8 @@ $masthead-h: 92px;
 .nsfc-home body { background: #fff !important; }
 
 .nsfc-ui .home-section.portal-block { padding-top: 3.2rem; padding-bottom: 3.2rem; }
-.nsfc-ui .home-section.portal-block .col-12 { text-align: left; }
+.nsfc-ui .home-section.portal-block .col-12,
+.nsfc-ui .home-section.portal-banner .col-12 { text-align: left; }
 .p-row { display: flex; flex-wrap: wrap; gap: 3rem; }
 .p-col { min-width: 0; }
 .p-col-wide { flex: 1 1 0; }
@@ -339,24 +345,27 @@ $masthead-h: 92px;
 
 // ---- Headline banner: big blue serif headline on the sky wash ----
 .nsfc-ui .home-section.portal-banner {
-  padding: 2.6rem 0 2.8rem;
-  background: linear-gradient(180deg, rgba($sky, 0.30) 0%, $wash 100%) !important;
+  padding: 3.2rem 0 3.4rem;
+  background:
+    radial-gradient(60% 140% at 88% 50%, rgba($gold, 0.34) 0%, rgba($gold, 0.10) 38%, rgba($gold, 0) 68%),
+    linear-gradient(120deg, $blue-deep 0%, $blue 100%) !important;
 }
-.p-headline { text-align: center; }
+.p-headline { text-align: left; max-width: 62rem; }
 .p-headline h1 {
-  font-size: 2.3rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  line-height: 1.3;
-  color: $blue;
-  margin: 0 0 0.6rem;
+  line-height: 1.25;
+  color: #fff;
+  margin: 0 0 0.8rem;
 }
-.p-headline p { font-size: 1.15rem; color: $blue; margin: 0; }
+.p-headline p { font-size: 1.2rem; color: rgba(255, 255, 255, 0.88); margin: 0; }
 .p-headline .p-headline-topics {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
+  margin-top: 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: $gold-ink;
+  color: $ember-light;
 }
 
 // ---- Block title: serif on a gold rule, "more" link at the right ----
@@ -370,7 +379,7 @@ $masthead-h: 92px;
 .p-title h2 {
   position: relative;
   margin: 0;
-  padding-bottom: 0.6rem;
+  padding-left: 0.85rem;
   font-size: 1.75rem;
   font-weight: 600;
   color: $ink;
@@ -379,9 +388,10 @@ $masthead-h: 92px;
   content: '';
   position: absolute;
   left: 0;
-  bottom: 0;
-  width: 2.6em;
-  height: 3px;
+  top: 0.2em;
+  bottom: 0.2em;
+  width: 4px;
+  border-radius: 2px;
   background: $gold;
 }
 .p-more { font-size: 0.95rem; color: $gold-ink; white-space: nowrap; }
@@ -390,21 +400,13 @@ $masthead-h: 92px;
 // ---- List rows: gold dash, title, date at the right ----
 .p-list { list-style: none; margin: 0; padding: 0; }
 .p-list li {
-  position: relative;
   display: flex;
   align-items: baseline;
   gap: 1.5rem;
-  padding: 0.55rem 0 0.55rem 1.1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid $line;
 }
-.p-list li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 1.4rem;
-  width: 0.45rem;
-  height: 1px;
-  background: $gold;
-}
+.p-list li:last-child { border-bottom: 0; }
 .p-list li > a,
 .p-list li > .p-item {
   flex: 1 1 auto;
@@ -415,22 +417,20 @@ $masthead-h: 92px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.p-list li > a:hover { color: $blue; font-weight: 600; text-decoration: none; }
+.p-list li > a:hover { color: $blue-bright; text-decoration: none; }
 .p-date { flex: 0 0 auto; color: $gold-ink; font-size: 0.95rem; white-space: nowrap; }
 
 // Publication rows: journal in its own column before the date
-.p-journal { flex: 0 0 auto; min-width: 4.5rem; text-align: right; color: $blue; font-size: 0.95rem; font-style: italic; white-space: nowrap; }
+.p-journal { flex: 0 0 auto; min-width: 4.5rem; text-align: right; color: $muted; font-size: 0.95rem; white-space: nowrap; }
 @media (max-width: 680px) { .p-journal { flex-basis: auto; } }
 
 // Inner-page rows: plain items (not links), year groups, small tags
 .p-list li > .p-item { white-space: normal; }
 .p-year {
-  margin: 1.7rem 0 0.3rem;
-  padding-bottom: 0.35rem;
-  font-size: 1.15rem;
+  margin: 1.9rem 0 0.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: $blue-deep;
-  border-bottom: 1px solid $line;
+  color: $gold-ink;
 }
 .p-title + .p-year { margin-top: 0; }
 .p-tag {
@@ -441,7 +441,8 @@ $masthead-h: 92px;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: $gold-ink;
-  border: 1px solid $gold-pale;
+  border-radius: 999px;
+  background: $gold-pale;
   vertical-align: 0.1em;
 }
 .p-code { display: inline-block; min-width: 4.6rem; color: $blue; font-weight: 600; }
@@ -455,14 +456,15 @@ $masthead-h: 92px;
 .p-note {
   margin: 1.8rem 0 0;
   padding: 0.9rem 1.2rem;
-  background: $wash;
-  border-left: 3px solid $gold;
-  color: $blue-deep;
+  background: $gold-pale;
+  border-radius: $radius;
+  color: $ink-strong;
 }
 
 // Rich rows: a one-line summary under the title
-.p-list-rich li { flex-wrap: wrap; row-gap: 0.1rem; padding-top: 0.5rem; padding-bottom: 0.7rem; }
-.p-list-rich li > a { flex: 1 1 0; font-size: 1.15rem; font-weight: 600; white-space: normal; }
+.p-list-rich li { flex-wrap: wrap; row-gap: 0.1rem; padding-top: 0.75rem; padding-bottom: 0.85rem; }
+.p-list-rich li:first-child { padding-top: 0; }
+.p-list-rich li > a { flex: 1 1 0; font-family: $site-serif; font-size: 1.2rem; font-weight: 600; white-space: normal; }
 .p-list-rich li p { flex: 0 0 100%; margin: 0; font-size: 0.95rem; line-height: 1.55; }
 
 // ---- Gold-edged cards (right-hand columns) ----
@@ -471,13 +473,14 @@ $masthead-h: 92px;
   display: block;
   padding: 0.95rem 1.2rem;
   background: #fff;
-  border-left: 3px solid $gold;
+  border: 1px solid $line;
+  border-radius: $radius;
   box-shadow: $card-shadow;
   color: $ink;
   line-height: 1.55;
-  transition: box-shadow 0.18s ease;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
 }
-a.p-card:hover { box-shadow: $card-shadow-h; color: $blue; text-decoration: none; }
+a.p-card:hover { box-shadow: $card-shadow-h; border-color: $gold; color: $ink-strong; text-decoration: none; }
 .p-card .p-date { margin-left: 0.4rem; }
 .p-card-label {
   display: block;
@@ -487,15 +490,15 @@ a.p-card:hover { box-shadow: $card-shadow-h; color: $blue; text-decoration: none
   color: $gold-ink;
   margin-bottom: 0.2rem;
 }
-.p-card-head { font-weight: 600; color: $ink-strong; }
+.p-card-head { font-family: $site-serif; font-size: 1.05rem; font-weight: 600; color: $ink-strong; }
 .p-card-sub { font-size: 0.95rem; color: $muted; }
 .p-plain { list-style: none; margin: 0; padding: 0; }
 
 // ---- Biography ----
 .p-bio { display: flex; gap: 2rem; align-items: flex-start; }
 .p-bio-side { flex: 0 0 180px; text-align: center; }
-.p-portrait { display: block; width: 180px; height: 180px; object-fit: cover; margin: 0 0 0.8rem; }
-.p-bio-name { font-size: 1.2rem; font-weight: 700; color: $blue-deep; }
+.p-portrait { display: block; width: 180px; height: 180px; object-fit: cover; margin: 0 0 0.8rem; border-radius: $radius; }
+.p-bio-name { font-family: $site-serif; font-size: 1.2rem; font-weight: 700; color: $blue-deep; }
 .p-bio-role { font-size: 0.95rem; color: $muted; }
 .p-social { display: flex; justify-content: center; gap: 0.7rem; list-style: none; margin: 0.6rem 0 0; padding: 0; font-size: 1.15rem; }
 .p-social a { color: $blue; }
@@ -505,28 +508,28 @@ a.p-card:hover { box-shadow: $card-shadow-h; color: $blue; text-decoration: none
 
 // ---- Blue band (research highlights + software) ----
 .nsfc-ui .home-section.portal-band {
-  background: linear-gradient(135deg, #2b62a3 0%, $blue 45%, #2f6cb0 100%) !important;
+  background: linear-gradient(160deg, $blue-deep 0%, $blue 100%) !important;
   color: #fff;
 }
 .portal-band .p-title h2 { color: #fff; }
 .portal-band .p-more { color: #fff; }
 .portal-band .p-more:hover { color: $gold-pale; }
 .portal-band .p-list li > a { color: #fff; }
-.portal-band .p-list li > a:hover { color: #e9c75a; }
-.portal-band .p-list li::before { background: #fff; }
-.portal-band .p-list li:first-child > a { color: #e9c75a; }   // lead item in gold, as on the reference
+.portal-band .p-list li > a:hover { color: $ember-light; }
+.portal-band .p-list li { border-bottom-color: rgba(255, 255, 255, 0.16); }
+.portal-band .p-list li:first-child > a { color: $ember-light; }   // lead item in ember
 .portal-band .p-list li p { color: rgba(255, 255, 255, 0.82); }
 .portal-band .p-date { color: #fff; }
 
 .p-feature-row { display: flex; gap: 2rem; align-items: flex-start; }
 .p-feature { flex: 0 0 300px; margin: 0; }
-.p-feature video, .p-feature img { display: block; width: 100%; height: auto; border: 4px solid #fff; background: #0d1117; }
+.p-feature video, .p-feature img { display: block; width: 100%; height: auto; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: $radius; background: #0d1117; }
 .p-feature img { background: #fff; padding: 8px; }
-.p-feature canvas { box-sizing: border-box; border: 4px solid #fff; }
+.p-feature canvas { box-sizing: border-box; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: $radius; }
 .p-feature figcaption { margin-top: 0.7rem; font-size: 0.92rem; line-height: 1.5; color: rgba(255, 255, 255, 0.9); }
 .p-feature-row .p-list { flex: 1 1 auto; min-width: 0; }
 
-// Software entry tiles: pale sky panels with a corner tag
+// Software entry tiles: translucent outlined panels with a corner tag
 .p-tile {
   position: relative;
   display: flex;
@@ -535,24 +538,24 @@ a.p-card:hover { box-shadow: $card-shadow-h; color: $blue; text-decoration: none
   min-height: 132px;
   padding: 1.2rem 1.6rem;
   margin-bottom: 1.1rem;
-  background: linear-gradient(160deg, #ffffff 0%, #e4f0fb 55%, #c6def5 100%);
-  border: 4px solid rgba(255, 255, 255, 0.55);
-  background-clip: padding-box;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: $radius;
   text-decoration: none !important;
-  transition: transform 0.18s ease;
+  transition: background 0.18s ease, border-color 0.18s ease;
 }
-.p-tile:hover { transform: translateY(-2px); }
-.p-tile-tag { position: absolute; top: 0.7rem; right: 1.1rem; font-weight: 700; letter-spacing: 0.06em; color: rgba($blue, 0.45); }
-.p-tile-name { font-size: 1.6rem; font-weight: 700; color: $blue; line-height: 1.25; }
-.p-tile-sub { font-size: 0.95rem; color: $blue-deep; }
+.p-tile:hover { background: rgba(255, 255, 255, 0.11); border-color: $ember-light; }
+.p-tile-tag { position: absolute; top: 0.8rem; right: 1.1rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; color: $ember-light; }
+.p-tile-name { font-family: $site-serif; font-size: 1.6rem; font-weight: 700; color: #fff; line-height: 1.25; }
+.p-tile-sub { font-size: 0.98rem; color: rgba(255, 255, 255, 0.8); }
 
-// ---- Pale sky band (personal + contact) ----
+// ---- Warm band (personal + contact) ----
 .nsfc-ui .home-section.portal-wash {
-  background: linear-gradient(180deg, rgba($sky, 0.20) 0%, $wash 100%) !important;
+  background: $warm !important;
 }
 .p-media-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; }
 .p-media { margin: 0; }
-.p-media img, .p-media video { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: #000; }
+.p-media img, .p-media video { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: #000; border-radius: $radius; }
 .p-media figcaption, .p-feature figcaption { text-align: left; }
 .p-media figcaption { margin-top: 0.7rem; font-size: 0.95rem; line-height: 1.6; }
 
@@ -609,9 +612,9 @@ a.p-card:hover { box-shadow: $card-shadow-h; color: $blue; text-decoration: none
 .nsfc-ui .home-section.wg-hero .col-md-6.text-md-left {
   background: transparent !important;
   border: 0 !important;
-  border-left: 3px solid $gold !important;
+  border-left: 0 !important;
   box-shadow: none !important;
-  padding: 0.4rem 0 0.4rem 1.8rem;
+  padding: 0.4rem 0;
 }
 .nsfc-ui .wg-hero .hero-title { font-weight: 700; }
 .nsfc-ui .wg-hero .hero-lead a { color: #fff; text-decoration: underline; }
@@ -673,11 +676,12 @@ a.p-card:hover { box-shadow: $card-shadow-h; color: $blue; text-decoration: none
   text-decoration: none !important;
   color: inherit;
   background: #fff;
-  border-bottom: 3px solid $gold;
+  border: 1px solid $line;
+  border-radius: $radius;
   box-shadow: $card-shadow;
   transition: box-shadow 0.18s ease;
 }
-.landscape-card:hover { box-shadow: $card-shadow-h; color: inherit; }
+.landscape-card:hover { box-shadow: $card-shadow-h; border-color: $gold; color: inherit; }
 .landscape-anim {
   width: 100%;
   aspect-ratio: 4 / 3;

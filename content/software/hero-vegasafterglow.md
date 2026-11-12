@@ -13,8 +13,8 @@ hero_media: 'vegasafterglow-logo.svg'
 
 design:
   background:
-    gradient_start: '#0a3a6a'
-    gradient_end: '#1f4e83'
+    gradient_start: '#0c1c38'
+    gradient_end: '#16305a'
     gradient_angle: 180
     #Text color (true=light, false=dark, or remove for the dynamic theme color).
     text_color_light: true

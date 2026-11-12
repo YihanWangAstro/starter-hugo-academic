@@ -1,15 +1,15 @@
 # Theme metadata
 name = "Geek"
 
-# Institutional blue + muted gold on white, after nsfc.gov.cn.
+# Night-sky navy with an ember accent, on white.
 # The site is light-only (forced in layouts/partials/custom_head.html).
 
 [light]
-  primary = "#1f4e83"
+  primary = "#16305a"
   background = "#ffffff"
 
   # Menu — solid blue bar, white links
-  menu_primary = "#1f4e83"
+  menu_primary = "#16305a"
   menu_text = "#ffffff"
   menu_text_active = "#ffffff"
   menu_title = "#ffffff"
@@ -22,7 +22,7 @@ name = "Geek"
   primary = "#5f9ccc"
   link = "#5f9ccc"
   link_hover = "#b6cee3"
-  menu_primary = "#0a3a6a"
+  menu_primary = "#0c1c38"
   menu_text = "#ffffff"
   menu_text_active = "#ffffff"
   menu_title = "#ffffff"
