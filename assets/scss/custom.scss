@@ -417,6 +417,10 @@ $masthead-h: 92px;
 .p-list li > a:hover { color: $blue; font-weight: 600; text-decoration: none; }
 .p-date { flex: 0 0 auto; color: $gold-ink; font-size: 0.95rem; white-space: nowrap; }
 
+// Publication rows: journal in its own column before the date
+.p-journal { flex: 0 0 4.5rem; text-align: right; color: $blue; font-size: 0.95rem; font-style: italic; white-space: nowrap; }
+@media (max-width: 680px) { .p-journal { flex-basis: auto; } }
+
 // Rich rows: a one-line summary under the title
 .p-list-rich li { flex-wrap: wrap; row-gap: 0.1rem; padding-top: 0.5rem; padding-bottom: 0.7rem; }
 .p-list-rich li > a { flex: 1 1 0; font-size: 1.15rem; font-weight: 600; white-space: normal; }

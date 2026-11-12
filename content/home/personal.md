@@ -12,7 +12,7 @@ design:
 <div class="p-col p-col-wide">
 <div class="p-title"><h2>Personal</h2></div>
 <div class="p-media-row">
-<figure class="p-media"><img src="uploads/drawing-color.png" alt="Sketch of Hongya Dong, Chongqing" loading="lazy"><figcaption><strong>Drawing.</strong> I grew up in Chongqing and enjoy sketching its iconic sites, like Hongya Dong. This sketch was later coloured with Google Gemini.</figcaption></figure>
+<figure class="p-media"><img src="uploads/drawing.png" alt="Sketch of Hongya Dong, Chongqing" loading="lazy"><figcaption><strong>Drawing.</strong> I grew up in Chongqing and enjoy sketching its iconic sites, like Hongya Dong.</figcaption></figure>
 <figure class="p-media"><video controls preload="metadata"><source src="uploads/skiing-low.mp4#t=3" type="video/mp4"></video><figcaption><strong>Skiing.</strong> I picked it up during my PhD and have been training toward CSIA Level III. I'm the one in the yellow pants.</figcaption></figure>
 </div>
 </div>

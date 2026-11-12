@@ -1,7 +1,10 @@
-{{/* Latest N publications as portal list rows: title left, date right. */}}
+{{/* Latest N publications as portal list rows: title left, journal and date right. */}}
 {{ $n := int (.Get 0 | default 8) }}
-<ul class="p-list">
+{{ $abbr := dict "mnras" "MNRAS" "apj" "ApJ" "apjl" "ApJL" "arxiv e-prints" "arXiv" "journal of high energy astrophysics" "JHEAp" }}
+<ul class="p-list p-list-pubs">
 {{ range first $n (where site.RegularPages "Type" "publication").ByDate.Reverse }}
-<li><a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a><span class="p-date">{{ .Date.Format "2006-01" }}</span></li>
+{{ $j := .Params.publication | default "" | replaceRE `\*` "" | replaceRE `\s*\(.*\)$` "" | strings.TrimSpace }}
+{{ $j = index $abbr (lower $j) | default $j }}
+<li><a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a><span class="p-journal">{{ $j }}</span><span class="p-date">{{ .Date.Format "2006-01" }}</span></li>
 {{ end }}
 </ul>
