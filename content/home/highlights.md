@@ -28,6 +28,6 @@ design:
 <div class="p-col p-col-narrow">
 <div class="p-title"><h2>Software</h2><a class="p-more" href="/software/">More &raquo;</a></div>
 <a class="p-tile" href="/software/"><span class="p-tile-tag">N-BODY</span><span class="p-tile-name">SpaceHub</span><span class="p-tile-sub">High-precision few-body gravitational dynamics</span></a>
-<a class="p-tile" href="/software/"><span class="p-tile-tag">GRB</span><span class="p-tile-name">VegasAfterglow</span><span class="p-tile-sub">Gamma-ray burst afterglow modeling in C++ and Python</span></a>
+<a class="p-tile" href="/software/"><span class="p-tile-tag">AFTERGLOW</span><span class="p-tile-name">VegasAfterglow</span><span class="p-tile-sub">Gamma-ray burst afterglow modeling in C++ and Python</span></a>
 </div>
 </div>
