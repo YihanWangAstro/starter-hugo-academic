@@ -1,0 +1,9 @@
+The fonts in this directory are redistributed under the SIL Open Font License,
+Version 1.1 (https://openfontlicense.org).
+
+Source Serif 4, Source Sans 3 - Copyright Adobe (http://www.adobe.com/), with
+  Reserved Font Name 'Source'.
+IBM Plex Mono - Copyright IBM Corp., with Reserved Font Name "Plex".
+Noto Serif SC - Copyright Adobe and Google; subset to three glyphs.
+
+The Latin, Latin-ext and Greek files are the subsets served by Google Fonts.

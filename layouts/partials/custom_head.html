@@ -5,6 +5,13 @@
   try { localStorage.setItem('wcTheme', '0'); } catch (e) {} // 0 = Light
 </script>
 
+{{/* Self-hosted fonts every page needs (headings, body text, the Chinese name in
+     the masthead), fetched early so text appears in its final face from the
+     first paint. The faces are declared in assets/scss/_site-fonts.scss. */}}
+{{ range slice "source-serif-4-normal-latin" "source-sans-3-normal-latin" "noto-serif-sc-600-name" }}
+<link rel="preload" as="font" type="font/woff2" href="{{ printf "fonts/%s.woff2" . | relURL }}" crossorigin>
+{{ end }}
+
 {{/* Site styling hooks: `.nsfc-ui` on every page, plus `.nsfc-home` on the
      homepage for its bespoke section layout. Added in <head> to avoid a flash
      of the unstyled theme. */}}
